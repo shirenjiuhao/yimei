@@ -17,5 +17,5 @@ angular.module('app',['ionic','app.controllers','app.servers'])
 	      }
 	    }
 	})
-    $urlRouterProvider.otherwise('/tabs');
+    $urlRouterProvider.otherwise('/tabs');/*默认的路由*/
 })
