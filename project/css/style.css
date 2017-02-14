@@ -1,0 +1,9 @@
+/* Empty. Add your own CSS if you like */
+*{padding:0;margin:0;box-sizing: border-box;}
+body{background: #ccc}
+a{text-decoration: none;}
+.clear{clear:both;}
+.mingyi{position: absolute;top:-9px;left:42px;}
+.zixun{position:absolute;bottom:0;width:100%;text-align:center; }
+.zixun a{color:#333}
+.zixun a span{color:#999}
