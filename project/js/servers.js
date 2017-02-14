@@ -9,6 +9,5 @@ angular.module('app.servers',[])
                 callback(data);
             })
         }
-
         return this;
     }])

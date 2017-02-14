@@ -2,7 +2,7 @@
  * Created by Administrator on 2017/2/14.
  */
 angular.module('app.controllers',['app.servers'])
-.controller('tabsCtrl',['$scope','$interval',function($scope,$interval){
+.controller('tabsCtrl',['$scope','$interval','tabsServer',function($scope,$interval,tabsServer){
         $scope.data = [
             {
                 href:'',

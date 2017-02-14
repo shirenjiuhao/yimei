@@ -6,16 +6,25 @@ angular.module('app',['ionic','app.controllers','app.servers'])
 	$stateProvider
 	.state('tabs',{
 		url:'/tabs',
-		templateUrl: 'templates/yimei.html'
+		templateUrl: 'views/yimei.html'
 	})
-	.state('tabs.line',{
-		url:'/line',
-		views: {
-	      'tab-line': {
-	        templateUrl: 'templates/yimei-line.html',
-	        controller: 'lineCtrl'
-	      }
-	    }
-	})
+//	.state('tabs.line',{
+//		url:'/line',
+//		views: {
+//	      'tabs-line': {
+//	        templateUrl: 'views/yimeiLine.html',
+//	        controller: 'lineCtrl'
+//	      }
+//	    }
+//	})
+//        .state('tabs.diy',{
+//            url:'/diy',
+//            views:{
+//                'tabs-diy':{
+//                    templateUrl:'views/yiyuanDiy.html',
+//                    constroller:'diyCtrl'
+//                }
+//            }
+//        })
     $urlRouterProvider.otherwise('/tabs');/*默认的路由*/
 })
