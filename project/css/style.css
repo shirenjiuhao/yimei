@@ -1,11 +1,10 @@
 /* Empty. Add your own CSS if you like */
 *{padding:0;margin:0;box-sizing: border-box;border:0}
-body{background: #ccc}
 a{text-decoration: none;color: #444}
 li{list-style: none}
 .clear{clear:both;}
 .responsive-img{width:100%;height:auto;}
-.mingyi{position: absolute;top:-9px;left:42px;}
+.mingyi{position: absolute;top:-15px;left:42px;}
 .row{height:90px;}
 /*轮播图*/
 .banner{

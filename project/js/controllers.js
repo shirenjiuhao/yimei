@@ -68,3 +68,6 @@ angular.module('app.controllers',['app.servers'])
 .controller('lineCtrl',['$scope', function ($scope) {
 
     }])
+.controller('loginCtrl',['$scope', function ($scope) {
+        
+    }])
