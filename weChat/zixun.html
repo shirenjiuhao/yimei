@@ -1,0 +1,23 @@
+
+
+    <div class="banner" id="banner" ng-controller="bannerCtrl">
+        <ul class="banner-wrap">
+            <li ng-repeat="item in data"><a href="{{item.url}}"><img src={{item.img}} alt="{{item.title}}" class="responsive-img"/></a></li>
+        </ul>
+        <div class="banner-num" id="btn">
+            <span class="active-span"></span>
+            <span></span><span></span>
+        </div>
+    </div>
+    <div when-scrolled="loadMore()">
+        <div class="content" ng-controller="contentCtrl">
+            <a class="wrap-item" href="#/tabs/{{item.id}}" ng-repeat="item in data.list">
+                <img src={{item.img}} alt="" class="item-img"/>
+                <div class="item-text">
+                    <div class="text">{{item.content}}</div>
+                    <span>{{item.time}}</span>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div ng-if="hasMore">没有更多了</div>
