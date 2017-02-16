@@ -16,23 +16,5 @@ angular.module('app',['ngRoute','app.controllers','app.servers'])
                 templateUrl:'views/login.html',
                 controller:'loginCtrl'
             })
-	/*.state('tabs',{
-		url:'/tabs',
-		templateUrl: 'views/yimei.html'
-	})
-	.state('tabs.line',{
-		url:'/line',
-            view:{
-                templateUrl: 'views/yimeiLine.html',
-                controller: 'lineCtrl'
-            }
-	})
-        .state('tabs.diy',{
-            url:'/diy',
-            views:{
-                templateUrl:'views/yiyuanDiy.html',
-                constroller:'diyCtrl'
-            }
-        })*/
         .otherwise({redirectTo:'/tabs'});/*默认的路由*/
 })

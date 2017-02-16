@@ -11,3 +11,6 @@ angular.module('app.servers',[])
         }
         return this;
     }])
+.service('loginServer',['$http',function ($http) {
+
+    }])

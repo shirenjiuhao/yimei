@@ -2,6 +2,7 @@
 *{padding:0;margin:0;box-sizing: border-box;border:0}
 a{text-decoration: none;color: #444}
 li{list-style: none}
+html,body{height:100%;background: #fcfcfc}
 .clear{clear:both;}
 .responsive-img{width:100%;height:auto;}
 .mingyi{position: absolute;top:-15px;left:42px;}
@@ -31,3 +32,13 @@ li{list-style: none}
 .zixun:before{content:'';display: block;position: absolute;top:-20px;width:100%;height:10px;background:rgba(204, 204, 204, 0.31)}
 .zixun a{color:#333}
 .zixun a span{color:#999}
+/*login*/
+.login-input{padding:20px;position: relative;}
+.login-input input{border-radius: 5px;width:100%;background: #fff;text-indent:10px;}
+.login-get{position: absolute;top:88px;right:35px;width:88px;height:33px;border-left:1px solid #ccc;line-height: 33px;padding-left:10px;
+    text-align: center;
+}
+.login-get a{color:lightskyblue}
+/*医生在线*/
+.line-selected{display: flex;padding:5px;}
+.line-selected a{display: block;width:100px;}
