@@ -30,13 +30,20 @@ app.directive('whenScrolled', function() {
     };
 });
 app.controller('bannerCtrl',['$scope','$interval','bannerServer',function($scope,$interval,bannerServer){
+    /*加载回调*/
+    var callback = function(data){
+        $scope.data = data;
+    }
+    bannerServer.getData(callback);
     /*轮播图*/
     var uls = $('#banner').find('ul');
+    var liWid = $('#banner').width();
+    //console.log(liWid);
     var oBtn = $('#btn').find('span');
     var index = 0;//第一张banner
     oBtn.click(function () {
         index = $(this).index();
-        uls.animate({left:(index)*(-375)},1000);
+        uls.animate({left:(index)*(-liWid)},1000);
         oBtn.eq(index).addClass("active-span").siblings().removeClass("active-span");
     });//对应的按钮切换图片
     var timer = $interval(next,2000);//启动间歇
@@ -55,20 +62,16 @@ app.controller('bannerCtrl',['$scope','$interval','bannerServer',function($scope
     function next() {
         if(index < 2){
             index ++;
-            uls.animate({left:(index)*(-375)},1000);
+           // console.log(liWid);
+            uls.animate({left:(index)*(-liWid)},1000);
         }else{
             index = 0;
-            uls.animate({left:2*(-375)},500, function () {//运动到复制的第一张，并执行回调
+            uls.animate({left:2*(-liWid)},500, function () {//运动到复制的第一张，并执行回调
                 $(this).css("left","0");
             });
         }
         oBtn.eq(index).addClass("active-span").siblings().removeClass("active-span");
     };
-    /*加载回调*/
-    var callback = function(data){
-        $scope.data = data;
-    }
-    bannerServer.getData(callback);
 }]);
 /*加载banner*/
 app.service('bannerServer',['$http', function ($http) {

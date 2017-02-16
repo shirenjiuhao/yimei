@@ -2,13 +2,43 @@
 a{text-decoration: none;color: #444}
 /*轮播图*/
 .banner{
-    width:100%;height:160px;overflow: hidden;position: relative;
+    width:100%;;height:160px;overflow: hidden;position: relative;
 }
 .banner-wrap{
     width:9999px;height:160px;position:absolute;top:0px;left:0;
 }
+@media screen and (width: 320px) {
+    .banner-wrap li{
+        width:320px;
+    }
+}
+@media screen and (width: 360px) {
+    .banner-wrap li{
+        width:360px;
+    }
+}
+@media screen and (width: 375px) {
+    .banner-wrap li{
+        width:375px;
+    }
+}
+@media screen and (width: 412px) {
+    .banner-wrap li{
+        width:412px;
+    }
+}
+@media screen and (width: 414px) {
+    .banner-wrap li{
+        width:414px;
+    }
+}
+@media screen and (min-width: 768px) {
+    .banner-wrap li{
+        width:768px;
+    }
+}
 .banner-wrap li {
-    float: left;width: 375px;height:160px;background: red;
+    float:left;height:160px;background: red;
 }
 /*按钮*/
 .banner-num{
