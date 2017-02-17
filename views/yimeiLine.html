@@ -1,17 +1,33 @@
 
-    <div class="bar bar-header">
-        <a href="#/tabs" class="button button-clear icon ion-ios-arrow-back"></a>
-        <h1 class="title">名医在线</h1>
-    </div>
-    <div class="has-header content">
-        <div class="line-selected">
-            <a href="">全部</a>
-            <a href="">眼部</a>
-            <a href="">鼻部</a>
-            <a href="">面部</a>
-            <a href="">胸部</a>
-            <a href="">口唇牙齿</a>
-            <a href="">皮肤</a>
-            <a href="">其他</a>
+    <div style="height:44px;">
+        <div class="bar bar-header">
+            <a href="#/tabs" class="button button-clear icon ion-ios-arrow-back"></a>
+            <h1 class="title">名医在线</h1>
         </div>
     </div>
+<ion-content class="has-header">
+
+    <div class="line-selected">
+        <div class="line-item">
+            <a class="line-active">全部</a>
+            <a>眼部</a>
+            <a>鼻部</a>
+            <a>面部</a>
+        </div>
+        <div class="line-item">
+            <a>胸部</a>
+            <a>口唇牙齿</a>
+            <a>皮肤</a>
+            <a>其他</a>
+        </div>
+    </div>
+    <div class="list">
+        <a class="item item-avatar line-yisheng" style="padding-left:100px;"
+            ng-repeat="list in lists" ng-href="#/tabs/line/{{list.id}}"    >
+            <img ng-src="{{list.img}}" alt="加载中" style="max-width: 72px;max-height: 72px;">
+            <h2 style="font-size: 20px;">{{ list.name }}-{{ list.job }}</h2>
+            <p style="margin-bottom: 10px;">{{list.address}}</p>
+            <span>{{list.hurt}}</span><span>{{list.timer}}</span>
+        </a>
+    </div>
+</ion-content>

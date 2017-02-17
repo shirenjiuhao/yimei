@@ -32,7 +32,6 @@ angular.module('app.controllers',['app.servers'])
         ];
         var uls = $('#banner').find('ul');
         var liWid = $('#banner').width();
-//        uls.append(uls.find("li:first").clone());/*复制第一个到最后面，保证最后出来的是第一张*/
         var oBtn = $('#btn').find('span');
         var index = 0;//第一张banner
         oBtn.click(function () {
@@ -67,8 +66,61 @@ angular.module('app.controllers',['app.servers'])
         }
     }])
 .controller('lineCtrl',['$scope', function ($scope) {
+        $scope.lists = [{
+              "id":1,
+              "name":"李敏",
+              "job":"主治医师",
+              "address":"北京爱悦里格美容医院",
+              "hurt":"眼部综合整形",
+              "timer":"微整形在线面诊",
+              "img":'img/c5.png'
+          },{
+              "id":2,
+              "name":"李敏",
+              "job":"主治医师",
+              "address":"北京爱悦里格美容医院",
+              "hurt":"眼部综合整形",
+              "timer":"微整形在线面诊",
+              "img":'img/c5.png'
+          },{
+              "id":3,
+              "name":"李敏",
+              "job":"主治医师",
+              "address":"北京爱悦里格美容医院",
+              "hurt":"眼部综合整形",
+              "timer":"微整形在线面诊",
+              "img":'img/c5.png'
+          },{
+              "id":4,
+              "name":"李敏",
+              "job":"主治医师",
+              "address":"北京爱悦里格美容医院",
+              "hurt":"眼部综合整形",
+              "timer":"微整形在线面诊",
+              "img":'img/c5.png'
+          },{
+              "id":5,
+              "name":"李敏",
+              "job":"主治医师",
+              "address":"北京爱悦里格美容医院",
+              "hurt":"眼部综合整形",
+              "timer":"微整形在线面诊",
+              "img":'img/c5.png'
+          },{
+              "id":6,
+              "name":"李敏",
+              "job":"主治医师",
+              "address":"北京爱悦里格美容医院",
+              "hurt":"眼部综合整形",
+              "timer":"微整形在线面诊",
+              "img":'img/c5.png'
+          }
+      ];
 
     }])
+.controller('yishengCtrl',['$scope', function ($scope) {
+        
+    }])    
 .controller('loginCtrl',['$scope','$interval',function ($scope,$interval) {
         var text = $('.login-get').find('a');
         var reg = /^1(3|4|5|7|8)\d{9}$/ig;
@@ -102,8 +154,8 @@ angular.module('app.controllers',['app.servers'])
         }
         $scope.login = function () {
             var pwd = $('.login-input').find("input[type='text']").val();
-            if(pwd.val() == str1){
-                text.attr('href','#/tabs');
+            if(pwd != '' && pwd == str1){
+                $('#login-btn').find('a').attr({href:'#/tabs'});
             }
         }
     }])

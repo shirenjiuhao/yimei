@@ -1,7 +1,7 @@
 /**
  * Created by Master on 2017/02/13.
  */
-angular.module('app',['ngRoute','app.controllers','app.servers'])
+angular.module('app',['ionic','ngRoute','app.controllers','app.servers'])
 .config(function($routeProvider){
         $routeProvider
             .when('/tabs',{
@@ -11,6 +11,10 @@ angular.module('app',['ngRoute','app.controllers','app.servers'])
             .when('/tabs/line',{
                 templateUrl:'views/yimeiLine.html',
                 controller:'lineCtrl'
+            })
+            .when('/tabs/line/:id',{
+                templateUrl:'views/lineyisheng.html',
+                controller:'yishengCtrl'
             })
             .when('/tabs/login',{
                 templateUrl:'views/login.html',
