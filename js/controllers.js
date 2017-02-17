@@ -31,12 +31,13 @@ angular.module('app.controllers',['app.servers'])
             }
         ];
         var uls = $('#banner').find('ul');
+        var liWid = $('#banner').width();
 //        uls.append(uls.find("li:first").clone());/*复制第一个到最后面，保证最后出来的是第一张*/
         var oBtn = $('#btn').find('span');
         var index = 0;//第一张banner
         oBtn.click(function () {
             index = $(this).index();
-            uls.animate({left:(index)*(-375)},1000);
+            uls.animate({left:(index)*(-liWid)},1000);
             oBtn.eq(index).addClass("active-span").siblings().removeClass("active-span");
         });//对应的按钮切换图片
         var timer = $interval(next,2000);//启动间歇
@@ -55,10 +56,10 @@ angular.module('app.controllers',['app.servers'])
         function next() {
             if(index < 3){
                 index ++;
-                uls.animate({left:(index)*(-375)},1000);
+                uls.animate({left:(index)*(-liWid)},1000);
             }else{
                 index = 0;
-                uls.animate({left:3*(-375)},500, function () {//运动到复制的第一张，并执行回调
+                uls.animate({left:3*(-liWid)},500, function () {//运动到复制的第一张，并执行回调
                     $(this).css("left","0");
                 });
             }

@@ -15,8 +15,38 @@ html,body{height:100%;background: #fcfcfc}
 .banner-wrap{
     width:9999px;height:480px;position:absolute;top:0px;left:0;
 }
+@media screen and (width: 320px) {
+    .banner-wrap li{
+        width:320px;
+    }
+}
+@media screen and (width: 360px) {
+    .banner-wrap li{
+        width:360px;
+    }
+}
+@media screen and (width: 375px) {
+    .banner-wrap li{
+        width:375px;
+    }
+}
+@media screen and (width: 412px) {
+    .banner-wrap li{
+        width:412px;
+    }
+}
+@media screen and (width: 414px) {
+    .banner-wrap li{
+        width:414px;
+    }
+}
+@media screen and (min-width: 768px) {
+    .banner-wrap li{
+        width:768px;
+    }
+}
 .banner-wrap li {
-    float: left;width: 375px;height: 480px;
+    float: left;height: 480px;
 }
 .banner-wrap li a img{height:320px;display: block;margin-bottom: 20px;}
 .banner-wrap-text{text-align: center}
