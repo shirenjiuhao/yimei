@@ -16,6 +16,10 @@ angular.module('app',['ionic','ngRoute','app.controllers','app.servers'])
                 templateUrl:'views/lineyisheng.html',
                 controller:'yishengCtrl'
             })
+            .when('/tabs/diy',{
+                templateUrl:'views/diylist.html',
+                controller:'diylistCtrl'
+            })
             .when('/tabs/login',{
                 templateUrl:'views/login.html',
                 controller:'loginCtrl'

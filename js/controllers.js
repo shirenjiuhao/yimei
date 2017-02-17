@@ -7,25 +7,25 @@ angular.module('app.controllers',['app.servers'])
             {
                 href:'',
                 src:'',
-                alt:'',
+                alt:'正在加载...',
                 name:'广告位',
                 message:'新美丽都三甲医院主任开通方案定制服务，点击定制等等...'
             },{
                 href:'',
                 src:'',
-                alt:'',
+                alt:'正在加载...',
                 name:'广告位',
                 message:'新美丽都三甲医院主任开通方案定制服务，点击定制等等...'
             },{
                 href:'',
                 src:'',
-                alt:'',
+                alt:'正在加载...',
                 name:'广告位',
                 message:'新美丽都三甲医院主任开通方案定制服务，点击定制等等...'
             },{
                 href:'',
                 src:'',
-                alt:'',
+                alt:'正在加载...',
                 name:'广告位',
                 message:'新美丽都三甲医院主任开通方案定制服务，点击定制等等...'
             }
@@ -120,7 +120,10 @@ angular.module('app.controllers',['app.servers'])
     }])
 .controller('yishengCtrl',['$scope', function ($scope) {
         
-    }])    
+    }])
+.controller('diylistCtrl',['$scope', function ($scope) {
+        
+    }])
 .controller('loginCtrl',['$scope','$interval',function ($scope,$interval) {
         var text = $('.login-get').find('a');
         var reg = /^1(3|4|5|7|8)\d{9}$/ig;
