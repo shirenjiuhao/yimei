@@ -1,0 +1,50 @@
+<div style="height:44px;">
+    <div class="bar bar-header">
+        <a ng-href="#/tabs/diy" class="button button-clear icon ion-ios-arrow-back"></a>
+        <h1 class="title">优质医院</h1>
+    </div>
+</div>
+<ion-content class="has-header">
+    <div><img src="" alt="" style="height:200px;background: red" class="responsive-img"/></div>
+    <div style="text-align:center;padding:10px 0 20px;border-bottom: 1px solid #ccc;background: #fff">
+        <p>北京爱乐里格医疗美容整形医院</p>
+        <span style="font-size:14px;color: #999">医疗美容诊所</span>
+    </div>
+    <div style="display: flex;padding-top:10px;padding-bottom: 1px;background: #fff">
+        <div style="flex: 1;text-align: center">
+            <a href="#/tabs/diy/:id" style="display: inline-block;padding-bottom: 10px;border-bottom: 3px solid transparent">医院介绍</a>
+        </div>
+        <div style="flex: 1;text-align: center">
+            <a ng-href="#/tabs/diy/:id/ys" style="display: inline-block;padding-bottom: 10px;border-bottom: 3px solid #11c1f3">医生团队</a>
+        </div>
+    </div>
+    <div style="padding:10px 10px;margin-top:10px;background: #fff">
+        <div class="list">
+            <p>医生团队</p>
+            <a class="item item-avatar line-yisheng" style="padding-left:100px;border-right-color: #fff;border-left-color: #fff; "
+                ng-href="#/tabs/line/{{list.id}}"    >
+                <img ng-src="img/c5.png" alt="加载中" style="max-width: 72px;max-height: 72px;">
+                <h2 style="font-size: 20px;">李敏-主治医师</h2>
+                <p style="margin-bottom: 10px;">北京爱悦里格美容医院</p>
+                <span>眼部综合整形</span><span>微整形在线面诊</span>
+            </a>
+            <a class="item item-avatar line-yisheng" style="padding-left:100px;border-right-color: #fff;border-left-color: #fff; "
+               ng-href="#/tabs/line/{{list.id}}"    >
+                <img ng-src="img/c5.png" alt="加载中" style="max-width: 72px;max-height: 72px;">
+                <h2 style="font-size: 20px;">李敏-主治医师</h2>
+                <p style="margin-bottom: 10px;">北京爱悦里格美容医院</p>
+                <span>眼部综合整形</span><span>微整形在线面诊</span>
+            </a>
+            <a class="item item-avatar line-yisheng" style="padding-left:100px;border-right-color: #fff;border-left-color: #fff; "
+               ng-href="#/tabs/line/{{list.id}}"    >
+                <img ng-src="img/c5.png" alt="加载中" style="max-width: 72px;max-height: 72px;">
+                <h2 style="font-size: 20px;">李敏-主治医师</h2>
+                <p style="margin-bottom: 10px;">北京爱悦里格美容医院</p>
+                <span>眼部综合整形</span><span>微整形在线面诊</span>
+            </a>
+        </div>
+    </div>
+</ion-content>
+<div class="bar bar-footer calm-bg">
+    <h1 class="title"><a ng-href="#/tabs/login" style="color:#fff">定制方案(首次免费)</a></h1>
+</div>
