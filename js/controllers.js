@@ -64,3 +64,6 @@ angular.module('app.controllers',['app.servers'])
 .controller('mineCtrl',['$scope', function ($scope) {
 
     }])
+.controller('counselorCtrl',['$scope', function ($scope) {
+
+    }])

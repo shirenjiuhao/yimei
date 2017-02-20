@@ -36,5 +36,13 @@ angular.module('app',['ionic','ngRoute','app.controllers','app.servers'])
                 templateUrl:'views/login.html',
                 controller:'loginCtrl'
             })
+            .when('/tabs/counselor',{
+                templateUrl:'views/counselor.html',
+                controller:'counselorCtrl'
+            })
+            .when('/tabs/counselor/more',{
+                templateUrl:'views/counselor-more.html',
+                controller:'counselorCtrl'
+            })
         .otherwise({redirectTo:'/tabs'});/*默认的路由*/
 })

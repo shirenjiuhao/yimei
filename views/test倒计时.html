@@ -8,13 +8,14 @@
 <body>
 <div id="box"></div>
 <script>
+    var box = document.getElementById('box');
     var t = new Date();
     t.setDate(t.getDate()+1);
     var timer = setInterval(function () {
         var d = new Date();
         var result = t.valueOf() - d.valueOf();
         var m = Math.floor(result%(1000 * 60)/(1000));
-        console.log(m);
+        box.innerHTML ="还剩" + m + '秒';
     },1000)
 </script>
 </body>
