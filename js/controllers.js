@@ -3,33 +3,10 @@
  */
 angular.module('app.controllers',['app.servers'])
 .controller('tabsCtrl',['$scope','$interval','tabsServer',function($scope,$interval,tabsServer){
-        $scope.data = [
-            {
-                href:'',
-                src:'',
-                alt:'正在加载...',
-                name:'广告位',
-                message:'新美丽都三甲医院主任开通方案定制服务，点击定制等等...'
-            },{
-                href:'',
-                src:'',
-                alt:'正在加载...',
-                name:'广告位',
-                message:'新美丽都三甲医院主任开通方案定制服务，点击定制等等...'
-            },{
-                href:'',
-                src:'',
-                alt:'正在加载...',
-                name:'广告位',
-                message:'新美丽都三甲医院主任开通方案定制服务，点击定制等等...'
-            },{
-                href:'',
-                src:'',
-                alt:'正在加载...',
-                name:'广告位',
-                message:'新美丽都三甲医院主任开通方案定制服务，点击定制等等...'
-            }
-        ];
+        var callback = function (data) {
+            $scope.data = data;
+        };
+        tabsServer.getData(callback);
         var uls = $('#banner').find('ul');
         var liWid = $('#banner').width();
         var oBtn = $('#btn').find('span');
@@ -63,66 +40,22 @@ angular.module('app.controllers',['app.servers'])
                 });
             }
             oBtn.eq(index).addClass("active-span").siblings().removeClass("active-span");
-        }
+        };
     }])
-.controller('lineCtrl',['$scope', function ($scope) {
-        $scope.lists = [{
-              "id":1,
-              "name":"李敏",
-              "job":"主治医师",
-              "address":"北京爱悦里格美容医院",
-              "hurt":"眼部综合整形",
-              "timer":"微整形在线面诊",
-              "img":'img/c5.png'
-          },{
-              "id":2,
-              "name":"李敏",
-              "job":"主治医师",
-              "address":"北京爱悦里格美容医院",
-              "hurt":"眼部综合整形",
-              "timer":"微整形在线面诊",
-              "img":'img/c5.png'
-          },{
-              "id":3,
-              "name":"李敏",
-              "job":"主治医师",
-              "address":"北京爱悦里格美容医院",
-              "hurt":"眼部综合整形",
-              "timer":"微整形在线面诊",
-              "img":'img/c5.png'
-          },{
-              "id":4,
-              "name":"李敏",
-              "job":"主治医师",
-              "address":"北京爱悦里格美容医院",
-              "hurt":"眼部综合整形",
-              "timer":"微整形在线面诊",
-              "img":'img/c5.png'
-          },{
-              "id":5,
-              "name":"李敏",
-              "job":"主治医师",
-              "address":"北京爱悦里格美容医院",
-              "hurt":"眼部综合整形",
-              "timer":"微整形在线面诊",
-              "img":'img/c5.png'
-          },{
-              "id":6,
-              "name":"李敏",
-              "job":"主治医师",
-              "address":"北京爱悦里格美容医院",
-              "hurt":"眼部综合整形",
-              "timer":"微整形在线面诊",
-              "img":'img/c5.png'
-          }
-      ];
-
+.controller('lineCtrl',['$scope','lineServer', function ($scope,lineServer) {
+    var callback = function (data) {
+        $scope.lists = data ;
+    }
+        lineServer.getData(callback);
     }])
 .controller('yishengCtrl',['$scope', function ($scope) {
         
     }])
 .controller('diylistCtrl',['$scope', function ($scope) {
         
+    }])
+.controller('diyInfoCtrl',['$scope', function ($scope) {
+
     }])
 .controller('loginCtrl',['$scope','$interval',function ($scope,$interval) {
         var text = $('.login-get').find('a');

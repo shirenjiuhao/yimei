@@ -52,7 +52,7 @@ html,body{background: #fcfcfc}
 .banner-wrap li a img{height:320px;display: block;margin-bottom: 20px;}
 .banner-wrap-text{text-align: center}
 .banner-num{
-    position: absolute;top:325px;width:200px;left:50%;margin-left:-100px;
+    position: absolute;top:300px;width:200px;left:50%;margin-left:-100px;
     height:10px;display: flex;z-index:1000;
     justify-content: center;
 }

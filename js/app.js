@@ -20,6 +20,14 @@ angular.module('app',['ionic','ngRoute','app.controllers','app.servers'])
                 templateUrl:'views/diylist.html',
                 controller:'diylistCtrl'
             })
+            .when('/tabs/diy/:id',{
+                templateUrl:'views/diyInfo.html',
+                controller:'diyInfoCtrl'
+            })
+            .when('/tabs/diy/:id/ys',{
+                templateUrl:'views/ysInfo.html',
+                controller:'diyInfoCtrl'
+            })
             .when('/tabs/login',{
                 templateUrl:'views/login.html',
                 controller:'loginCtrl'
