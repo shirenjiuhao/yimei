@@ -8,6 +8,10 @@ angular.module('app',['ionic','ngRoute','app.controllers','app.servers'])
                 templateUrl: 'views/yimei.html',
                 controller:'tabsCtrl'
             })
+            .when('/tabs/mine',{
+                templateUrl:'views/mine.html',
+                controller:'mineCtrl'
+            })
             .when('/tabs/line',{
                 templateUrl:'views/yimeiLine.html',
                 controller:'lineCtrl'

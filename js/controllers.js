@@ -7,40 +7,6 @@ angular.module('app.controllers',['app.servers'])
             $scope.data = data;
         };
         tabsServer.getData(callback);
-        var uls = $('#banner').find('ul');
-        var liWid = $('#banner').width();
-        var oBtn = $('#btn').find('span');
-        var index = 0;//第一张banner
-        oBtn.click(function () {
-            index = $(this).index();
-            uls.animate({left:(index)*(-liWid)},1000);
-            oBtn.eq(index).addClass("active-span").siblings().removeClass("active-span");
-        });//对应的按钮切换图片
-        var timer = $interval(next,2000);//启动间歇
-        uls.bind({"mouseenter":function () {//over 停止间歇
-            $interval.cancel(timer);
-        },"mouseleave":function () {//out 启动间歇
-            $interval.cancel(timer);
-            timer = $interval(next,2000);
-        }});
-        oBtn.hover(function () {
-            $interval.cancel(timer);
-        },function () {//out 启动间歇
-            $interval.cancel(timer);
-            timer = $interval(next,2000);
-        });
-        function next() {
-            if(index < 3){
-                index ++;
-                uls.animate({left:(index)*(-liWid)},1000);
-            }else{
-                index = 0;
-                uls.animate({left:3*(-liWid)},500, function () {//运动到复制的第一张，并执行回调
-                    $(this).css("left","0");
-                });
-            }
-            oBtn.eq(index).addClass("active-span").siblings().removeClass("active-span");
-        };
     }])
 .controller('lineCtrl',['$scope','lineServer', function ($scope,lineServer) {
     var callback = function (data) {
@@ -94,4 +60,7 @@ angular.module('app.controllers',['app.servers'])
                 $('#login-btn').find('a').attr({href:'#/tabs'});
             }
         }
+    }])
+.controller('mineCtrl',['$scope', function ($scope) {
+
     }])

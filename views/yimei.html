@@ -1,44 +1,35 @@
 
-
-<div class='bar bar-header'>
-    <a class='button button-icon icon ion-ios-person'></a>
-	<h1 class='title'>医美定制</h1>
-	<a class='button button-icon icon ion-ios-bell'></a>
-</div>
-<div class="content has-header">
-    <div class="banner" id="banner">
-        <ul class="banner-wrap">
-            <li ng-repeat="item in data">
-                <a ng-href="{{item.href}}"><img ng-src={{item.src}} alt="{{item.alt}}" class="responsive-img"/>
-                <div class="banner-wrap-text">
-                    <p>{{item.name}}</p>
-                    <p>{{item.message}}</p>
-                </div>
-            </a>
-            </li>
-        </ul>
-        <div class="banner-num" id="btn">
-            <span class="active-span"></span>
-            <span></span><span></span><span></span>
-        </div>
+<div style="height: 44px;">
+    <div class='bar bar-header'>
+        <a class='button button-icon icon ion-ios-person' ng-href="#/tabs/mine"></a>
+        <h1 class='title'>医美定制</h1>
+        <a class='button button-icon icon ion-ios-bell'></a>
     </div>
-    <div class="row">
-        <div class="col content">
-            <a class="button-icon tab con-left ion-android-star dark" href="#/tabs/line">
-                <div class="mingyi">
-                    <h5>名医在线</h5>
-                    <span>一对一专家视频资讯</span>
-                </div>
-            </a>
-        </div>
-        <div class="col content">
-            <a class="button-icon icon-left ion-android-star dark" href="#/tabs/diy">
-                <div class="mingyi">
-                    <h5>医院定制</h5>
-                    <span>预约全球顶尖医院</span>
-                </div>
-            </a>
-        </div>
+</div>
+
+<div class="content">
+    <div class="banner" id="banner">
+        <ion-slide-box class="banner-wrap">
+            <ion-slide ng-repeat="item in data">
+                <a ng-href="{{item.href}}">
+                    <img ng-src={{item.src}} alt="{{item.alt}}" class="responsive-img" style="height:535px;background:paleturquoise"/>
+                </a>
+            </ion-slide>
+        </ion-slide-box>
+    </div>
+    <div style="display:flex;">
+        <a class="item item-avatar" style="border-right: 0;"
+           ng-href="#/tabs/line"    >
+            <img ng-src="img/c5.png" alt="加载中" style="border-radius:0;">
+            <h2>名医在线</h2>
+            <p style="margin-bottom: 10px;">一对一专家视频资讯</p>
+        </a>
+        <a class="item item-avatar" style="border-left: 0;"
+           ng-href="#/tabs/diy"    >
+            <img ng-src="img/c5.png" alt="加载中" style="border-radius:0;">
+            <h2>医院定制</h2>
+            <p style="margin-bottom: 10px;">预约全球顶尖医院</p>
+        </a>
     </div>
 </div>
 <div class="zixun">
