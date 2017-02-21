@@ -61,9 +61,10 @@ angular.module('app.controllers',['app.servers'])
             }
         }
     }])
-.controller('mineCtrl',['$scope', function ($scope) {
-
-    }])
-.controller('counselorCtrl',['$scope', function ($scope) {
-
-    }])
+.controller('mineCtrl',['$scope', function ($scope){}])
+.controller('programCtrl',['$scope',function($scope){}])
+.controller('orderCtrl',['$scope',function($scope){}])
+.controller('counselorCtrl',['$scope', function ($scope){}])
+.controller('messagesCtrl',['$scope',function($scope){}])
+.controller('programInfoCtrl',['$scope',function($scope){}])
+.controller('orderInfoCtrl',['$scope',function($scope){}])

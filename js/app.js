@@ -12,6 +12,22 @@ angular.module('app',['ionic','ngRoute','app.controllers','app.servers'])
                 templateUrl:'views/mine.html',
                 controller:'mineCtrl'
             })
+            .when('/tabs/mine/program',{
+                templateUrl:'views/program.html',
+                controller:'programCtrl'
+            })
+            .when('/tabs/mine/program/:id',{
+                templateUrl:'views/programInfo.html',
+                controller:'programInfoCtrl'
+            })
+            .when('/tabs/mine/order',{
+                templateUrl:'views/order.html',
+                controller:'orderCtrl'
+            })
+            .when('/tabs/mine/order/:id',{
+                templateUrl:'views/orderInfo.html',
+                controller:'orderInfoCtrl'
+            })
             .when('/tabs/line',{
                 templateUrl:'views/yimeiLine.html',
                 controller:'lineCtrl'
@@ -35,6 +51,10 @@ angular.module('app',['ionic','ngRoute','app.controllers','app.servers'])
             .when('/tabs/login',{
                 templateUrl:'views/login.html',
                 controller:'loginCtrl'
+            })
+            .when('/tabs/messages',{
+                templateUrl:'views/messages.html',
+                controller:'messagesCtrl'
             })
             .when('/tabs/counselor',{
                 templateUrl:'views/counselor.html',

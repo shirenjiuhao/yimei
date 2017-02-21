@@ -37,3 +37,12 @@ html,body{background: #eee}
 /*咨询师页面*/
 .counselor-content{padding:10px;font-size: 18px;}
 .counselor-content img{max-height: 40px;min-width: 40px;background:red;border-radius:50%}
+/*信息页面*/
+.message-border{padding: 0 5px;background: #fff}
+.message-border .item{margin:0;border-color:transparent;}
+.message-border .item:not(:last-child){border-bottom-color:#ccc}
+/*方案详情页*/
+.programInfo{text-align: center;position: relative;padding: 10px 20px;}
+.programInfo:before,.programInfo:after{content: '';position:absolute;top:20px;width: 42%;border-top: 1px solid #ccc}
+.programInfo:after{right:20px;}
+.programInfo:before{left:20px;}
