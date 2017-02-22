@@ -61,10 +61,18 @@ angular.module('app.controllers',['app.servers'])
             }
         }
     }])
-.controller('mineCtrl',['$scope', function ($scope){}])
+.controller('mineCtrl',['$scope', function ($scope) {
+        $scope.signOut = function () {
+            alert("是否确认退出");
+        }
+    }])
 .controller('programCtrl',['$scope',function($scope){}])
 .controller('orderCtrl',['$scope',function($scope){}])
 .controller('counselorCtrl',['$scope', function ($scope){}])
 .controller('messagesCtrl',['$scope',function($scope){}])
-.controller('programInfoCtrl',['$scope',function($scope){}])
+.controller('programInfoCtrl',['$scope',function($scope) {
+        $scope.appay = function () {
+            alert(1);
+        }
+    }])
 .controller('orderInfoCtrl',['$scope',function($scope){}])
