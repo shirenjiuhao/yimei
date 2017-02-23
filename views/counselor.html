@@ -1,41 +1,47 @@
-<div style="height: 44px;">
-    <div class='bar bar-header'>
-        <a ng-href="#/tabs" class="button button-clear icon ion-ios-arrow-back"></a>
-        <h1 class='title'>咨询师</h1>
-    </div>
+<div class='index-ion'>
+    <a ng-href="#/tabs/messages" class="index-ion-return"></a>
+    <h1 class='title'>咨询师</h1>
 </div>
-<ion-content class="has-header">
+<ion-content class="has-header" style="background:#ddd">
     <div class="counselor-content">
-        <div style="line-height: 45px;height:50px;">
-            <img ng-src="img/c5.png" alt="加载中"/>
-            <span style="font-size: 18px;vertical-align: text-bottom;padding-left: 5px;">咨询师</span>
+        <div class="counselor-timer">2017-02-23</div>
+        <div class="counselor-chat">
+            <img ng-src="img/touxiang1.png" alt="加载中"/>
+            <div class="counselor-chat-text">中国爱美整形外科医院是中国唯一
+                一家集整形美容整容为一体的专科医院。</div>
         </div>
-        <div>
-            <textarea name="" id="" cols="30" rows="6" style="width: 100%;border-radius: 5px;">
-                漂亮的界面　追求性能  　专注原生　免费开源
-            </textarea>
-        </div>
-        <div style="background: #fff;margin:10px 0;padding:0 10px;border-radius: 5px;
-    line-height: 45px;">
+        <div class="counselor-chat-prog">
             <a href="#/tabs/mine/program/:id">
-                <p style="border-bottom: 1px solid #ccc;padding:5px 0;">方案1</p>
-                <img ng-src="img/c5.png" alt="加载中"/>
-                <span style="font-size: 18px;vertical-align: text-bottom;padding-left: 5px;">李敏 <span style="color:#999"> 主治医师</span></span>
+                <p>方案1</p>
+                <img ng-src="img/touxiang1.png" alt="加载中"/>
+                <div class="counselor-chat-prog-tex">
+                    <div>李敏<i class="line-ion-zhuan"></i></div>
+                    <span>主治医师</span>
+                </div>
             </a>
         </div>
-        <div style="background: #fff;margin:10px 0;padding:0 10px;border-radius: 5px;line-height: 1.5">
+        <div class="counselor-chat-prog counselor-chat-h">
             <a href="#/tabs/mine/order/:id">
-                <p style="border-bottom: 1px solid #ccc;padding:5px 0;">北京爱乐里格美容医院</p>
-                <div>李敏 <span style="float: right;color:lightskyblue">￥1204.00</span></div>
-                <span style="color: #999">01-10 16:16</span>
-                <div style="color: #999;padding-bottom: 10px;">方案1</div>
+                <p>中国爱美整形外科医院</p>
+                <div style="display: flex">
+                    <span>医生</span>
+                    <span style="color:#333">&nbsp;&nbsp;李敏</span>
+                    <i class="line-ion-zhuan"></i>
+                    <span style="flex: 1;color: #FF8EA2;font-size:1.42rem;text-align:right">￥1204.00</span>
+                </div>
+                <div><span>时间&nbsp;&nbsp;</span><span>02-10 16:16</span></div>
+                <div><span>方案&nbsp;&nbsp;</span><span style="color:#333">方案1</span></div>
             </a>
+        </div>
+        <div class="counselor-chat-mine">
+            <img ng-src="img/WechatIMG8.png" alt="加载中"/>
+            <div class="counselor-chat-mine-text">谢谢老师！</div>
         </div>
     </div>
 </ion-content>
-<div class="bar bar-footer" style="border-top: 1px solid #999;display:flex;">
-    <input type="text" placeholder="请输入消息" style="flex:1;" />
-    <a class="button-icon button ion-ios-plus-outline" href="#/tabs/counselor/more"></a>
+<div class="counselor-foot">
+    <input type="text" placeholder="请输入消息"/>
+    <a class="icon ion-ios-plus-outline counselor-foot-add" href="#/tabs/messages/counselor/more"></a>
 </div>
 
 

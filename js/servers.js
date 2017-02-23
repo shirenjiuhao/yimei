@@ -21,11 +21,42 @@ angular.module('app.servers',[])
         return this;
     }])
 .service('lineServer',['$http', function ($http) {
-    this.getData = function(callback){
-        var url = "json/yishenglist.json";
+    this.getData = function(callback,url){
         $http.get(url).success(function (data) {
             callback(data);
         })
     }
     return this;
 }])
+.service('yishengServer',['$http', function ($http) {
+        this.getData = function(callback,url){
+            $http.get(url).success(function (data) {
+                callback(data);
+            })
+        }
+        return this;
+    }])
+.service('diylistServer',['$http', function ($http) {
+    this.getData = function(callback,url){
+        $http.get(url).success(function (data) {
+            callback(data);
+        })
+    }
+    return this;
+}])
+.service('diyInfoServer',['$http', function ($http) {
+        this.getData = function(callback,url){
+            $http.get(url).success(function (data) {
+                callback(data);
+            })
+        }
+        return this;
+    }])
+.service('orderServer',['$http', function ($http) {
+        this.getData = function(callback,url){
+            $http.get(url).success(function (data) {
+                callback(data);
+            })
+        }
+        return this;
+    }])

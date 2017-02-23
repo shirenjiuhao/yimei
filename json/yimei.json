@@ -1,23 +1,18 @@
 [
     {
         "href":"",
-        "src":"",
+        "src":"img/tu.png",
         "alt":"正在加载...",
         "bg":"blue"
     },{
         "href":"",
-        "src":"",
+        "src":"img/tu1.png",
         "alt":"正在加载...",
         "bg":"red"
     },{
         "href":"",
-        "src":"",
+        "src":"img/tu2.png",
         "alt":"正在加载...",
         "bg":"purple"
-    },{
-        "href":"",
-        "src":"",
-        "alt":"正在加载...",
-        "bg":"paleturquoise"
     }
 ]

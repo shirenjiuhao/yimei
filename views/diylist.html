@@ -1,34 +1,14 @@
-<div style="height:44px;">
-    <div class="bar bar-header">
-        <a ng-href="#/tabs" class="button button-clear icon ion-ios-arrow-back"></a>
-        <h1 class="title">优质医院</h1>
-    </div>
+<div class='index-ion'>
+    <a ng-href="#/tabs/line" class="index-ion-return"></a>
+    <h1 class='title'>优质医院</h1>
 </div>
 <ion-content class="has-header">
-    <div style="margin:5px 5px;" class="card" >
-        <a ng-href="#/tabs/diy/:id">
-            <img ng-src="" alt="加载更多..." class="responsive-img" style="height:220px;background: green"/>
-            <div style="padding:3px 10px;">
-                <div style="font-weight:600">爱乐开不打吧vdsb</div>
-                <span style="color:#999">医疗美容怎所 - 北京市朝阳区东直门</span>
-            </div>
-        </a>
-    </div>
-    <div style="margin:5px 5px;" class="card" >
-        <a ng-href="#/tabs/diy/:id">
-            <img ng-src="" alt="加载更多..." class="responsive-img" style="height:220px;background: green"/>
-            <div style="padding:3px 10px;">
-                <div style="font-weight:600">爱乐开不打吧vdsb</div>
-                <span style="color:#999">医疗美容怎所 - 北京市朝阳区东直门</span>
-            </div>
-        </a>
-    </div>
-    <div style="margin:5px 5px;" class="card" >
-        <a ng-href="#/tabs/diy/:id">
-            <img ng-src="" alt="加载更多..." class="responsive-img" style="height:220px;background: green"/>
-            <div style="padding:3px 10px;">
-                <div style="font-weight:600">爱乐开不打吧vdsb</div>
-                <span style="color:#999">医疗美容怎所 - 北京市朝阳区东直门</span>
+    <div class="diylist" ng-repeat="item in data" ng-cloak>
+        <a ng-href="#/tabs/diy/{{item.id}}">
+            <img ng-src="{{item.img}}" alt="加载更多..." class="responsive-img"/>
+            <div class="diylist-text">
+                <div>{{item.name}}</div>
+                <span>{{item.adress}}</span>
             </div>
         </a>
     </div>

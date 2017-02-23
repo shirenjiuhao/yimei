@@ -56,11 +56,11 @@ angular.module('app',['ionic','ngRoute','app.controllers','app.servers'])
                 templateUrl:'views/messages.html',
                 controller:'messagesCtrl'
             })
-            .when('/tabs/counselor',{
+            .when('/tabs/messages/counselor',{
                 templateUrl:'views/counselor.html',
                 controller:'counselorCtrl'
             })
-            .when('/tabs/counselor/more',{
+            .when('/tabs/messages/counselor/more',{
                 templateUrl:'views/counselor-more.html',
                 controller:'counselorCtrl'
             })

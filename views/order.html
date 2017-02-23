@@ -1,24 +1,20 @@
-<div style="height:44px;">
-    <div class="bar bar-header">
-        <a href="#/tabs/mine" class="button button-clear icon ion-ios-arrow-back"></a>
-        <h1 class="title">服务预约</h1>
-    </div>
+
+<div class='index-ion'>
+    <a ng-href="#/tabs/mine" class="index-ion-return"></a>
+    <h1 class='title'>服务预约</h1>
 </div>
-<ion-content class="has-header" style="padding:0 5px">
-    <div style="background: #fff;margin:10px 0;padding:0 10px;border-radius: 5px;line-height: 1.5">
+<ion-content class="has-header" style="padding:0 1rem;background: #ddd">
+    <div class="counselor-chat-prog order-card" ng-repeat="item in data">
         <a href="#/tabs/mine/order/:id">
-            <p style="border-bottom: 1px solid #ccc;padding:5px 0;">北京爱乐里格美容医院</p>
-            <div>李敏 <span style="float: right;color:lightskyblue">¥1204.00</span></div>
-            <span style="color: #999">01-10 16:16</span>
-            <div style="color: #999;padding-bottom: 10px;">方案1</div>
-        </a>
-    </div>
-    <div style="background: #fff;margin:10px 0;padding:0 10px;border-radius: 5px;line-height: 1.5">
-        <a href="#/tabs/mine/order/:id">
-            <p style="border-bottom: 1px solid #ccc;padding:5px 0;">北京爱乐里格美容医院</p>
-            <div>李敏 <span style="float: right;color:lightskyblue">¥1204.00</span></div>
-            <span style="color: #999">01-10 16:16</span>
-            <div style="color: #999;padding-bottom: 10px;">方案1</div>
+            <p>{{item.adress}}</p>
+            <div style="display: flex">
+                <span>医生</span>
+                <span style="color:#333">&nbsp;&nbsp;{{item.name}}</span>
+                <i class="line-ion-zhuan"></i>
+                <span style="flex: 1;color:#FE88A5;font-size:1.5rem;text-align:right">{{item.price|currency:"¥"}}</span>
+            </div>
+            <div><span>时间&nbsp;&nbsp;</span><span>{{item.timer}}</span></div>
+            <div><span>方案&nbsp;&nbsp;</span><span style="color:#333">{{item.methods}}</span></div>
         </a>
     </div>
 </ion-content>

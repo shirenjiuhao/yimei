@@ -1,43 +1,49 @@
 
-<div style="height: 44px;">
-    <div class='bar bar-header'>
-        <a class='button button-icon icon ion-ios-person' ng-href="#/tabs/mine"></a>
-        <h1 class='title'>医美定制</h1>
-        <a class='button button-icon icon ion-ios-bell' ng-href="#/tabs/messages"></a>
+
+<div class='index-ion'>
+    <a ng-href="#/tabs/mine" class="index-ion-mine"></a>
+    <h1 class='title'>医美定制<span class="index-info"></span></h1>
+    <a ng-href="#/tabs/messages" class="index-ion-tongzhi"></a>
+</div>
+<div  style="padding:1.9% 3.3% 0;">
+    <ion-slide-box  style="height:16.25rem;">
+        <ion-slide ng-repeat="item in data">
+            <a ng-href="#/tabs/messages">
+                <img ng-src={{item.src}} alt="{{item.alt}}" class="responsive-img" style="height:100%;background:{{item.bg}};"/>
+            </a>
+        </ion-slide>
+    </ion-slide-box>
+</div>
+<div style="padding:1.33rem 0;text-align:center;color: #918F8F;font-size: 1rem">
+    『  创造你的美  』
+</div>
+
+<div  class="index-box">
+    <div class="index-to">
+        <a ng-href="#/tabs/line">
+            <span>...</span>
+            <div>名医在线</div>
+            <span>一对一专家视频资讯</span>
+        </a>
+    </div>
+    <div class="index-to">
+        <a ng-href="#/tabs/diy">
+            <span>...</span>
+            <div>医院定制</div>
+            <span>预约全球顶尖医院</span>
+        </a>
+    </div>
+    <div class="index-to">
+        <a href="#/tabs/login">
+            <span>...</span>
+            <div>专属外形定制咨询师</div>
+            <span>
+                专业医生咨询团队24小时为您服务
+            </span>
+        </a>
     </div>
 </div>
 
 
-    <div class="banner" id="banner">
-        <ion-slide-box class="banner-wrap">
-            <ion-slide ng-repeat="item in data">
-                <a ng-href="#/tabs/counselor">
-                    <img ng-src={{item.src}} alt="{{item.alt}}" class="responsive-img" style="height:480px;background:{{item.bg}};"/>
-                </a>
-            </ion-slide>
-        </ion-slide-box>
-    </div>
 
-<div class="bar bar-subfooter" style="display:flex;padding:0;bottom:95px;">
-    <a class="item item-avatar" style="border-right:0;flex: 1"
-       ng-href="#/tabs/line"    >
-        <img ng-src="img/c5.png" alt="加载中" style="border-radius:0;">
-        <h2>名医在线</h2>
-        <p style="margin-bottom: 10px;">一对一专家视频资讯</p>
-    </a>
-    <a class="item item-avatar" style="border-left: 0;flex: 1"
-       ng-href="#/tabs/diy"    >
-        <img ng-src="img/c5.png" alt="加载中" style="border-radius:0;">
-        <h2>医院定制</h2>
-        <p style="margin-bottom: 10px;">预约全球顶尖医院</p>
-    </a>
-</div>
-<div class="zixun">
-    <a href="#/tabs/login" class="title">
-        <b>专属外形定制咨询师</b><br/>
-        <span>
-            专业医生咨询团队24小时为您服务
-        </span>
-    </a>
-</div>
 

@@ -9,19 +9,47 @@ angular.module('app.controllers',['app.servers'])
         tabsServer.getData(callback);
     }])
 .controller('lineCtrl',['$scope','lineServer', function ($scope,lineServer) {
+    var url = "json/yishenglist0.json";
     var callback = function (data) {
         $scope.lists = data ;
     }
-        lineServer.getData(callback);
+        lineServer.getData(callback,url);
+        var seleted = $('.line-selected');
+        seleted.on('click','a',function(){
+            $scope.lists =[] ;
+            $(this).addClass("line-active").siblings().removeClass("line-active");
+            $(this).addClass("line-active").parent(".line-item").siblings().find("a").removeClass("line-active");
+            $scope.$index = $(this).index();
+            console.log($scope.$index)
+            url = "json/yishenglist" +$scope.$index + ".json";
+            lineServer.getData(callback,url)
+        })
     }])
-.controller('yishengCtrl',['$scope', function ($scope) {
-        
+.controller('yishengCtrl',['$scope','yishengServer', function ($scope,yishengServer) {
+        var url = 'json/yisheng.json';
+        var callback = function (data) {
+            $scope.data = data;
+        };
+        yishengServer.getData(callback,url);
     }])
-.controller('diylistCtrl',['$scope', function ($scope) {
-        
+.controller('diylistCtrl',['$scope','diylistServer', function ($scope,diylistServer) {
+        var url = 'json/diylist.json';
+        var callback = function (data) {
+            $scope.data = data;
+        };
+        diylistServer.getData(callback,url);
     }])
-.controller('diyInfoCtrl',['$scope', function ($scope) {
-
+.controller('diyInfoCtrl',['$scope','diyInfoServer', function ($scope,diyInfoServer) {
+        var url = 'json/diyInfo.json';
+        var callback = function (data) {
+            $scope.data = data;
+        };
+        var url2 = 'json/yishenglist0.json'
+        diyInfoServer.getData(callback,url);
+        var callback2 = function (data) {
+            $scope.lists = data
+        }
+        diyInfoServer.getData(callback2,url2);
     }])
 .controller('loginCtrl',['$scope','$interval',function ($scope,$interval) {
         var text = $('.login-get').find('a');
@@ -67,7 +95,13 @@ angular.module('app.controllers',['app.servers'])
         }
     }])
 .controller('programCtrl',['$scope',function($scope){}])
-.controller('orderCtrl',['$scope',function($scope){}])
+.controller('orderCtrl',['$scope','orderServer',function($scope,orderServer){
+        var url = 'json/order.json';
+        var callback = function (data) {
+            $scope.data = data;
+        };
+        orderServer.getData(callback,url)
+    }])
 .controller('counselorCtrl',['$scope', function ($scope){}])
 .controller('messagesCtrl',['$scope',function($scope){}])
 .controller('programInfoCtrl',['$scope',function($scope) {
