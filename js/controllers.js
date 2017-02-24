@@ -110,12 +110,30 @@ angular.module('app.controllers',['app.servers'])
             /*点击后的倒计时*/
         };
         var url = '';
-        $scope.login = function () {
+        $scope.yanzhengma = function () {
             var pwd = $('.login-input').find("input[type='text']").val();
-            if(pwd != '' && pwd == str1){
+            if(pwd != '' && pwd == str1 && pwd != ''){
                 $('#login-btn').attr({href:'#/tabs'});
+            }else{
+                alert('验证码输入错误')
             }
         }
+        $scope.login = function () {
+            var  username = $('#username').val();
+            var password = $('#password').val();
+            var options = {
+                username:username ,
+                password:password ,
+                appKey: WebIM.config.appkey,
+                success: function (data) { console.log(data);
+                    window.open("#/tabs")
+                },
+                error: function (err) {console.log( err )},
+                apiUrl: WebIM.config.apiURL
+            };
+            conn.registerUser(options);
+        }
+
     }])
 .controller('mineCtrl',['$scope', function ($scope) {
         $scope.signOut = function () {

@@ -3,24 +3,11 @@
 </div>
 <div class="login-box">
     <div class="login-input">
-        <input type="tel" focus placeholder="&nbsp;&nbsp;&nbsp;填写手机号" id="username" />
-        <input type="text" placeholder="&nbsp;&nbsp;&nbsp;填写验证码" id="password"/>
+        <input type="tel" placeholder="&nbsp;&nbsp;&nbsp;填写手机号" id="username" />
+        <input type="text" placeholder="&nbsp;&nbsp;&nbsp;填写验证码" id="password" ng-blur="yanzhengma()"/>
         <div class="login-get" ng-click="getInfo()">获取验证码</div>
     </div>
     <a class="login-btn" id="login-btn" href="" ng-click="login()">
         登录
     </a>
 </div>
-<script type="text/javascript">
-    ;$(function () {
-        var options = {
-            username: $('#username').val(),
-            password: $('#password').val(),
-            appKey: WebIM.config.appkey,
-            success: function (data) { console.log(data)},
-            error: function (err) {console.log(err)},
-            apiUrl: WebIM.config.apiURL
-        };
-        conn.registerUser(options);
-    });
-</script>
