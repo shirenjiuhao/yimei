@@ -1,24 +1,14 @@
-<div style="height:44px;">
-    <div class="bar bar-header">
-        <a ng-href="#/tabs" class="button button-clear icon ion-ios-arrow-back"></a>
-        <h1 class="title">个人中心</h1>
+<div class="mine-box" style="">
+    <div class="mine-img">
+        <a href="#">
+            <img ng-src="img/WechatIMG8.png" alt=""/>
+        </a>
+        <p>卖品牌的小火柴</p>
     </div>
+    <div class="mine-in">
+        <a href="#/tabs/mine/program"><i class="fangan"></i><div>方案</div><span class="icon-next"></span></a>
+        <a href="#/tabs/mine/order"><i class="dingdan"></i><div>订单</div><span class="icon-next"></span></a>
+    </div>
+    <a href="#" class="signOut" ng-click="signOut()">退出登录</a>
 </div>
-<div  style="height:150px;text-align: center;padding:20px;background: #fff;margin-top:1px;">
-    <a href="#">
-        <img ng-src="img/WechatIMG8.png" alt="" style="border-radius: 50%;
-    max-width: 72px;
-    max-height: 72px;"/>
-    </a>
-    <p style="font-size: 16px;">昵称</p>
-</div>
-<a href="#/tabs/mine/program" class="item" style="margin-top: 10px;">
-    方案
-</a>
-<a href="#/tabs/mine/order" class="item" style="margin-top: 5px;">
-    订单
-</a>
-<div style="position: fixed;bottom:120px;display: flex;padding:0 20px;width:100% ">
-    <a href="#" class="button" ng-click="signOut()" style="flex:1;border-radius: 5px;
-    background: #999;color:#fff">退出登录</a>
-</div>
+

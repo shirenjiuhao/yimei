@@ -44,15 +44,36 @@ angular.module('app.controllers',['app.servers'])
         var callback = function (data) {
             $scope.data = data;
         };
-        var url2 = 'json/yishenglist0.json'
         diyInfoServer.getData(callback,url);
+        var url2 = 'json/yishenglist0.json';
         var callback2 = function (data) {
             $scope.lists = data
-        }
+        };
         diyInfoServer.getData(callback2,url2);
+        /*点击切换*/
+        var count = 0;
+        $scope.show = function () {
+            return true;
+        };
+        $scope.change = function () {
+            count = 0;
+            console.log(count);
+            $('.diyInfo-thr').find('a').eq(count).addClass("diyInfo-thr-act").siblings().removeClass("diyInfo-thr-act");
+            $scope.show = function () {
+                return true;
+            }
+        };
+        $scope.change1= function () {
+            count = 1;
+            console.log(count);
+            $('.diyInfo-thr').find('a').eq(count).addClass("diyInfo-thr-act").siblings().removeClass("diyInfo-thr-act");
+            $scope.show = function () {
+                return false;
+            }
+        };
     }])
 .controller('loginCtrl',['$scope','$interval',function ($scope,$interval) {
-        var text = $('.login-get').find('a');
+        var text = $('.login-get');
         var reg = /^1(3|4|5|7|8)\d{9}$/ig;
         var str1 = "";
         $scope.getInfo = function () {
@@ -62,10 +83,11 @@ angular.module('app.controllers',['app.servers'])
                 alert('手机号有误，请重新填写');
                 return false;
             }else {
+                str1 = "";
                 for (var i = 1; i <= 6; i++) {
                     str1 = str1 + parseInt(Math.random() * 10);
                 }
-                alert(str1);
+                console.log(str1);
             };
             var targetDate = new Date();
             targetDate.setMinutes(targetDate.getMinutes()+1);
@@ -74,9 +96,11 @@ angular.module('app.controllers',['app.servers'])
                 var result = targetDate.valueOf() - newDate.valueOf();
                 var minute = Math.floor(result%(1000 * 60)/(1000));
                 if(result > 0){
-                    text1 = minute + '后可发送';
+                    text1 = minute + 's后可发送';
+                    text.removeAttr("ng-click")
                 }else{
                     $interval.cancel(timer);
+                    text.attr("ng-click","getInfo()")
                     text1 = '重新发送';
                 }
                 text.html(text1);
@@ -85,7 +109,7 @@ angular.module('app.controllers',['app.servers'])
         $scope.login = function () {
             var pwd = $('.login-input').find("input[type='text']").val();
             if(pwd != '' && pwd == str1){
-                $('#login-btn').find('a').attr({href:'#/tabs'});
+                $('#login-btn').attr({href:'#/tabs'});
             }
         }
     }])

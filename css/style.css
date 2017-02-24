@@ -5,7 +5,7 @@ i{font-style: normal}
 li{list-style: none}
 html,body{font-size: 12px;}
 .responsive-img{width:100%;height:100%;}
-.index-ion{border-bottom: 1px solid #ddd;height: 44px;position:relative;text-align: center;display: flex;align-items:center;padding:0 3.3%;background: #fff}
+.index-ion{border-bottom: 1px solid #E8E8E8;height: 44px;position:relative;text-align: center;display: flex;align-items:center;padding:0 3.3%;background: #fff}
 .index-ion .title{font-size: 1.42rem;flex: 1;margin: 0;}
 .index-ion-return{background-color:#666;background:url('../img/return.png') no-repeat ;width: 0.85rem;height:1.53rem;
     background-size: 100%}
@@ -24,17 +24,36 @@ html,body{font-size: 12px;}
 .index-to span:first-child{font-size: 1.25rem;color: #666;line-height: 1.75rem}
 .index-to span:last-child{font-size: 1.17rem;color: #666;line-height: 1.67rem}
 /**专属定制*/
-.zixun{position:absolute;bottom:0px;width:100%;text-align:center;z-index:10;background: #fff;padding:10px 0;}
+.zixun{position:absolute;bottom:0px;width:100%;text-align:center;z-index:10;background: #fff;padding:0.83rem 0;}
 .zixun a{color:#333}
 .zixun a span{color:#999}
 /*登录页-------------------------------------------------------------*/
 /*login 登录*/
-.login-input{padding:20px;position: relative;}
-.login-input input{border-radius: 5px;width:100%;background: #fff;text-indent:10px;}
-.login-get{position: absolute;top:88px;right:35px;width:88px;height:33px;border-left:1px solid #ccc;line-height: 33px;padding-left:10px;
-    text-align: center;
+.login-box{padding:2rem 1.58rem}
+.login-input{position: relative;}
+.login-input input{width:100%;background: #fff;text-indent:1.17rem;border-bottom:0.08rem solid #E8E8E8;height:3.8rem}
+.login-get{position: absolute;top:4.8rem;right:1.42rem;width:8rem;height:1.75rem;border-left:0.08rem solid #E8E8E8;line-height:1.75rem;
+    text-align: center;color: #3CDAD3;font-size: 1.25rem;cursor: pointer;
 }
-.login-get a{color:lightskyblue}
+.login-btn{padding:0 1.58rem;display: flex;margin-top:4.9rem;justify-content: center;align-items: center;
+    background:#3CDAD3;color:#fff;height: 3.67rem;font-size: 1.33rem;border-radius:2rem;
+}
+/*个人主页-----------------------------------------------------------*/
+.mine-box{
+    position: absolute; top: 0; right: 0;bottom: 0;
+    left: 0;overflow: hidden;margin-top: -1px; padding-top: 1px;margin-bottom: -1px;width: auto;height: auto;background:#F3F7F8
+}
+.mine-img{height:13.58rem;text-align: center;padding:2.42rem;background-image: linear-gradient(0deg, #56DBE2 3%, #71D5B9 98%);}
+.mine-img img{border-radius: 50%;max-width:5rem;max-height:5rem;}
+.mine-img p{margin-top: 1.25rem;font-size: 1.25rem;color:#fff}
+.mine-in{padding:0 1.33rem 0 1rem;display:flex;flex-flow: row wrap;background: #fff;margin-top: 0.83rem}
+.mine-in a{width:100%;padding:1rem 0;font-size: 1.25rem;color:#333;display:flex;}
+.mine-in a:not(:last-child){border-bottom:0.04rem solid #E8E8E8;}
+.mine-in a div{flex:1;margin-left: 0.83rem}
+.mine-in a i{width:1.67rem;height: 1.42rem;display:block;background:red;margin-top:0.17rem;}
+.mine-in a i.dingdan{background: url("../img/dingdan.png") no-repeat;background-size: 100%;}
+.mine-in a i.fangan{background: url("../img/fangan.png") no-repeat;background-size: 100%;}
+.signOut{display: flex;margin:18.92rem 1.67rem 0;height:3.67rem;border-radius:2rem;justify-content: center;align-items: center;background:#3CDAD3;font-size: 1.33rem;color:#fff}
 /*医生在线-------------------------------------------------------------*/
 /*选择按钮*/
 .line-selected{padding:10px;width:100%;}
@@ -43,6 +62,7 @@ html,body{font-size: 12px;}
 .line-item a:nth-child(-n+4){margin-bottom: 0.83rem}
 .line-item .line-active{background:#3CDAD3;color:#fff}
 /*医生列表*/
+.item{border-color:#E8E8E8}
 .line-yisheng img{max-width:4.17rem;max-height:4.17rem;}
 .line-yisheng h2{font-size:1.25rem;color:#333333;display: flex;}
 .line-yisheng p{font-size:1rem;margin-bottom: 0.83rem;}
@@ -50,7 +70,7 @@ html,body{font-size: 12px;}
 .line-yisheng span:not(:last-child){margin-right:5px;}
 .line-ion-zhuan{width: 1.3rem;height: 1rem;background: url("../img/zhuan.png") no-repeat;background-size: 100%;display: block;position: relative;top:0.2rem}
 /*医生详情页-------------------------------------------------------------*/
-.yisheng-mid{text-align:center;line-height: 2;padding:0.83rem 0 1.33rem;border-bottom: 0.08rem solid #ddd}
+.yisheng-mid{text-align:center;line-height: 2;padding:0.83rem 0 1.33rem;border-bottom: 0.08rem solid #E8E8E8}
 .lineyisheng{height:16.67rem}
 .yisheng-mid .line-name{font-size: 1.33rem;font-weight:500;color: #333}
 .yisheng-mid .line-job{font-size:1.25rem;color: #666 }
@@ -67,12 +87,12 @@ html,body{font-size: 12px;}
 .diylist-text span{font-size: 1.17rem;color:#999}
 /*医院详情介绍页-------------------------------------------------------------*/
 .diyInfo-fir img{height: 16.67rem}
-.diyInfo-sec{text-align:center;padding:1rem 0 1.67rem;border-bottom: 0.08rem solid #ccc;background: #fff}
+.diyInfo-sec{text-align:center;padding:1rem 0 1.67rem;border-bottom: 0.08rem solid #E8E8E8;background: #fff}
 .diyInfo-sec div{font-size: 1.33rem;color: #333}
 .diyInfo-sec span{font-size: 1.25rem;color: #999}
 .diyInfo-thr{display: flex;padding-top:1rem;padding-bottom:0.75rem;background: #fff;font-size: 1.33rem}
 .diyInfo-thr a{flex: 1;text-align: center;position: relative}
-.diyInfo-thr a:after{content: '';position: absolute;bottom: -0.75rem;left: 6rem;height: 0.17rem;width:3.33rem;background:transparent}
+.diyInfo-thr a:after{content: '';position: absolute;bottom: -0.75rem;left:6rem;height: 0.17rem;width:3.33rem;background:transparent}
 .diyInfo-thr .diyInfo-thr-act{color:#34BBBE}
 .diyInfo-thr .diyInfo-thr-act:after{background:#34BBBE}
 .diyInfo-for{margin-top:0.83rem;height:38.5rem}
@@ -86,20 +106,20 @@ html,body{font-size: 12px;}
 .counselor-timer{padding:2% 0;text-align: center;font-size:1rem;color: #999}
 .counselor-chat{position:relative;}
 .counselor-chat img{position:absolute;top:0;left:0;max-height:4.17rem;max-width:4.17rem}
-.counselor-chat .counselor-chat-text{margin-left:6rem;min-height: 4.17rem;font-size: 1.25rem;color:#333;max-width: 60%;padding:1%;border:0.08rem solid #fff;
+.counselor-chat .counselor-chat-text{margin-left:6rem;min-height: 4.17rem;font-size: 1.25rem;color:#333;max-width: 60%;padding:1%;border:0.08rem solid #E8E8E8;
     border-radius:0.83rem;position: relative;background: #fff;
 }
 .counselor-chat-text:before{content:'';position:absolute;border-color:transparent #FFF transparent transparent;top:0.34rem;left:-2rem;
     border-width:1rem;border-style: dashed solid dashed dashed;
 }
 .counselor-chat-prog{min-width:23.75rem;height:10rem;margin: 0.83rem 3.75rem;background: #fff;padding:0 10px;border-radius: 5px;font-size: 1.25rem;position: relative}
-.counselor-chat-prog p{border-bottom: 0.08px dashed #ccc;font-size: 1.33rem;color: #34BBBE;padding:1rem 0;margin-bottom: 1rem;}
+.counselor-chat-prog p{border-bottom: 0.08px dashed #E8E8E8;font-size: 1.33rem;color: #34BBBE;padding:1rem 0;margin-bottom: 1rem;}
 .counselor-chat-prog-tex{position:absolute;top:4.7rem;left:5rem;}
 .counselor-chat-prog-tex div{color:#333;display: flex}
 .counselor-chat-prog-tex span{color: #999}
 .counselor-chat-h{height:11.17rem}
 .counselor-chat-h a{color:#999;}
-/*我的头像样式*/
+/*聊天头像样式*/
 .counselor-chat-mine{position: relative;margin-top: 1.67rem;}
 .counselor-chat-mine img{position:absolute;top:0;right:0;max-height:4.17rem;max-width:4.17rem}
 .counselor-chat-mine .counselor-chat-mine-text{
@@ -110,12 +130,12 @@ html,body{font-size: 12px;}
     border-width:1rem;border-style: dashed dashed dashed solid;}
 /*输入框*/
 .counselor-foot{position:fixed;bottom:0;height:3.7rem;display:flex;width:100%;background:#fff;padding:0 3.3%;justify-content: center;align-items: center}
-.counselor-foot input{border:0.08rem solid #ddd;flex:1;border-radius: 0.33rem;}
+.counselor-foot input{border:0.08rem solid #E8E8E8;flex:1;border-radius: 0.33rem;}
 .counselor-foot-add{margin-left:1rem;color:#34BBBE;font-size: 3rem;}
 /*信息页面-------------------------------------------------------*/
 .message-border{margin: 0 1rem;background: #fff;}
 .message-border .item{margin:0;border-color:transparent;padding-top:1.17rem;padding-bottom:1.17rem;font-size: 1.25rem}
-.message-border .item:not(:last-child){border-bottom-color:#ccc}
+.message-border .item:not(:last-child){border-bottom-color:#E8E8E8}
 .message-border .item img{max-width:4.17rem;max-height:4.17rem;left:0;top:1rem}
 .message-border .item h2{color:#34BBBE}
 .message-border .item h2 span{color:#999;font-size: 1.17rem;float: right;}
@@ -123,7 +143,7 @@ html,body{font-size: 12px;}
 /*服务预约-----------------------------------------------------*/
 .order-card{margin: 1rem 0;height: 11.17rem;font-size: 1.17rem;}
 .orderInfo{padding:1rem;background: #fff;line-height:2;font-size:1.25rem;}
-.orderInfo p{padding-bottom:0.83rem;border-bottom: 0.08rem dashed #ddd;font-size: 1.33rem;color:#34BBBE;}
+.orderInfo p{padding-bottom:0.83rem;border-bottom: 0.08rem dashed #E8E8E8;font-size: 1.33rem;color:#34BBBE;}
 .orderInfo .orderInfo-text{display:flex;color:#666;}
 .orderInfo .addPrice{float: right;color:#FE88A5}
 .orderInfo-mid{padding:0 1rem 1rem;background: #fff;line-height: 2;font-size: 1.25rem}
@@ -134,7 +154,7 @@ html,body{font-size: 12px;}
 /*方案页面----------------------------------------------------*/
 .program-msg{background:#fff;padding:0 0.92rem;border-radius: 0.33rem;font-size: 1.25rem;height:10rem;position: relative}
 .program-msg:not(:last-child){margin-bottom: 0.83rem;}
-.program-msg p{color:#34BBBE;padding:0.5rem 1.25rem 0.42rem;border-bottom: 0.17rem dashed #eee;}
+.program-msg p{color:#34BBBE;padding:0.5rem 1.25rem 0.42rem;border-bottom: 0.17rem dashed #E8E8E8;}
 .program-msg img{max-width:3.5rem;max-height:3.5rem;border-radius: 50%;position:absolute;top:4.5rem;left:1.25rem;}
 .program-msg-text{padding-left:5rem;padding-top:1rem }
 .program-msg-text div{color: #333;display:flex;}

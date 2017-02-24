@@ -5,7 +5,7 @@ angular.module('app.servers',[])
 .service('tabsServer',['$http', function ($http) {
         this.getData = function(callback){
             var url = "json/yimei.json";
-            $http.get(url).success(function (data) {
+            $http.get(url,{cache:true}).success(function (data) {
                 callback(data);
             })
         }
@@ -14,7 +14,7 @@ angular.module('app.servers',[])
 .service('loginServer',['$http',function ($http) {
         this.getData = function(callback){
             var url = "";
-            $http.get(url).success(function (data) {
+            $http.get(url,{cache:true}).success(function (data) {
                 callback(data);
             })
         }
@@ -22,7 +22,7 @@ angular.module('app.servers',[])
     }])
 .service('lineServer',['$http', function ($http) {
     this.getData = function(callback,url){
-        $http.get(url).success(function (data) {
+        $http.get(url,{cache:true}).success(function (data) {
             callback(data);
         })
     }
@@ -30,7 +30,7 @@ angular.module('app.servers',[])
 }])
 .service('yishengServer',['$http', function ($http) {
         this.getData = function(callback,url){
-            $http.get(url).success(function (data) {
+            $http.get(url,{cache:true}).success(function (data) {
                 callback(data);
             })
         }
@@ -38,7 +38,7 @@ angular.module('app.servers',[])
     }])
 .service('diylistServer',['$http', function ($http) {
     this.getData = function(callback,url){
-        $http.get(url).success(function (data) {
+        $http.get(url,{cache:true}).success(function (data) {
             callback(data);
         })
     }
@@ -46,7 +46,7 @@ angular.module('app.servers',[])
 }])
 .service('diyInfoServer',['$http', function ($http) {
         this.getData = function(callback,url){
-            $http.get(url).success(function (data) {
+            $http.get(url,{cache:true}).success(function (data) {
                 callback(data);
             })
         }
@@ -54,7 +54,7 @@ angular.module('app.servers',[])
     }])
 .service('orderServer',['$http', function ($http) {
         this.getData = function(callback,url){
-            $http.get(url).success(function (data) {
+            $http.get(url,{cache:true}).success(function (data) {
                 callback(data);
             })
         }
