@@ -3,8 +3,7 @@
  */
 angular.module('app.servers',[])
 .service('tabsServer',['$http', function ($http) {
-        this.getData = function(callback){
-            var url = "json/yimei.json";
+        this.getData = function(callback,url){
             $http.get(url,{cache:true}).success(function (data) {
                 callback(data);
             })
@@ -12,8 +11,7 @@ angular.module('app.servers',[])
         return this;
     }])
 .service('loginServer',['$http',function ($http) {
-        this.getData = function(callback){
-            var url = "";
+        this.getData = function(callback,url){
             $http.get(url,{cache:true}).success(function (data) {
                 callback(data);
             })

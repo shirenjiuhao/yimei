@@ -3,10 +3,11 @@
  */
 angular.module('app.controllers',['app.servers'])
 .controller('tabsCtrl',['$scope','$interval','tabsServer',function($scope,$interval,tabsServer){
+        var url = "json/yimei.json";
         var callback = function (data) {
             $scope.data = data;
         };
-        tabsServer.getData(callback);
+        tabsServer.getData(callback,url);
     }])
 .controller('lineCtrl',['$scope','lineServer', function ($scope,lineServer) {
     var url = "json/yishenglist0.json";
@@ -91,6 +92,7 @@ angular.module('app.controllers',['app.servers'])
             };
             var targetDate = new Date();
             targetDate.setMinutes(targetDate.getMinutes()+1);
+            /*点击后的倒计时*/
             var timer = $interval(function () {
                 var newDate = new Date();
                 var result = targetDate.valueOf() - newDate.valueOf();
@@ -105,7 +107,9 @@ angular.module('app.controllers',['app.servers'])
                 }
                 text.html(text1);
             },20);
-        }
+            /*点击后的倒计时*/
+        };
+        var url = '';
         $scope.login = function () {
             var pwd = $('.login-input').find("input[type='text']").val();
             if(pwd != '' && pwd == str1){

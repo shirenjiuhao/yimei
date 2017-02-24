@@ -56,17 +56,17 @@ html,body{font-size: 12px;}
 .signOut{display: flex;margin:18.92rem 1.67rem 0;height:3.67rem;border-radius:2rem;justify-content: center;align-items: center;background:#3CDAD3;font-size: 1.33rem;color:#fff}
 /*医生在线-------------------------------------------------------------*/
 /*选择按钮*/
-.line-selected{padding:10px;width:100%;}
-.line-selected .line-item {width:100%;display: flex;justify-content:space-between;align-items: stretch;font-size: 1.17rem;flex-flow: row wrap;}
-.line-item a{text-align: center;line-height:2.5rem;background:#EDFAFA;color:#34BBBE;cursor: pointer;border-radius: 0.33rem;width: 6rem}
-.line-item a:nth-child(-n+4){margin-bottom: 0.83rem}
+.line-selected{padding:1rem;width:100%;}
+.line-selected .line-item {width:100%;display: flex;justify-content:space-between;align-items:center;font-size: 1.17rem;flex-flow: row wrap;}
+.line-item a{text-align: center;line-height:2.5rem;background:#EDFAFA;color:#34BBBE;cursor: pointer;border-radius: 0.33rem;min-width: 6rem;margin-bottom: 0.83rem;width:auto}
+/*.line-item a:nth-child(-n+4){margin-bottom: 0.83rem}*/
 .line-item .line-active{background:#3CDAD3;color:#fff}
 /*医生列表*/
 .item{border-color:#E8E8E8}
-.line-yisheng img{max-width:4.17rem;max-height:4.17rem;}
+.list .line-yisheng img{max-width:4.17rem;max-height:4.17rem;}
 .line-yisheng h2{font-size:1.25rem;color:#333333;display: flex;}
 .line-yisheng p{font-size:1rem;margin-bottom: 0.83rem;}
-.line-yisheng span{font-size: 1rem;color:#666;border:0.04rem solid #FF8EA2;border-radius:0.17rem;padding:0.17rem}
+.line-yisheng span{font-size: 1rem;color:#FF8EA2;border:0.04rem solid #FF8EA2;border-radius:0.17rem;padding:0.17rem}
 .line-yisheng span:not(:last-child){margin-right:5px;}
 .line-ion-zhuan{width: 1.3rem;height: 1rem;background: url("../img/zhuan.png") no-repeat;background-size: 100%;display: block;position: relative;top:0.2rem}
 /*医生详情页-------------------------------------------------------------*/
@@ -134,8 +134,7 @@ html,body{font-size: 12px;}
 .counselor-foot-add{margin-left:1rem;color:#34BBBE;font-size: 3rem;}
 /*信息页面-------------------------------------------------------*/
 .message-border{margin: 0 1rem;background: #fff;}
-.message-border .item{margin:0;border-color:transparent;padding-top:1.17rem;padding-bottom:1.17rem;font-size: 1.25rem}
-.message-border .item:not(:last-child){border-bottom-color:#E8E8E8}
+.message-border .item{margin:0;border-color:transparent;padding-top:1.17rem;padding-bottom:1.17rem;font-size: 1.25rem;border-bottom-color:#E8E8E8}
 .message-border .item img{max-width:4.17rem;max-height:4.17rem;left:0;top:1rem}
 .message-border .item h2{color:#34BBBE}
 .message-border .item h2 span{color:#999;font-size: 1.17rem;float: right;}
