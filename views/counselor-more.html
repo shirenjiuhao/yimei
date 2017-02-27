@@ -41,8 +41,9 @@
 </ion-content>
 
 <div class="counselor-foot" style="bottom:5.42rem">
-    <input type="text" placeholder="请输入消息"/>
-    <a class="icon ion-ios-plus-outline counselor-foot-add" href="#/tabs/messages/counselor"></a>
+    <input type="text" placeholder="请输入消息" id="info_text" ng-blur="changeShow()"/>
+    <a class="icon ion-ios-plus-outline counselor-foot-add" href="#/tabs/messages/counselor" ng-if="show()"></a>
+    <a class="counselor-send" id="info_send" ng-if="!show()" href="#/tabs/messages/counselor">发送</a>
 </div>
 <div class="bar bar-footer" style="height:66px;">
     <i class="button-icon button icon ion-ios-camera"></i>

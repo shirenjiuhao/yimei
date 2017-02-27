@@ -40,8 +40,9 @@
     </div>
 </ion-content>
 <div class="counselor-foot">
-    <input type="text" placeholder="请输入消息"/>
-    <a class="icon ion-ios-plus-outline counselor-foot-add" href="#/tabs/messages/counselor/more"></a>
+    <input type="text" placeholder="请输入消息" id="info_text" ng-blur="changeShow()"/>
+    <a class="icon ion-ios-plus-outline counselor-foot-add" href="#/tabs/messages/counselor/more" ng-if="show()"></a>
+    <a class="counselor-send" id="info_send" ng-if="!show()">发送</a>
 </div>
 
 

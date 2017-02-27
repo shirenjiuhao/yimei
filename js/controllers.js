@@ -73,7 +73,7 @@ angular.module('app.controllers',['app.servers'])
             }
         };
     }])
-.controller('loginCtrl',['$scope','$interval',function ($scope,$interval) {
+.controller('loginCtrl',['$scope','$interval','$timeout',function ($scope,$interval,$timeout) {
         var text = $('.login-get');
         var reg = /^1(3|4|5|7|8)\d{9}$/ig;
         var str1 = "";
@@ -81,7 +81,7 @@ angular.module('app.controllers',['app.servers'])
             var name = $('.login-input').find("input[type='tel']").val();
             var text1 = "";
             if(!reg.test(name)){
-                alert('手机号有误，请重新填写');
+                alert('手机号有误，请输入正确的手机号');
                 return false;
             }else {
                 str1 = "";
@@ -112,32 +112,60 @@ angular.module('app.controllers',['app.servers'])
         var url = '';
         $scope.yanzhengma = function () {
             var pwd = $('.login-input').find("input[type='text']").val();
-            if(pwd != '' && pwd == str1 && pwd != ''){
-                $('#login-btn').attr({href:'#/tabs'});
-            }else{
-                alert('验证码输入错误')
+            if(pwd == '' && pwd != str1){
+                alert('验证码输入错误,请重新输入')
             }
         }
         $scope.login = function () {
             var  username = $('#username').val();
             var password = $('#password').val();
-            var options = {
+            if (username == '' || password == '') {
+                alert("用户名/验证码 不能为空");
+                return;
+            }
+            var registers = {
                 username:username ,
                 password:password ,
                 appKey: WebIM.config.appkey,
-                success: function (data) { console.log(data);
-                    window.open("#/tabs")
+                success: function () {
+                    alert('注册成功')
                 },
-                error: function (err) {console.log( err )},
+                error: function (e) {console.log(e.error)},
                 apiUrl: WebIM.config.apiURL
             };
-            conn.registerUser(options);
+            conn.registerUser(registers) ;//注册用户名
+            console.log('1121-------------------------------');
+            var signIn = {
+                apiUrl: WebIM.config.apiURL,
+                user: username,
+                pwd: password,
+                appKey: WebIM.config.appkey,
+                success: function (token) {
+                    alert('登陆成功');
+                    /*var token = token.access_token;
+                    WebIM.utils.setCookie('webim_' + encryptUsername, token, 1);*/
+                    $('#login-btn').attr('href','#/tabs/messages');
+                },
+                error: function(){
+                }
+            };
+            conn.open(signIn);
+            $timeout(function () {
+                $('#login-btn').attr('href','#/tabs/messages/counselor');
+            },3000)
+            console.log('------------------------------------------------------------')
         }
-
     }])
 .controller('mineCtrl',['$scope', function ($scope) {
         $scope.signOut = function () {
-            alert("是否确认退出");
+            var signOut = $("#signOut");
+            var r = window.confirm('是否退出登录');
+            if(r == true){
+                signOut.attr('href','#/tabs');
+                conn.close();
+            }else{
+                signOut.attr('href');
+            }
         }
     }])
 .controller('programCtrl',['$scope',function($scope){}])
@@ -149,7 +177,39 @@ angular.module('app.controllers',['app.servers'])
         orderServer.getData(callback,url)
     }])
 .controller('counselorCtrl',['$scope', function ($scope){}])
-.controller('messagesCtrl',['$scope',function($scope){}])
+.controller('messagesCtrl',['$scope',function($scope){
+        $scope.sendPrivateText = function () {
+            var id = conn.getUniqueId();                 // 生成本地消息id
+            var msg = new WebIM.message('txt', id);      // 创建文本消息
+            msg.set({
+                msg: 'message content',                  // 消息内容
+                to: 'username',                          // 接收消息对象（用户id）
+                roomType: false,
+                success: function (id, serverMsgId) {
+                    console.log('send private text Success');
+                }
+            });
+            msg.body.chatType = 'singleChat';
+            conn.send(msg.body);
+        };
+    }])
+.controller('counselorCtrl',['$scope', function ($scope) {
+        $scope.show = function () {
+            return true
+        };
+        $scope.changeShow = function () {
+            var add = $('#info_text');
+            if(add.val() == ""){
+                $scope.show = function () {
+                    return true
+                };
+            }else{
+                $scope.show = function () {
+                    return false
+                };
+            }
+        }
+    }])
 .controller('programInfoCtrl',['$scope',function($scope) {
         $scope.appay = function () {
             alert(1);
