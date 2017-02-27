@@ -1,7 +1,82 @@
 /**
  * Created by Master on 2017/02/13.
  */
-angular.module('app',['ionic','ngRoute','app.controllers','app.servers'])
+angular.module('app',['ionic','app.controllers','app.servers'])
+    .config(['$stateProvider','$urlRouterProvider', function ($stateProvider,$urlRouterProvider) {
+        $stateProvider
+            .state('tabs',{
+                url:'/tabs',
+                templateUrl:'views/yimei.html',
+                controller:'tabsCtrl'
+            })
+            .state('mine',{
+                url:'/tabs/mine',
+                templateUrl:'views/mine.html',
+                controller:'mineCtrl'
+            })
+            .state('program',{
+                url:'/tabs/mine/program',
+                templateUrl:'views/program.html',
+                controller:'programCtrl'
+            })
+            .state('programid',{
+                url:'/tabs/mine/program/:id',
+                templateUrl:'views/programInfo.html',
+                controller:'programInfoCtrl'
+            })
+            .state('order',{
+                url:'/tabs/mine/order',
+                templateUrl:'views/order.html',
+                controller:'orderCtrl'
+            })
+            .state('orderid',{
+                url:'/tabs/mine/order/:id',
+                templateUrl:'views/orderInfo.html',
+                controller:'orderInfoCtrl'
+            })
+            .state('line',{
+                url:'/tabs/line',
+                templateUrl:'views/yimeiLine.html',
+                controller:'lineCtrl'
+            })
+            .state('lineid',{
+                url:'/tabs/line/:id',
+                templateUrl:'views/lineyisheng.html',
+                controller:'yishengCtrl'
+            })
+            .state('diy',{
+                url:'/tabs/diy',
+                templateUrl:'views/diylist.html',
+                controller:'diylistCtrl'
+            })
+            .state('diyid',{
+                url:'/tabs/diy/:id',
+                templateUrl:'views/diyInfo.html',
+                controller:'diyInfoCtrl'
+            })
+            .state('login',{
+                url:'/tabs/login',
+                templateUrl:'views/login.html',
+                controller:'loginCtrl'
+            })
+            .state('messages',{
+                url:'/tabs/messages',
+                templateUrl:'views/messages.html',
+                controller:'messagesCtrl'
+            })
+            .state('counselor',{
+                url:'/tabs/messages/counselor',
+                templateUrl:'views/counselor.html',
+                controller:'counselorCtrl'
+            })
+            .state('more',{
+                url:'/tabs/messages/counselor/more',
+                templateUrl:'views/counselor-more.html',
+                controller:'counselorCtrl'
+            })
+        $urlRouterProvider.otherwise('/tabs');
+    }])
+/*
 .config(function($routeProvider){
         $routeProvider
             .when('/tabs',{
@@ -60,5 +135,7 @@ angular.module('app',['ionic','ngRoute','app.controllers','app.servers'])
                 templateUrl:'views/counselor-more.html',
                 controller:'counselorCtrl'
             })
-        .otherwise({redirectTo:'/tabs'});/*默认的路由*/
-})
+        .otherwise({redirectTo:'/tabs'});*/
+/*默认的路由*//*
+
+})*/
