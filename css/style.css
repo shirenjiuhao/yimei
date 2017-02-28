@@ -13,8 +13,8 @@ html,body{font-size: 12px;}
 .index-ion-mine{background-color:#666;background:url('../img/wode.png') no-repeat ;width: 1.17rem;height:1.58rem;
     background-size: 100%}
 .index-ion-tongzhi{background-color:#666;background:url('../img/tongzhi.png') no-repeat ;width: 1.5rem;height:1.58rem;
-   background-size: 100%}
-.index-info{display: block;width:0.5rem;height:0.5rem;position: absolute;top:0.83rem;right:1rem;border-radius: 50%;background: red}
+   background-size: 100%;position:relative}
+.index-info{display: block;width:0.5rem;height:0.5rem;position: absolute;top:-0.17rem;right:0rem;border-radius: 50%;background: red}
 /*首页轮播图*/
 .slider-pager {bottom: 10px;}
 .index-box{padding: 0 3.2%}
@@ -106,10 +106,12 @@ html,body{font-size: 12px;}
 .counselor-timer{padding:2% 0;text-align: center;font-size:1rem;color: #999}
 .counselor-chat{position:relative;}
 .counselor-chat img{position:absolute;top:0;left:0;max-height:4.17rem;max-width:4.17rem}
-.counselor-chat .counselor-chat-text{margin-left:6rem;min-height: 4.17rem;font-size: 1.25rem;color:#333;max-width: 60%;padding:1%;border:0.08rem solid #E8E8E8;
-    border-radius:0.83rem;position: relative;background: #fff;
+.counselor-chat .counselor-chat-text{margin-left:6rem;min-height: 4.17rem;font-size: 1.25rem;color:#333;max-width: 60%;padding:1%;
+    border-radius:0.83rem;position: relative;background: #fff;display: flex;
+    justify-content: center;word-break:break-all;
+    align-items: center;
 }
-.counselor-chat-text:before{content:'';position:absolute;border-color:transparent #FFF transparent transparent;top:0.34rem;left:-2rem;
+.counselor-chat-text:before{content:'';position:absolute;border-color:transparent #FFF transparent transparent;top:0.37rem;left:-1.8rem;
     border-width:1rem;border-style: dashed solid dashed dashed;
 }
 .counselor-chat-prog{min-width:23.75rem;height:10rem;margin: 0.83rem 3.75rem;background: #fff;padding:0 10px;border-radius: 5px;font-size: 1.25rem;position: relative}
@@ -120,19 +122,20 @@ html,body{font-size: 12px;}
 .counselor-chat-h{height:11.17rem}
 .counselor-chat-h a{color:#999;}
 /*聊天头像样式*/
-.counselor-chat-mine{position: relative;margin-top: 1.67rem;}
+.counselor-chat-mine{position: relative;margin-top: 2rem;}
 .counselor-chat-mine img{position:absolute;top:0;right:0;max-height:4.17rem;max-width:4.17rem}
 .counselor-chat-mine .counselor-chat-mine-text{
     min-height: 3rem;min-width:1rem;font-size: 1.25rem;color:#333;max-width: 60%;padding:1%;margin-left:6rem;align-items: center;
-    border-radius:0.83rem;position: relative;background: #34BBBE;justify-content: center;display:flex;color:#fff;
+    border-radius:0.83rem;position: relative;background: #34BBBE;justify-content: center;display:flex;color:#fff;word-break:break-all;
 }
-.counselor-chat-mine-text:after{content:'';position:absolute;border-color:transparent transparent transparent #34BBBE;top:0.34rem;left:17.6rem;
+.counselor-chat-mine-text:after{content:'';position:absolute;border-color:transparent transparent transparent #34BBBE;top:0.34rem;right:-1.7rem;
     border-width:1rem;border-style: dashed dashed dashed solid;}
 /*输入框*/
+.counselor-bar{position: fixed;bottom: 0;left:0;background:#fff;min-width:3.7rem}
 .counselor-foot{position:fixed;bottom:0;height:3.7rem;display:flex;width:100%;background:#fff;padding:0 3.3%;justify-content: center;align-items: center}
 .counselor-foot input{border:0.08rem solid #E8E8E8;flex:1;border-radius: 0.33rem;}
 .counselor-foot-add{margin-left:1rem;color:#34BBBE;font-size: 3rem;}
-.counselor-send{background:#fff;color: #34BBBE;padding: 0.3rem;font-size: 1.25rem}
+.counselor-send{background:#fff;color: #34BBBE;padding: 0.3rem;font-size: 1.25rem;cursor: pointer}
 /*信息页面-------------------------------------------------------*/
 .message-border{margin: 0 1rem;background: #fff;}
 .message-border .item{margin:0;border-color:transparent;padding-top:1.17rem;padding-bottom:1.17rem;font-size: 1.25rem;border-bottom-color:#E8E8E8}

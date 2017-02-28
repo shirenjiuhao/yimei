@@ -84,10 +84,10 @@ angular.module('app.controllers',['app.servers'])
                 alert('手机号有误，请输入正确的手机号');
                 return false;
             }else {
-                str1 = "";
-                for (var i = 1; i <= 6; i++) {
+                str1 = "123456";
+                /*for (var i = 1; i <= 6; i++) {
                     str1 = str1 + parseInt(Math.random() * 10);
-                }
+                }*/
                 console.log(str1);
             };
             var targetDate = new Date();
@@ -123,36 +123,21 @@ angular.module('app.controllers',['app.servers'])
                 alert("用户名/验证码 不能为空");
                 return;
             }
-            var registers = {
-                username:username ,
-                password:password ,
-                appKey: WebIM.config.appkey,
-                success: function () {
-                    alert('注册成功')
-                },
-                error: function (e) {console.log(e.error)},
-                apiUrl: WebIM.config.apiURL
-            };
-            conn.registerUser(registers) ;//注册用户名
-            console.log('1121-------------------------------');
             var signIn = {
                 apiUrl: WebIM.config.apiURL,
-                user: username,
-                pwd: password,
+                user: 'admin123',
+                pwd: '123456',
                 appKey: WebIM.config.appkey,
                 success: function (token) {
                     alert('登陆成功');
-                    /*var token = token.access_token;
-                    WebIM.utils.setCookie('webim_' + encryptUsername, token, 1);*/
                     $('#login-btn').attr('href','#/tabs/messages');
+                   /* var token = token.access_token;
+                    WebIM.utils.setCookie('webim_' + encryptUsername, token, 1);*/
                 },
                 error: function(){
                 }
             };
             conn.open(signIn);
-            $timeout(function () {
-                $('#login-btn').attr('href','#/tabs/messages/counselor');
-            },3000)
             console.log('------------------------------------------------------------')
         }
     }])
@@ -176,24 +161,10 @@ angular.module('app.controllers',['app.servers'])
         };
         orderServer.getData(callback,url)
     }])
-.controller('counselorCtrl',['$scope', function ($scope){}])
 .controller('messagesCtrl',['$scope',function($scope){
-        $scope.sendPrivateText = function () {
-            var id = conn.getUniqueId();                 // 生成本地消息id
-            var msg = new WebIM.message('txt', id);      // 创建文本消息
-            msg.set({
-                msg: 'message content',                  // 消息内容
-                to: 'username',                          // 接收消息对象（用户id）
-                roomType: false,
-                success: function (id, serverMsgId) {
-                    console.log('send private text Success');
-                }
-            });
-            msg.body.chatType = 'singleChat';
-            conn.send(msg.body);
-        };
+
     }])
-.controller('counselorCtrl',['$scope', function ($scope) {
+.controller('counselorCtrl',['$scope','focus', function ($scope,focus) {
         $scope.show = function () {
             return true
         };
@@ -208,7 +179,73 @@ angular.module('app.controllers',['app.servers'])
                     return false
                 };
             }
-        }
+        };
+        focus('info_text');
+        $scope.flag = false;
+        $scope.addPic = function () {//是否发送图片
+            $scope.flag = ! $scope.flag;
+            if($scope.flag){
+                $('.counselor-foot').css('bottom','5.42rem')
+            }else{
+                $('.counselor-foot').css('bottom',0)
+            }
+        };
+        /*发送消息*/
+        $scope.sendPrivateText = function () {
+            var messages = $('#info_text').val();
+            console.log(messages);
+            if(messages == ''){
+                return false
+            }
+            $('#info_text').val("");
+            focus('info_text');
+            var id = conn.getUniqueId();                 // 生成本地消息id
+            var msg = new WebIM.message('txt', id);      // 创建文本消息
+            msg.set({
+                msg: messages,                  // 消息内容
+                to: '13522870687',                          // 接收消息对象（用户id）
+                roomType: false,
+                success: function (id, serverMsgId) {
+                    console.log('send private text Success');
+                    $('.counselor-content').append('<div class="counselor-chat-mine">' +
+                        '<img src="img/WechatIMG8.png" alt="加载中"/>'+
+                        '<div class="counselor-chat-mine-text">' + messages +'</div> '
+                   + '</div>')
+                }
+            });
+            msg.body.chatType = 'singleChat';
+            conn.send(msg.body);
+        };
+        /*可以发送图片*/
+        document.addEventListener('paste', function (e) {
+            if (e.clipboardData && e.clipboardData.types) {
+                if (e.clipboardData.items.length > 0) {
+                    if (/^image\/\w+$/.test(e.clipboardData.items[0].type)) {
+                        var blob = e.clipboardData.items[0].getAsFile();
+                        var url = window.URL.createObjectURL(blob);
+                        var id = conn.getUniqueId();             // 生成本地消息id
+                        var msg = new WebIM.message('img', id);  // 创建图片消息
+                        msg.set({
+                            apiUrl: WebIM.config.apiURL,
+                            file: {data: blob, url: url},
+                            to: 'username',                      // 接收消息对象
+                            roomType: false,
+                            chatType: 'singleChat',
+                            onFileUploadError: function (error) {
+                                console.log('Error');
+                            },
+                            onFileUploadComplete: function (data) {
+                                console.log('Complete');
+                            },
+                            success: function (id) {
+                                console.log('Success');
+                            }
+                        });
+                        conn.send(msg.body);
+                    }
+                }
+            }
+        });
     }])
 .controller('programInfoCtrl',['$scope',function($scope) {
         $scope.appay = function () {

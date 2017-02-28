@@ -65,13 +65,8 @@ angular.module('app',['ionic','app.controllers','app.servers'])
                 controller:'messagesCtrl'
             })
             .state('counselor',{
-                url:'/tabs/messages/counselor',
+                url:'/tabs/messages/?username=admin',
                 templateUrl:'views/counselor.html',
-                controller:'counselorCtrl'
-            })
-            .state('more',{
-                url:'/tabs/messages/counselor/more',
-                templateUrl:'views/counselor-more.html',
                 controller:'counselorCtrl'
             })
         $urlRouterProvider.otherwise('/tabs');
@@ -129,10 +124,6 @@ angular.module('app',['ionic','app.controllers','app.servers'])
             })
             .when('/tabs/messages/counselor',{
                 templateUrl:'views/counselor.html',
-                controller:'counselorCtrl'
-            })
-            .when('/tabs/messages/counselor/more',{
-                templateUrl:'views/counselor-more.html',
                 controller:'counselorCtrl'
             })
         .otherwise({redirectTo:'/tabs'});*/

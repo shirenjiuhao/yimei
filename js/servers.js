@@ -58,3 +58,12 @@ angular.module('app.servers',[])
         }
         return this;
     }])
+    .service('focus', function ($timeout, $window) {
+        return function (id) {
+            $timeout(function () {
+                var element = $window.document.getElementById(id);
+                if (element)
+                    element.focus();
+            });
+        };
+    })

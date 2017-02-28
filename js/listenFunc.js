@@ -1,39 +1,37 @@
 /**
  * Created by Administrator on 2017/2/27.
  */
-
 var conn = new WebIM.connection({
     https: WebIM.config.https,
     url: WebIM.config.xmppURL,
     isAutoLogin: WebIM.config.isAutoLogin,
-    isMultiLoginSessions: WebIM.config.isMultiLoginSessions,
-    heartBeatWait: WebIM.config.heartBeatWait,
-    autoReconnectNumMax: WebIM.config.autoReconnectNumMax,
-    autoReconnectInterval: WebIM.config.autoReconnectInterval
+    isMultiLoginSessions: WebIM.config.isMultiLoginSessions
 });
 conn.listen({
-    onOpened: function (message) {          //连接成功回调，连接成功后才可以发送消息
-        //如果isAutoLogin设置为false，那么必须手动设置上线，否则无法收消息
-        // 手动上线指的是调用conn.setPresence(); 在本例中，conn初始化时已将isAutoLogin设置为true
-        // 所以无需调用conn.setPresence();
-        console.log("opened");
+    onOpened: function ( message ) {          //连接成功回调
+        // 如果isAutoLogin设置为false，那么必须手动设置上线，否则无法收消息
+        // 手动上线指的是调用conn.setPresence(); 如果conn初始化时已将isAutoLogin设置为true
+        // 则无需调用conn.setPresence();
+        console.log('连接成功');
     },
-    onTextMessage: function (message) {
-        // 在此接收和处理消息，根据message.type区分消息来源，私聊或群组或聊天室
-        console.log(message.type);
-        console.log('Text');
-    },  //收到文本消息
-    onEmojiMessage: function (message) {
-        // 当为WebIM添加了Emoji属性后，若发送的消息含WebIM.Emoji里特定的字符串，connection就会自动将
-        // 这些字符串和其它文字按顺序组合成一个数组，每一个数组元素的结构为{type: 'emoji(或者txt)', data:''}
-        // 当type='emoji'时，data表示表情图像的路径，当type='txt'时，data表示文本消息
+    onClosed: function ( message ) {
+        console.log('已退出登录')
+    },         //连接关闭回调
+    onTextMessage: function ( message ) {
+        console.log(message);
+        $('.counselor-content').append('<div class="counselor-chat" style="margin-top:2rem">'+
+            '<img src="img/touxiang1.png" alt="加载中"/>'+
+            '<div class="counselor-chat-text">'+ message.data+ '</div>'
+            +'</div>' );
+    },    //收到文本消息
+    onEmojiMessage: function ( message ) {
         console.log('Emoji');
         var data = message.data;
-        for (var i = 0, l = data.length; i < l; i++) {
+        for(var i = 0 , l = data.length ; i < l ; i++){
             console.log(data[i]);
         }
     },   //收到表情消息
-    onPictureMessage: function (message) {
+    onPictureMessage: function ( message ) {
         console.log('Picture');
 
         var options = {url: message.url};
@@ -45,21 +43,12 @@ conn.listen({
             // 图片下载失败
             console.log('Image download failed!');
         };
-        WebIM.utils.download.call(conn, options);       // 意义待查
-
+        WebIM.utils.download.call(conn, options);
     }, //收到图片消息
-    onCmdMessage: function (message) {
-        console.log('CMD');
-    },     //收到命令消息
-    onAudioMessage: function (message) {
-        console.log("Audio");
-    },   //收到音频消息
-    onLocationMessage: function (message) {
-        console.log("Location");
-    },//收到位置消息
-    onFileMessage: function (message) {
-        console.log("File");
-    },    //收到文件消息
+    onCmdMessage: function ( message ) {},     //收到命令消息
+    onAudioMessage: function ( message ) {},   //收到音频消息
+    onLocationMessage: function ( message ) {},//收到位置消息
+    onFileMessage: function ( message ) {},    //收到文件消息
     onVideoMessage: function (message) {
         var node = document.getElementById('privateVideo');
         var option = {
@@ -77,64 +66,27 @@ conn.listen({
         };
         WebIM.utils.download.call(conn, option);
     },   //收到视频消息
-    onPresence: function (message) {
-        switch (message.type) {
-            case 'subscribe':                           // 对方请求添加好友
-                // 同意对方添加好友
-                document.getElementById('agreeFriends').onclick = function (message) {
-                    conn.subscribed({
-                        to: 'asdfghj',
-                        message: "[resp:true]"
-                    });
-                    // 需要反向添加对方好友
-                    conn.subscribe({
-                        to: message.from,
-                        message: "[resp:true]"
-                    });
-                };
-                // 拒绝对方添加好友
-                document.getElementById('rejectFriends').onclick = function (message) {
-                    conn.unsubscribed({
-                        to: message.from,
-                        message: "rejectAddFriend"                  // 拒绝添加好友回复信息
-                    });
-                };
+    onPresence: function ( message ) {},       //收到联系人订阅请求、处理群组、聊天室被踢解散等消息
+    onRoster: function ( message ) {},         //处理好友申请
+    onInviteMessage: function ( message ) {},  //处理群组邀请
+    onOnline: function () {},                  //本机网络连接成功
+    onOffline: function () {},                 //本机网络掉线
+    onError: function ( message ) {
+        console.log(message.error);
+        console.log('连接失败，请重新登录');
 
-                break;
-            case 'subscribed':                          // 对方同意添加好友，已方同意添加好友
-                break;
-            case 'unsubscribe':                         // 对方删除好友
-                break;
-            case 'unsubscribed':                        // 被拒绝添加好友，或被对方删除好友成功
-                break;
-            case 'joinChatRoomSuccess':                 // 成功加入聊天室
-                console.log('join chat room success');
-                break;
-            case 'joinChatRoomFaild':                   // 加入聊天室失败
-                console.log('join chat room faild');
-                break;
-            case 'joinPublicGroupSuccess':              // 意义待查
-                console.log('join public group success', message.from);
-                break;
-        }
-    },       //收到联系人订阅请求（加好友）、处理群组、聊天室被踢解散等消息
-    onRoster: function (message) {
-        console.log('Roster');
-    },         //处理好友申请
-    onInviteMessage: function (message) {
-        console.log('Invite');
-    },  //处理群组邀请
-    onOnline: function () {
-        console.log('onLine');
-    },                  //本机网络连接成功
-    onOffline: function () {
-        console.log('offline');
-    },                 //本机网络掉线
-    onError: function (message) {
-        console.log('Error');
-    },           //失败回调
-    onBlacklistUpdate: function (list) {
+    },          //失败回调
+    onBlacklistUpdate: function (list) {       //黑名单变动
         // 查询黑名单，将好友拉黑，将好友从黑名单移除都会回调这个函数，list则是黑名单现有的所有好友信息
         console.log(list);
-    }     // 黑名单变动
+    }
 });
+//是否能上传file
+WebIM.utils.isCanUploadFile;
+//是否能下载file
+WebIM.utils.isCanDownLoadFile ;
+//是否设置header
+WebIM.utils.hasSetRequestHeader;
+//是否设置mimetype
+WebIM.utils.hasOverrideMimeType;
+

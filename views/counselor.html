@@ -40,9 +40,12 @@
     </div>
 </ion-content>
 <div class="counselor-foot">
-    <input type="text" placeholder="请输入消息" id="info_text" ng-blur="changeShow()"/>
-    <a class="icon ion-ios-plus-outline counselor-foot-add" href="#/tabs/messages/counselor/more" ng-if="show()"></a>
-    <a class="counselor-send" id="info_send" ng-if="!show()">发送</a>
+    <input type="text" placeholder="请输入消息" id="info_text" ng-focus="true" ng-blur="changeShow()"/>
+    <a class="icon ion-ios-plus-outline counselor-foot-add" ng-if="show()" ng-click="addPic()" style="cursor:pointer"></a>
+    <a class="counselor-send" id="info_send" ng-if="!show()" ng-click="sendPrivateText()">发送</a>
 </div>
-
+<div class="bar bar-footer" style="height:66px;" ng-if="flag">
+    <i class="button-icon button icon ion-ios-camera"></i>
+    <div style="position: absolute;left: 14px;bottom:6px;">照片</div>
+</div>
 
