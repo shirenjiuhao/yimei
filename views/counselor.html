@@ -3,6 +3,10 @@
     <h1 class='title'>咨询师</h1>
 </div>
 <ion-content class="has-header" style="background:#F3F7F8">
+    <ion-refresher
+            pulling-text="Pull to refresh..."
+            on-refresh="">
+    </ion-refresher>
     <div class="counselor-content">
         <div class="counselor-timer">2017-02-23</div>
         <div class="counselor-chat">
@@ -38,7 +42,11 @@
             <div class="counselor-chat-mine-text">谢谢老师！</div>
         </div>
     </div>
-    <div style="height:4rem"></div>
+    <ion-infinite-scroll
+            icon="ion-loading-c"
+            on-infinite=""
+            distance="1%">
+    </ion-infinite-scroll>
 </ion-content>
 <div class="counselor-foot">
     <input type="text" placeholder="请输入消息" id="info_text" ng-focus="true" ng-blur="changeShow()"/>
