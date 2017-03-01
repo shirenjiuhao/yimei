@@ -1,7 +1,7 @@
 /**
  * Created by Master on 2017/02/13.
  */
-angular.module('app',['ionic','app.controllers','app.servers'])
+angular.module('app',['ionic','app.controllers'])
     .config(['$stateProvider','$urlRouterProvider', function ($stateProvider,$urlRouterProvider) {
         $stateProvider
             .state('tabs',{
