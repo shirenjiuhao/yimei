@@ -125,12 +125,11 @@ angular.module('app.controllers',['app.servers'])
             }
             var signIn = {
                 apiUrl: WebIM.config.apiURL,
-                user: '13522870687',
-                pwd: '123456',
+                user: username,
+                pwd: password,
                 appKey: WebIM.config.appkey,
                 success: function (token) {
                     alert('登陆成功');
-                    $('#login-btn').attr('href','#/tabs/messages');
                    /* var token = token.access_token;
                     WebIM.utils.setCookie('webim_' + encryptUsername, token, 1);*/
                 },
@@ -180,7 +179,7 @@ angular.module('app.controllers',['app.servers'])
                 };
             }
         };
-        focus('info_text');
+        /*focus('info_text');*/
         $scope.flag = false;
         $scope.addPic = function () {//是否发送图片
             $scope.flag = ! $scope.flag;
