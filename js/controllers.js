@@ -125,7 +125,7 @@ angular.module('app.controllers',['app.servers'])
             }
             var signIn = {
                 apiUrl: WebIM.config.apiURL,
-                user: 'admin123',
+                user: '13522870687',
                 pwd: '123456',
                 appKey: WebIM.config.appkey,
                 success: function (token) {
@@ -203,7 +203,7 @@ angular.module('app.controllers',['app.servers'])
             var msg = new WebIM.message('txt', id);      // 创建文本消息
             msg.set({
                 msg: messages,                  // 消息内容
-                to: '13522870687',                          // 接收消息对象（用户id）
+                to: 'admin123',                          // 接收消息对象（用户id）
                 roomType: false,
                 success: function (id, serverMsgId) {
                     console.log('send private text Success');
