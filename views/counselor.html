@@ -49,7 +49,7 @@
     </ion-infinite-scroll>
 </ion-content>
 <div class="counselor-foot">
-    <input type="text" placeholder="请输入消息" id="info_text" ng-keydown="changeShow()"/>
+    <input type="text" placeholder="请输入消息" id="info_text" ng-keyup="changeShow()"/>
     <a class="icon ion-ios-plus-outline counselor-foot-add" ng-if="show()" ng-click="addPic()" style="cursor:pointer"></a>
     <a class="counselor-send" id="info_send" ng-if="!show()" ng-click="sendPrivateText()">发送</a>
 </div>

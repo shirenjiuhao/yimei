@@ -130,7 +130,7 @@ angular.module('app.controllers',['app.servers'])
                 appKey: WebIM.config.appkey,
                 success: function (token) {
                     alert('登陆成功');
-                   /* var token = token.access_token;
+                    /*var token = token.access_token;
                     WebIM.utils.setCookie('webim_' + encryptUsername, token, 1);*/
                 },
                 error: function(){
