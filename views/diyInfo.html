@@ -12,8 +12,8 @@
             <span>{{item.adress}}</span>
         </div>
         <div class="diyInfo-thr" id="diyInfo-thr">
-            <a href="" class="diyInfo-thr-act" ng-click="change()">医院介绍</a>
-            <a href="" ng-click="change1()">医生团队</a>
+            <a href="" ng-class="{true:'diyInfo-thr-act',false:''}[show()]" ng-click="change()">医院介绍</a>
+            <a href="" ng-class="{true:'diyInfo-thr-act',false:''}[!show()]" ng-click="change1()">医生团队</a>
         </div>
         <div style="height: 0.83rem;background:#F3F7F8"></div>
         <div class="diyInfo-for" ng-if="show()">
@@ -22,20 +22,20 @@
         <div class="diyInfo-for" ng-if="!show()">
             <div class="list">
                 <a class="item item-avatar line-yisheng" style="padding-left:7rem;"
-                   ng-repeat="list in lists" ng-href="#/tabs/line/{{list.id}}"    >
+                   ng-repeat="list in lists" ng-href="#/tabs/line/{{list.id}}">
                     <img ng-src="{{list.img}}" alt="加载中">
                     <h2>{{ list.name }}-{{ list.job }}<i class="line-ion-zhuan"></i></h2>
                     <p>{{list.address}}</p>
                     <span>{{list.hurt}}</span><span>{{list.timer}}</span>
                 </a>
             </div>
+            <ion-infinite-scroll
+                    icon="ion-load-a"
+                    on-infinite="loadMore()"
+                    distance="1%">
+            </ion-infinite-scroll>
         </div>
     </div>
-    <ion-infinite-scroll
-            icon="ion-loading-c"
-            on-infinite=""
-            distance="1%">
-    </ion-infinite-scroll>
 </ion-content>
 <div class="program-btn">
     <a ng-href="#/tabs/login">定制方案(首次免费)</a>

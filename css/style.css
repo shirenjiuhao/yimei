@@ -134,7 +134,7 @@ html,body{font-size: 12px;}
 .counselor-foot{position:absolute;bottom:0;height:3.7rem;display:flex;width:100%;background:#fff;padding:0 3.3%;justify-content: center;align-items: center}
 .counselor-foot input{border:0.08rem solid #E8E8E8;flex:1;border-radius: 0.33rem;}
 .counselor-foot-add{margin-left:1rem;color:#34BBBE;font-size: 3rem;}
-.counselor-send{background:#fff;color: #34BBBE;padding: 0.3rem;font-size: 1.25rem;cursor: pointer}
+.counselor-send{background:#fff;color: #34BBBE;margin-left:1rem;font-size: 1.25rem;cursor: pointer}
 /*信息页面-------------------------------------------------------*/
 .message-border{margin: 0 1rem;background: #fff;}
 .message-border .item{margin:0;border-color:transparent;padding-top:1.17rem;padding-bottom:1.17rem;font-size: 1.25rem;border-bottom-color:#E8E8E8}

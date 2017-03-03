@@ -10,10 +10,10 @@ angular.module('app.controllers',['app.servers'])
         tabsServer.getData(callback,url);
     }])
 .controller('lineCtrl',['$scope','lineServer', function ($scope,lineServer) {
-    var url = "json/yishenglist0.json";
-    var callback = function (data) {
-        $scope.lists = data ;
-    }
+        var url = "json/yishenglist0.json";
+        var callback = function (data) {
+            $scope.lists = data ;
+        }
         lineServer.getData(callback,url);
         var seleted = $('.line-selected');
         seleted.on('click','a',function(){
@@ -23,8 +23,51 @@ angular.module('app.controllers',['app.servers'])
             $scope.$index = $(this).index();
             console.log($scope.$index)
             url = "json/yishenglist" +$scope.$index + ".json";
-            lineServer.getData(callback,url)
+            lineServer.getData(callback,url);
         })
+        /*--===================================================*/
+        $scope.pageNumber =1;//当前页
+        var pageCount = 3;//总页数
+        $scope.pageNumber1 = 1;//当前页
+        /*加载更多-------------------------------*/
+        $scope.loadMore = function(){
+            if (!$scope.hasMore($scope.pageNumber)) {
+                $scope.$broadcast("scroll.infiniteScrollComplete");
+                return;
+            }
+            var url1 = 'json/yishenglist'+ $scope.pageNumber +'.json';
+            console.log(url1);
+            var callback1 = function (data) {
+                console.log('第'+$scope.pageNumber+'次');
+                for(var i in data){
+                    $scope.lists.push(data[i])
+                }
+                $scope.pageNumber ++;
+            };
+            lineServer.getData(callback1,url1);
+            $scope.$broadcast("scroll.infiniteScrollComplete");
+        };
+        /*下拉刷新--------------------------------------*/
+        $scope.pullMore = function(){
+            if (!$scope.hasMore($scope.pageNumber1)) {
+                $scope.$broadcast("scroll.refreshComplete");
+                return;
+            }
+            var url2 = 'json/yishenglist'+ $scope.pageNumber1 +'.json';
+            console.log(url2);
+            var callback2 = function (data) {
+                console.log('第'+$scope.pageNumber1+'次');
+                for(var i in data){
+                    $scope.lists.unshift(data[i])
+                }
+                $scope.pageNumber1 ++;
+            };
+            lineServer.getData(callback2,url2);
+            $scope.$broadcast("scroll.refreshComplete");
+        };
+        $scope.hasMore = function (num) {
+            return num > pageCount ? false : true ;
+        }
     }])
 .controller('yishengCtrl',['$scope','yishengServer', function ($scope,yishengServer) {
         var url = 'json/yisheng.json';
@@ -52,26 +95,42 @@ angular.module('app.controllers',['app.servers'])
         };
         diyInfoServer.getData(callback2,url2);
         /*点击切换*/
-        var count = 0;
         $scope.show = function () {
             return true;
         };
         $scope.change = function () {
-            count = 0;
-            console.log(count);
-            $('.diyInfo-thr').find('a').eq(count).addClass("diyInfo-thr-act").siblings().removeClass("diyInfo-thr-act");
             $scope.show = function () {
                 return true;
             }
         };
         $scope.change1= function () {
-            count = 1;
-            console.log(count);
-            $('.diyInfo-thr').find('a').eq(count).addClass("diyInfo-thr-act").siblings().removeClass("diyInfo-thr-act");
             $scope.show = function () {
                 return false;
             }
         };
+        /*加载更多----------------------------------------------------*/
+        $scope.pageNumber =1;//当前页
+        var pageCount = 3;//总页数
+        $scope.loadMore = function(){
+            if (!$scope.hasMore($scope.pageNumber)) {
+                $scope.$broadcast("scroll.infiniteScrollComplete");
+                return;
+            }
+            var url1 = 'json/yishenglist'+ $scope.pageNumber +'.json';
+            console.log(url1);
+            var callback1 = function (data) {
+                console.log('第'+$scope.pageNumber+'次');
+                for(var i in data){
+                    $scope.lists.push(data[i])
+                }
+                $scope.pageNumber ++;
+            };
+            diyInfoServer.getData(callback1,url1);
+            $scope.$broadcast("scroll.infiniteScrollComplete");
+        };
+        $scope.hasMore = function (num) {
+            return num > pageCount ? false : true ;
+        }
     }])
 .controller('loginCtrl',['$scope','$interval',function ($scope,$interval) {
         var text = $('.login-get');
@@ -163,7 +222,7 @@ angular.module('app.controllers',['app.servers'])
 .controller('messagesCtrl',['$scope',function($scope){
 
     }])
-.controller('counselorCtrl',['$scope','focus', function ($scope,focus) {
+.controller('counselorCtrl',['$scope', function ($scope) {
         $scope.show = function () {
             return true
         };

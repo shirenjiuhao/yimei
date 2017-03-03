@@ -3,7 +3,7 @@
     <h1 class='title'>咨询师</h1>
 </div>
 <ion-content class="has-header" style="background:#F3F7F8">
-    <ion-refresher
+    <ion-refresher pulling-icon="ion-load-b"
             pulling-text="Pull to refresh..."
             on-refresh="">
     </ion-refresher>
@@ -43,13 +43,12 @@
         </div>
     </div>
     <ion-infinite-scroll
-            icon="ion-loading-c"
             on-infinite=""
             distance="1%">
     </ion-infinite-scroll>
 </ion-content>
 <div class="counselor-foot">
-    <input type="text" placeholder="请输入消息" id="info_text" ng-keyup="changeShow()"/>
+    <input type="text" placeholder="请输入消息" id="info_text" ng-keyup="changeShow()" ng-blur="changeShow()"/>
     <a class="icon ion-ios-plus-outline counselor-foot-add" ng-if="show()" ng-click="addPic()" style="cursor:pointer"></a>
     <a class="counselor-send" id="info_send" ng-if="!show()" ng-click="sendPrivateText()">发送</a>
 </div>
