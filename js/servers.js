@@ -15,7 +15,7 @@ angular.module('app.servers',[])
             $http.get(url,{cache:true}).success(function (data) {
                 callback(data);
             })
-        }
+        };
         return this;
     }])
 .service('lineServer',['$http', function ($http) {

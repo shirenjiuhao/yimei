@@ -73,7 +73,7 @@ angular.module('app.controllers',['app.servers'])
             }
         };
     }])
-.controller('loginCtrl',['$scope','$interval','$timeout',function ($scope,$interval,$timeout) {
+.controller('loginCtrl',['$scope','$interval',function ($scope,$interval) {
         var text = $('.login-get');
         var reg = /^1(3|4|5|7|8)\d{9}$/ig;
         var str1 = "";

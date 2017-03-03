@@ -131,8 +131,7 @@ html,body{font-size: 12px;}
 .counselor-chat-mine-text:after{content:'';position:absolute;border-color:transparent transparent transparent #34BBBE;top:0.34rem;right:-1.7rem;
     border-width:1rem;border-style: dashed dashed dashed solid;}
 /*输入框*/
-.counselor-bar{position: fixed;bottom: 0;left:0;background:#fff;min-width:3.7rem}
-.counselor-foot{position:fixed;bottom:0;height:3.7rem;display:flex;width:100%;background:#fff;padding:0 3.3%;justify-content: center;align-items: center}
+.counselor-foot{position:absolute;bottom:0;height:3.7rem;display:flex;width:100%;background:#fff;padding:0 3.3%;justify-content: center;align-items: center}
 .counselor-foot input{border:0.08rem solid #E8E8E8;flex:1;border-radius: 0.33rem;}
 .counselor-foot-add{margin-left:1rem;color:#34BBBE;font-size: 3rem;}
 .counselor-send{background:#fff;color: #34BBBE;padding: 0.3rem;font-size: 1.25rem;cursor: pointer}

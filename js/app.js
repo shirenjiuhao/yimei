@@ -71,6 +71,18 @@ angular.module('app',['ionic','app.controllers'])
             })
         $urlRouterProvider.otherwise('/tabs');
     }])
+    .run(function ($rootScope,loginServer,$location) {
+        $rootScope.$on('$routeChangeStart', function(evt, next, current) {
+            // 如果用户未登录
+            if (!loginServer.login()) {
+                if (next.templateUrl === "login.html") {
+                    // 已经转向登录路由因此无需重定向
+                } else {
+                    $location.path('/login');
+                }
+            }
+        });
+    })
 /*
 .config(function($routeProvider){
         $routeProvider

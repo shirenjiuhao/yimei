@@ -3,6 +3,10 @@
     <h1 class='title'>优质医院</h1>
 </div>
 <ion-content class="has-header">
+    <ion-refresher
+            pulling-text="Pull to refresh..."
+            on-refresh="">
+    </ion-refresher>
     <div class="diylist" ng-repeat="item in data" ng-cloak>
         <a ng-href="#/tabs/diy/{{item.id}}">
             <img ng-src="{{item.img}}" alt="加载更多..." class="responsive-img"/>
@@ -12,4 +16,9 @@
             </div>
         </a>
     </div>
+    <ion-infinite-scroll
+            icon="ion-loading-c"
+            on-infinite=""
+            distance="1%">
+    </ion-infinite-scroll>
 </ion-content>
