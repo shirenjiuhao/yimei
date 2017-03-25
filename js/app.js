@@ -65,7 +65,7 @@ angular.module('app',['ionic','app.controllers'])
                 controller:'messagesCtrl'
             })
             .state('counselor',{
-                url:'/tabs/messages/?username=admin',
+                url:'/tabs/messages/:id',
                 templateUrl:'views/counselor.html',
                 controller:'counselorCtrl'
             })
@@ -73,8 +73,9 @@ angular.module('app',['ionic','app.controllers'])
     }])
     .run(function ($rootScope,loginServer,$location) {
         $rootScope.$on('$routeChangeStart', function(evt, next, current) {
+            var loginUsers = JSON.parse(localStorage.getItem('users'))
             // 如果用户未登录
-            if (!loginServer.login()) {
+            if (!loginUsers) {
                 if (next.templateUrl === "login.html") {
                     // 已经转向登录路由因此无需重定向
                 } else {

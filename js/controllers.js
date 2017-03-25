@@ -2,14 +2,45 @@
  * Created by Administrator on 2017/2/14.
  */
 angular.module('app.controllers',['app.servers'])
-.controller('tabsCtrl',['$scope','$interval','tabsServer',function($scope,$interval,tabsServer){
-        var url = "json/yimei.json";
-        var callback = function (data) {
-            $scope.data = data;
+    .controller('tabsCtrl',['$scope','$location','$interval','tabsServer',function($scope,$location,$interval,tabsServer){
+        var url = "/api/beta/banner/list.aspx?platform=APP&num=6";
+        var callback = function (res) {
+            console.log(res)
+            $scope.data = res.data;
+            //console.log()
         };
         tabsServer.getData(callback,url);
+        var loginUsers = JSON.parse(localStorage.getItem('users'));
+        $scope.speedChat = function(){
+            if(loginUsers){
+                var params = {
+                    consumerId:loginUsers.consumer.consumerId,
+                    page:'首页',
+                    url:'"http://yifengbeauty.com/banner-info.html"',
+                    deviceType:'2',
+                    appType:'2'
+                }
+                var Authorization = "MEDCOS#"+ loginUsers.sessionKey
+                //console.log(Authorization)
+                $.ajax({
+                    url: '/api/beta/counseling/fastRequest.aspx',
+                    type: 'get',
+                    data: params,
+                    //contentType:{Authorization:Authorization}
+                    header:{
+                        Authorization:Authorization
+                    }
+                })
+                .done(function(res) {
+                    $location.path('/tabs/messages/'+ params.consumerId)
+                    console.log(res);
+                })
+            }else{
+                $location.path('/tabs/login')
+            }
+        }
     }])
-.controller('lineCtrl',['$scope','lineServer', function ($scope,lineServer) {
+    .controller('lineCtrl',['$scope','lineServer', function ($scope,lineServer) {
         var url = "json/yishenglist0.json";
         var callback = function (data) {
             $scope.lists = data ;
@@ -69,21 +100,21 @@ angular.module('app.controllers',['app.servers'])
             return num > pageCount ? false : true ;
         }
     }])
-.controller('yishengCtrl',['$scope','yishengServer', function ($scope,yishengServer) {
+    .controller('yishengCtrl',['$scope','yishengServer', function ($scope,yishengServer) {
         var url = 'json/yisheng.json';
         var callback = function (data) {
             $scope.data = data;
         };
         yishengServer.getData(callback,url);
     }])
-.controller('diylistCtrl',['$scope','diylistServer', function ($scope,diylistServer) {
+    .controller('diylistCtrl',['$scope','diylistServer', function ($scope,diylistServer) {
         var url = 'json/diylist.json';
         var callback = function (data) {
             $scope.data = data;
         };
         diylistServer.getData(callback,url);
     }])
-.controller('diyInfoCtrl',['$scope','diyInfoServer', function ($scope,diyInfoServer) {
+    .controller('diyInfoCtrl',['$scope','diyInfoServer', function ($scope,diyInfoServer) {
         var url = 'json/diyInfo.json';
         var callback = function (data) {
             $scope.data = data;
@@ -132,22 +163,27 @@ angular.module('app.controllers',['app.servers'])
             return num > pageCount ? false : true ;
         }
     }])
-.controller('loginCtrl',['$scope','$interval',function ($scope,$interval) {
+    .controller('loginCtrl',['$scope','$interval',function ($scope,$interval) {
         var text = $('.login-get');
         var reg = /^1(3|4|5|7|8)\d{9}$/ig;
         var str1 = "";
         $scope.getInfo = function () {
             var name = $('.login-input').find("input[type='tel']").val();
-            var text1 = "";
+            //var text1 = "";
             if(!reg.test(name)){
                 alert('手机号有误，请输入正确的手机号');
                 return false;
             }else {
-                str1 = "123456";
-                /*for (var i = 1; i <= 6; i++) {
-                    str1 = str1 + parseInt(Math.random() * 10);
-                }*/
-                console.log(str1);
+                var loginPara = {
+                    tel:name,
+                    smsType:'login'
+                }
+                $.ajax({
+                    url:'/api/beta/sms/send/code.aspx',
+                    type:'post',
+                    data:loginPara,
+                    header:{}
+                }).done(function(res){console.log(res)})
             };
             var targetDate = new Date();
             targetDate.setMinutes(targetDate.getMinutes()+1);
@@ -168,10 +204,9 @@ angular.module('app.controllers',['app.servers'])
             },20);
             /*点击后的倒计时*/
         };
-        var url = '';
         $scope.yanzhengma = function () {
             var pwd = $('.login-input').find("input[type='text']").val();
-            if(pwd == '' && pwd != str1){
+            if(pwd == ''){
                 alert('验证码输入错误,请重新输入')
             }
         }
@@ -182,47 +217,77 @@ angular.module('app.controllers',['app.servers'])
                 alert("用户名/验证码 不能为空");
                 return;
             }
-            var signIn = {
-                apiUrl: WebIM.config.apiURL,
-                user: username,
-                pwd: password,
-                appKey: WebIM.config.appkey,
-                success: function (token) {
-                    alert('登陆成功');
-                    /*var token = token.access_token;
-                    WebIM.utils.setCookie('webim_' + encryptUsername, token, 1);*/
-                },
-                error: function(){
-                }
-            };
-            conn.open(signIn);
-            console.log('------------------------------------------------------------')
+            var params = {
+                tel:username,
+                code:password,
+                channel:'WEB'
+            }
+            var loginUsers = {}
+            $.ajax({
+                url: '/api/beta/consumer/loginByCode.aspx',
+                type: 'post',
+                data: params,
+            })
+            .done(function(res) {
+                console.log(res);
+                loginUsers = res.data;
+                localStorage.setItem('users',JSON.stringify(loginUsers))
+                var signIn = {
+                    apiUrl: WebIM.config.apiURL,
+                    user: loginUsers.consumer.uno,
+                    pwd: loginUsers.consumer.easemobPwd,
+                    appKey: WebIM.config.appkey,
+                    success: function (token) {
+                        alert('登陆成功');
+                        window.history.go(-1)
+                    },
+                    error: function(){
+                    }
+                };
+                conn.open(signIn);
+                console.log('------------------------------------------------------------')
+            })
         }
     }])
-.controller('mineCtrl',['$scope', function ($scope) {
+    .controller('mineCtrl',['$scope','$location', function ($scope,$location) {
         $scope.signOut = function () {
-            var signOut = $("#signOut");
+            //var signOut = $("#signOut");
             var r = window.confirm('是否退出登录');
             if(r == true){
-                signOut.attr('href','#/tabs');
-                conn.close();
+                var hahh = JSON.parse(localStorage.getItem('users'));
+                if(hahh){
+                   var Authorization = hahh.sessionKey 
+                   $.ajax({
+                    url: '/api/beta/consumer/logout.aspx',
+                    type: 'get',
+                    header:{
+                        Authorization:'MEDCOS#'+ Authorization
+                        }
+                    })
+                    .done(function(res) {
+                        console.log(res);
+                        localStorage.removeItem('users')
+                        $location.path('#/tabs');
+                        conn.close();
+                    })
+                }
             }else{
                 signOut.attr('href');
             }
         }
     }])
-.controller('programCtrl',['$scope',function($scope){}])
-.controller('orderCtrl',['$scope','orderServer',function($scope,orderServer){
+    .controller('programCtrl',['$scope',function($scope){}])
+    .controller('orderCtrl',['$scope','orderServer',function($scope,orderServer){
         var url = 'json/order.json';
         var callback = function (data) {
             $scope.data = data;
         };
         orderServer.getData(callback,url)
     }])
-.controller('messagesCtrl',['$scope',function($scope){
+    .controller('messagesCtrl',['$scope',function($scope){
 
     }])
-.controller('counselorCtrl',['$scope', function ($scope) {
+    .controller('counselorCtrl',['$scope', function ($scope) {
         $scope.show = function () {
             return true
         };
@@ -268,7 +333,7 @@ angular.module('app.controllers',['app.servers'])
                     $('.counselor-content').append('<div class="counselor-chat-mine">' +
                         '<img src="img/WechatIMG8.png" alt="加载中"/>'+
                         '<div class="counselor-chat-mine-text">' + messages +'</div> '
-                   + '</div>')
+                        + '</div>')
                 }
             });
             msg.body.chatType = 'singleChat';
@@ -305,9 +370,9 @@ angular.module('app.controllers',['app.servers'])
             }
         });
     }])
-.controller('programInfoCtrl',['$scope',function($scope) {
+    .controller('programInfoCtrl',['$scope',function($scope) {
         $scope.appay = function () {
             alert(1);
         }
     }])
-.controller('orderInfoCtrl',['$scope',function($scope){}])
+    .controller('orderInfoCtrl',['$scope',function($scope){}])

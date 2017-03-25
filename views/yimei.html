@@ -5,11 +5,11 @@
     <h1 class='title'>医美定制</h1>
     <a ng-href="#/tabs/messages" class="index-ion-tongzhi"><span class="index-info"></span></a>
 </div>
-<div  style="padding:1.9% 3.3% 0;">
+<div style="padding:1.9% 3.3% 0;">
     <ion-slide-box  style="height:16.25rem;">
         <ion-slide ng-repeat="item in data">
-            <a ng-href="#/tabs/messages">
-                <img ng-src={{item.src}} alt="{{item.alt}}" class="responsive-img" style="height:100%;background:{{item.bg}};"/>
+            <a ng-href="{{item.url}}">
+                <img ng-src={{item.img}} alt="{{item.title}}" class="responsive-img"/>
             </a>
         </ion-slide>
     </ion-slide-box>
@@ -33,8 +33,8 @@
             <span>预约全球顶尖医院</span>
         </a>
     </div>
-    <div class="index-to">
-        <a href="#/tabs/login">
+    <div class="index-to" ng-click='speedChat()'>
+        <a>
             <span>...</span>
             <div>专属外形定制咨询师</div>
             <span>
