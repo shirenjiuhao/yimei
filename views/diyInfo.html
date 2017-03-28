@@ -3,13 +3,13 @@
     <h1 class='title'>医院介绍</h1>
 </div>
 <ion-content class="has-header">
-    <div ng-repeat="item in data">
+    <div>
         <div class="diyInfo-fir">
-            <img ng-src="{{item.img}}" alt="正在加载..." class="responsive-img"/>
+            <img ng-src="{{data.img}}" alt="正在加载..." class="responsive-img"/>
         </div>
         <div class="diyInfo-sec">
-            <div>{{item.name}}</div>
-            <span>{{item.adress}}</span>
+            <div>{{data.name}}</div>
+            <span>{{data.address}}</span>
         </div>
         <div class="diyInfo-thr" id="diyInfo-thr">
             <a href="" ng-class="{true:'diyInfo-thr-act',false:''}[show()]" ng-click="change()">医院介绍</a>
@@ -17,16 +17,16 @@
         </div>
         <div style="height: 0.83rem;background:#F3F7F8"></div>
         <div class="diyInfo-for" ng-if="show()">
-            <img ng-src="{{item.bsrc}}" alt="正在加载中..." class="responsive-img"/>
+            <img ng-src="{{data.description}}" alt="正在加载中..." class="responsive-img"/>
         </div>
         <div class="diyInfo-for" ng-if="!show()">
             <div class="list">
                 <a class="item item-avatar line-yisheng" style="padding-left:7rem;"
                    ng-repeat="list in lists" ng-href="#/tabs/line/{{list.id}}">
                     <img ng-src="{{list.img}}" alt="加载中">
-                    <h2>{{ list.name }}-{{ list.job }}<i class="line-ion-zhuan"></i></h2>
-                    <p>{{list.address}}</p>
-                    <span>{{list.hurt}}</span><span>{{list.timer}}</span>
+                    <h2>{{ list.name }}-{{ list.level }}<i class="line-ion-zhuan"></i></h2>
+                    <p>{{list.hospName}}</p>
+                    <span ng-repeat='x in list.plasticProjects'>{{x.name}}</span>
                 </a>
             </div>
             <ion-infinite-scroll

@@ -24,6 +24,11 @@ angular.module('app.servers',[])
             callback(data);
         })
     }
+    this.getDataList = function(callback,url){
+        $http.get(url,{cache:true}).success(function (data) {
+            callback(data);
+        })
+    }
     return this;
 }])
 .service('yishengServer',['$http', function ($http) {

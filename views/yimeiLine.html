@@ -4,34 +4,28 @@
     <h1 class='title'>名医在线</h1>
 </div>
 <ion-content class="has-header">
-    <ion-refresher icon="ion-load-c"
+    <!-- <ion-refresher icon="ion-load-c"
             pulling-text="Pull to refresh..."
             on-refresh="pullMore()">
-    </ion-refresher>
+    </ion-refresher> -->
     <div class="line-selected">
         <div class="line-item">
             <a class="line-active" ng-init="$index=index">全部</a>
-            <a ng-init="$index=index">眼部</a>
-            <a ng-init="$index=index">鼻部</a>
-            <a ng-init="$index=index">面部</a>
-            <a ng-init="$index=index">胸部</a>
-            <a ng-init="$index=index">口唇牙齿</a>
-            <a ng-init="$index=index">皮肤</a>
-            <a ng-init="$index=index">其他</a>
+            <a name="{{item.id}}" ng-repeat="item in bodys">{{item.name}}</a>
         </div>
     </div>
     <div class="list">
         <a class="item item-avatar line-yisheng" style="padding-left:7rem;"
             ng-repeat="list in lists" ng-href="#/tabs/line/{{list.id}}">
             <img ng-src="{{list.img}}" alt="加载中">
-            <h2>{{ list.name }}-{{ list.job }}<i class="line-ion-zhuan"></i></h2>
-            <p>{{list.address}}</p>
-            <span>{{list.hurt}}</span><span>{{list.timer}}</span>
+            <h2>{{ list.name }}-{{ list.level }}<i class="line-ion-zhuan"></i></h2>
+            <p>{{list.hospName}}</p>
+            <span ng-repeat="i in list.plasticProjects" data-id="{{i.id}}">{{i.name}}</span>
         </a>
+        <ion-infinite-scroll
+           icon="ion-load-c"
+           on-infinite="loadMore()"
+           distance="1%">
+        </ion-infinite-scroll>
     </div>
-    <ion-infinite-scroll
-            icon="ion-load-c"
-            on-infinite="loadMore()"
-            distance="1%">
-    </ion-infinite-scroll>
 </ion-content>

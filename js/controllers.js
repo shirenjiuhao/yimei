@@ -40,89 +40,128 @@ angular.module('app.controllers',['app.servers'])
             }
         }
     }])
+//医生列表
     .controller('lineCtrl',['$scope','lineServer', function ($scope,lineServer) {
-        var url = "json/yishenglist0.json";
-        var callback = function (data) {
-            $scope.lists = data ;
+        //获取整形部位
+        var url = "/api/beta/doctor/bodyList.aspx";
+        var callback = function (res) {
+            console.log(res)
+            $scope.bodys = res.data ;
         }
         lineServer.getData(callback,url);
+        //获取医生列表 ------------------------------start
+        var url = "/api/beta/doctor/list.aspx";
+        var callback = function (res) {
+            console.log(res)
+            $scope.lists = res.data.list ;
+            //$scope.pager = res.data.pager;
+            $scope.pageNumber = res.data.pager.pageNumber;//当前页
+            $scope.pageCount = res.data.pager.pageCount;//总页数
+            //console.log($scope.pageNumber+'---------------')
+            //console.log($scope.pageCount+"+++++++++++++++++++++++++++")
+        }
+        lineServer.getDataList(callback,url);
+        //根据分类选择医生 ------------------------------start
         var seleted = $('.line-selected');
         seleted.on('click','a',function(){
             $scope.lists =[] ;
             $(this).addClass("line-active").siblings().removeClass("line-active");
             $(this).addClass("line-active").parent(".line-item").siblings().find("a").removeClass("line-active");
-            $scope.$index = $(this).index();
-            console.log($scope.$index)
-            url = "json/yishenglist" +$scope.$index + ".json";
-            lineServer.getData(callback,url);
+            console.log($(this).attr('name'))
+            if($(this).attr('name')){
+                url = "/api/beta/doctor/list.aspx?partId=" + $(this).attr('name') +"&";
+                lineServer.getDataList(callback,url);
+            }else{
+                url = "/api/beta/doctor/list.aspx";
+                lineServer.getDataList(callback,url);
+            }
         })
         /*--===================================================*/
-        $scope.pageNumber =1;//当前页
-        var pageCount = 3;//总页数
-        $scope.pageNumber1 = 1;//当前页
+        
         /*加载更多-------------------------------*/
         $scope.loadMore = function(){
             if (!$scope.hasMore($scope.pageNumber)) {
                 $scope.$broadcast("scroll.infiniteScrollComplete");
                 return;
+            }else{
+                url = "/api/beta/doctor/list.aspx?pageNumber=" + $scope.pageNumber +"&";
+                //console.log(url);
+                var callback1 = function (res) {
+                    console.log('第'+$scope.pageNumber+'次');
+                    //console.log(res);
+                    if(res.status == 200){
+                        var moreList = res.data.list
+                        for(var i in moreList){
+                            $scope.lists.push(moreList[i])
+                        }
+                        $scope.pageNumber = res.data.pager.pageNumber;//当前页
+                        $scope.pageCount = res.data.pager.pageCount;//总页数
+                    }
+                };
+                lineServer.getDataList(callback1,url);
+                $scope.$broadcast("scroll.infiniteScrollComplete");
             }
-            var url1 = 'json/yishenglist'+ $scope.pageNumber +'.json';
-            console.log(url1);
-            var callback1 = function (data) {
-                console.log('第'+$scope.pageNumber+'次');
-                for(var i in data){
-                    $scope.lists.push(data[i])
-                }
-                $scope.pageNumber ++;
-            };
-            lineServer.getData(callback1,url1);
-            $scope.$broadcast("scroll.infiniteScrollComplete");
         };
         /*下拉刷新--------------------------------------*/
-        $scope.pullMore = function(){
-            if (!$scope.hasMore($scope.pageNumber1)) {
+        /*$scope.pullMore = function(){
+            if (!$scope.hasMore(pageNumber)) {
                 $scope.$broadcast("scroll.refreshComplete");
                 return;
             }
-            var url2 = 'json/yishenglist'+ $scope.pageNumber1 +'.json';
-            console.log(url2);
-            var callback2 = function (data) {
-                console.log('第'+$scope.pageNumber1+'次');
-                for(var i in data){
-                    $scope.lists.unshift(data[i])
+            url = "/api/beta/doctor/list.aspx?pageNumber=" + pageNumber +"&";
+            console.log(url);
+            var callback2 = function (res) {
+                console.log('第'+pageNumber+'次');
+                var Ulist = res.data.list
+                for(var i in Ulist){
+                    $scope.lists.unshift(Ulist[i])
                 }
-                $scope.pageNumber1 ++;
+                $scope.pager = res.data.pager;
             };
-            lineServer.getData(callback2,url2);
+            lineServer.getData(callback2,url);
             $scope.$broadcast("scroll.refreshComplete");
-        };
+        };*/
         $scope.hasMore = function (num) {
-            return num > pageCount ? false : true ;
+            return num > $scope.pageCount ? false : true ;
         }
     }])
+//医生详情
     .controller('yishengCtrl',['$scope','yishengServer', function ($scope,yishengServer) {
-        var url = 'json/yisheng.json';
-        var callback = function (data) {
-            $scope.data = data;
+        //console.log(location.hash)
+        var id = location.hash.split('/')[location.hash.split('/').length-1]
+        //console.log(id)
+        var url = '/api/beta/doctor/info.aspx?id='+ id +'&';
+        var callback = function (res) {
+            console.log(res)
+            $scope.data = res.data;
         };
         yishengServer.getData(callback,url);
     }])
+    //医院列表
     .controller('diylistCtrl',['$scope','diylistServer', function ($scope,diylistServer) {
-        var url = 'json/diylist.json';
-        var callback = function (data) {
-            $scope.data = data;
+        var url = '/api/beta/hospital/list.aspx';
+        var callback = function (res) {
+            console.log(res)
+            $scope.data = res.data.list;
         };
         diylistServer.getData(callback,url);
     }])
+    //医院详情
     .controller('diyInfoCtrl',['$scope','diyInfoServer', function ($scope,diyInfoServer) {
-        var url = 'json/diyInfo.json';
-        var callback = function (data) {
-            $scope.data = data;
+        var id = location.hash.split('/')[location.hash.split('/').length-1]
+        var url = '/api/beta/hospital/info.aspx?id='+ id +'&';
+        var callback = function (res) {
+            console.log(res)
+            $scope.data = res.data;
         };
         diyInfoServer.getData(callback,url);
-        var url2 = 'json/yishenglist0.json';
-        var callback2 = function (data) {
-            $scope.lists = data
+        //医院的医生列表
+        var url2 = '/api/beta/doctor/list.aspx?hospitalId='+ id +'&';
+        var callback2 = function (res) {
+            console.log(res)
+            $scope.lists = res.data.list;
+            $scope.pageNumber = res.data.pager.pageNumber;//当前页
+            $scope.pageCount = res.data.pager.pageCount;//总页数
         };
         diyInfoServer.getData(callback2,url2);
         /*点击切换*/
@@ -140,27 +179,31 @@ angular.module('app.controllers',['app.servers'])
             }
         };
         /*加载更多----------------------------------------------------*/
-        $scope.pageNumber =1;//当前页
-        var pageCount = 3;//总页数
         $scope.loadMore = function(){
             if (!$scope.hasMore($scope.pageNumber)) {
                 $scope.$broadcast("scroll.infiniteScrollComplete");
                 return;
+            }else{
+                url = "/api/beta/doctor/list.aspx?pageNumber=" + $scope.pageNumber +"&";
+                //console.log(url);
+                var callback1 = function (res) {
+                    console.log('第'+$scope.pageNumber+'次');
+                    //console.log(res);
+                    if(res.status == 200){
+                        var moreList = res.data.list
+                        for(var i in moreList){
+                            $scope.lists.push(moreList[i])
+                        }
+                        $scope.pageNumber = res.data.pager.pageNumber;//当前页
+                        $scope.pageCount = res.data.pager.pageCount;//总页数
+                    }
+                };
+                lineServer.getDataList(callback1,url);
+                $scope.$broadcast("scroll.infiniteScrollComplete");
             }
-            var url1 = 'json/yishenglist'+ $scope.pageNumber +'.json';
-            console.log(url1);
-            var callback1 = function (data) {
-                console.log('第'+$scope.pageNumber+'次');
-                for(var i in data){
-                    $scope.lists.push(data[i])
-                }
-                $scope.pageNumber ++;
-            };
-            diyInfoServer.getData(callback1,url1);
-            $scope.$broadcast("scroll.infiniteScrollComplete");
         };
         $scope.hasMore = function (num) {
-            return num > pageCount ? false : true ;
+            return num > $scope.pageCount ? false : true ;
         }
     }])
     .controller('loginCtrl',['$scope','$interval',function ($scope,$interval) {
@@ -178,7 +221,7 @@ angular.module('app.controllers',['app.servers'])
                     tel:name,
                     smsType:'login'
                 }
-                $.ajax({
+                $.ajax({//发送验证码
                     url:'/api/beta/sms/send/code.aspx',
                     type:'post',
                     data:loginPara,
@@ -271,8 +314,6 @@ angular.module('app.controllers',['app.servers'])
                         conn.close();
                     })
                 }
-            }else{
-                signOut.attr('href');
             }
         }
     }])
@@ -285,7 +326,7 @@ angular.module('app.controllers',['app.servers'])
         orderServer.getData(callback,url)
     }])
     .controller('messagesCtrl',['$scope',function($scope){
-
+        
     }])
     .controller('counselorCtrl',['$scope', function ($scope) {
         $scope.show = function () {

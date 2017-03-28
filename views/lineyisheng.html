@@ -4,28 +4,26 @@
     <h1 class='title'>医生详情</h1>
 </div>
 <ion-content class="has-header">
-    <div ng-repeat="item in data" ng-cloak>
+    <div ng-cloak>
         <div class="lineyisheng">
-            <img ng-src="{{item.ssrc}}" alt="正在加载图片..." class="responsive-img"/>
+            <img ng-src="{{data.bigImg}}" alt="正在加载图片..." class="responsive-img"/>
         </div>
         <div class="yisheng-mid line-yisheng">
-            <div class="line-name">{{item.name}}</div>
+            <div class="line-name">{{data.name}}</div>
             <div class="line-job">{{item.job}}</div>
-            <span>{{item.span1}}</span>
-            <span>{{item.span2}}</span>
-            <span>{{item.span3}}</span>
+            <span ng-repeat="x in data.plasticProjects" data-id='x.id'>{{x.name}}</span>
         </div>
         <div class="line-yisheng-adr">
-            <a href="#/tabs/diy/:id">
-                <span>{{item.adress}}</span>
+            <a href="#/tabs/diy/{{data.hospId}}">
+                <span>{{item.address}}</span>
                 <i class="icon-next"></i>
             </a>
         </div>
         <div style="height:0.83rem;background: #F3F7F8"></div>
-        <div class="line-yisheng-bimg"><img ng-src="{{item.bsrc}}" alt="正在加载..."class="responsive-img"/></div>
+        <div class="line-yisheng-bimg"><img ng-src="{{data.description}}" alt="正在加载..."class="responsive-img"/></div>
     </div>
 
 </ion-content>
 <div class="program-btn">
-    <a ng-href="#/tabs/login">定制方案(首次免费)</a>
+    <a>定制方案(首次免费)</a>
 </div>
