@@ -10,6 +10,7 @@ angular.module('app.controllers',['app.servers'])
             //console.log()
         };
         tabsServer.getData(callback,url);
+        $('')
         var loginUsers = JSON.parse(localStorage.getItem('users'));
         $scope.speedChat = function(){
             if(loginUsers){
