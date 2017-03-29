@@ -11,7 +11,7 @@
         <div class="yisheng-mid line-yisheng">
             <div class="line-name">{{data.name}}</div>
             <div class="line-job">{{item.job}}</div>
-            <span ng-repeat="x in data.plasticProjects" data-id='x.id'>{{x.name}}</span>
+            <span ng-repeat="(key,val) in data.plasticProjects" ng-if='key > 2 ? false : true' data-id="{{val.id}}">{{val.name}}</span> 
         </div>
         <div class="line-yisheng-adr">
             <a href="#/tabs/diy/{{data.hospId}}">

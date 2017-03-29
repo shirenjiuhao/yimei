@@ -72,8 +72,9 @@ conn.listen({
     onOnline: function () {},                  //本机网络连接成功
     onOffline: function () {},                 //本机网络掉线
     onError: function ( message ) {
-        console.log(message.error);
+        console.log(message);
         console.log('连接失败，请重新登录');
+        window.location.replace('#/tabs/login')
 
     },          //失败回调
     onBlacklistUpdate: function (list) {       //黑名单变动

@@ -2,15 +2,14 @@
  * Created by Administrator on 2017/2/14.
  */
 angular.module('app.controllers',['app.servers'])
-    .controller('tabsCtrl',['$scope','$location','tabsServer',function($scope,$location,tabsServer){
+    .controller('tabsCtrl',['$scope','$location','$ionicSlideBoxDelegate','tabsServer',function($scope,$location,$ionicSlideBoxDelegate,tabsServer){
         var url = "/api/beta/banner/list.aspx?platform=APP&num=6";
         var callback = function (res) {
             console.log(res)
             $scope.data = res.data;
-            //console.log()
+            $ionicSlideBoxDelegate.update();
         };
         tabsServer.getData(callback,url);
-        $('')
         var loginUsers = JSON.parse(localStorage.getItem('users'));
         $scope.speedChat = function(){
             if(loginUsers){
@@ -28,7 +27,7 @@ angular.module('app.controllers',['app.servers'])
                     type: 'get',
                     data: params,
                     //contentType:{Authorization:Authorization}
-                    header:{
+                    headers:{
                         Authorization:Authorization
                     }
                 })
@@ -207,6 +206,7 @@ angular.module('app.controllers',['app.servers'])
             return num > $scope.pageCount ? false : true ;
         }
     }])
+//登陆
     .controller('loginCtrl',['$scope','$interval',function ($scope,$interval) {
         var text = $('.login-get');
         var reg = /^1(3|4|5|7|8)\d{9}$/ig;
@@ -226,7 +226,7 @@ angular.module('app.controllers',['app.servers'])
                     url:'/api/beta/sms/send/code.aspx',
                     type:'post',
                     data:loginPara,
-                    header:{}
+                    headers:{}
                 }).done(function(res){console.log(res)})
             };
             var targetDate = new Date();
@@ -299,19 +299,20 @@ angular.module('app.controllers',['app.servers'])
             var r = window.confirm('是否退出登录');
             if(r == true){
                 var hahh = JSON.parse(localStorage.getItem('users'));
+                var loginUsers = JSON.parse(localStorage.getItem('users'));
                 if(hahh){
                    var Authorization = hahh.sessionKey 
                    $.ajax({
                     url: '/api/beta/consumer/logout.aspx',
                     type: 'get',
-                    header:{
+                    headers:{
                         Authorization:'MEDCOS#'+ Authorization
                         }
                     })
                     .done(function(res) {
                         console.log(res);
-                        localStorage.removeItem('users')
                         $location.path('#/tabs');
+                        localStorage.removeItem('users')
                         conn.close();
                     })
                 }
@@ -326,8 +327,12 @@ angular.module('app.controllers',['app.servers'])
         };
         orderServer.getData(callback,url)
     }])
-    .controller('messagesCtrl',['$scope',function($scope){
-        
+    .controller('messagesCtrl',['$scope','messagesServer',function($scope,messagesServer){
+        var url = '/api/beta/easemob/chat/list.aspx';
+        var callback = function (data) {
+            $scope.data = data;
+        };
+        messagesServer.getData(callback,url)
     }])
     .controller('counselorCtrl',['$scope', function ($scope) {
         $scope.show = function () {

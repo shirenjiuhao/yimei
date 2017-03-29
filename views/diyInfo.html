@@ -26,7 +26,7 @@
                     <img ng-src="{{list.img}}" alt="加载中">
                     <h2>{{ list.name }}-{{ list.level }}<i class="line-ion-zhuan"></i></h2>
                     <p>{{list.hospName}}</p>
-                    <span ng-repeat='x in list.plasticProjects'>{{x.name}}</span>
+                    <span ng-repeat="(key,val) in list.plasticProjects" ng-if='key > 2 ? false : true' data-id="{{val.id}}">{{val.name}}</span> 
                 </a>
             </div>
             <ion-infinite-scroll

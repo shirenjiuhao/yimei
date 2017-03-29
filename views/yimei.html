@@ -6,10 +6,10 @@
     <a ng-href="#/tabs/messages" class="index-ion-tongzhi"><span class="index-info"></span></a>
 </div>
 <div style="padding:1.9% 3.3% 0;">
-    <ion-slide-box  style="height:16.25rem;">
+    <ion-slide-box pager auto-play="true" does-continue="true" slide-interval="2000" style="height:16.25rem;">
         <ion-slide ng-repeat="item in data">
             <a ng-href="{{item.url}}">
-                <img ng-src={{item.img}} alt="{{item.title}}" class="responsive-img"/>
+                <img ng-src="{{item.img}}" alt="{{item.title}}" class="responsive-img" style='min-width:100%'/>
             </a>
         </ion-slide>
     </ion-slide-box>
