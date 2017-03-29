@@ -19,7 +19,7 @@
             ng-repeat="list in lists" ng-href="#/tabs/line/{{list.id}}">
             <img ng-src="{{list.img}}" alt="加载中">
             <h2>{{ list.name }}-{{ list.level }}<i class="line-ion-zhuan"></i></h2>
-            <p>{{list.hospName}}</p>
+            <p>{{ list.hospName }}</p>
             <span ng-repeat="i in list.plasticProjects" data-id="{{i.id}}">{{i.name}}</span>
         </a>
         <ion-infinite-scroll

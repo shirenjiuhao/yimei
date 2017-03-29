@@ -2,7 +2,7 @@
  * Created by Administrator on 2017/2/14.
  */
 angular.module('app.controllers',['app.servers'])
-    .controller('tabsCtrl',['$scope','$location','$interval','tabsServer',function($scope,$location,$interval,tabsServer){
+    .controller('tabsCtrl',['$scope','$location','tabsServer',function($scope,$location,tabsServer){
         var url = "/api/beta/banner/list.aspx?platform=APP&num=6";
         var callback = function (res) {
             console.log(res)

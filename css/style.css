@@ -23,6 +23,7 @@ html,body{font-size: 12px;}
 .index-to div{font-size: 1.5rem;color: #333;line-height: 2.08rem}
 .index-to span:first-child{font-size: 1.25rem;color: #666;line-height: 1.75rem}
 .index-to span:last-child{font-size: 1.17rem;color: #666;line-height: 1.67rem}
+
 /**专属定制*/
 .zixun{position:absolute;bottom:0px;width:100%;text-align:center;z-index:10;background: #fff;padding:0.83rem 0;}
 .zixun a{color:#333}
