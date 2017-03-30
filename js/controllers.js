@@ -3,7 +3,7 @@
  */
 angular.module('app.controllers',['app.servers'])
     //首页
-    .controller('tabsCtrl',['$rootScope','$scope','$location','$ionicSlideBoxDelegate','tabsServer',function($rootScope,$scope,$location,$ionicSlideBoxDelegate,tabsServer){
+    .controller('tabsCtrl',['$scope','$location','$ionicSlideBoxDelegate','tabsServer',function($scope,$location,$ionicSlideBoxDelegate,tabsServer){
         var url = "/api/beta/banner/list.aspx?platform=APP&num=6";
         var callback = function (res) {
             console.log(res)
@@ -45,9 +45,6 @@ angular.module('app.controllers',['app.servers'])
                 $location.path('/tabs/login')
             }
         };
-        $rootScope.backPgUp = function(){
-            window.history.go(-1);
-        }
     }])
     //医生列表
     .controller('lineCtrl',['$scope','lineServer', function ($scope,lineServer) {
@@ -288,7 +285,7 @@ angular.module('app.controllers',['app.servers'])
             }
         }
     }])
-    //登陆
+    //登录
     .controller('loginCtrl',['$scope','$interval',function ($scope,$interval) {
         var text = $('.login-get');
         var reg = /^1(3|4|5|7|8)\d{9}$/ig;
@@ -406,7 +403,7 @@ angular.module('app.controllers',['app.servers'])
         }
     }])
     //方案列表
-    .controller('programCtrl',['$scope','programServer',function($scope,programServer){
+    .controller('programCtrl',['$scope','programServer',function ($scope,programServer){
         var url = '/api/beta/scheme/list.aspx';
         var loginUsers = JSON.parse(sessionStorage.getItem('users'));
         var callback = function (res) {
@@ -419,7 +416,7 @@ angular.module('app.controllers',['app.servers'])
         }
     }])
     //订单列表
-    .controller('orderCtrl',['$scope','orderServer',function($scope,orderServer){
+    .controller('orderCtrl',['$scope','orderServer',function ($scope,orderServer){
         var url = '/api/beta/order/list.aspx';
         var loginUsers = JSON.parse(sessionStorage.getItem('users'));
         var callback = function (res) {
@@ -432,7 +429,7 @@ angular.module('app.controllers',['app.servers'])
         }
     }])
     //消息列表
-    .controller('messagesCtrl',['$scope','messagesServer',function($scope,messagesServer){
+    .controller('messagesCtrl',['$scope','messagesServer',function ($scope,messagesServer){
         var url = '/api/beta/easemob/chat/list.aspx';
         var callback = function (data) {
             $scope.data = data;
@@ -466,8 +463,12 @@ angular.module('app.controllers',['app.servers'])
                 }
             }
         };
-        /*focus('info_text');*/
+        focus('info_text');
         $scope.flag = false;
+        function handleAvatarSuccess() {
+            let file = $('#image')[0].files[0];
+            if(file) return true
+        };
         $scope.addPic = function () {//是否发送图片
             $scope.flag = ! $scope.flag;
             if($scope.flag){
@@ -475,21 +476,23 @@ angular.module('app.controllers',['app.servers'])
             }else{
                 $('.counselor-foot').css('bottom',0)
             }
-            /*var file = $('#image')[0].files[0];//
-             console.log(file)
-             if(file){
-                var reader = new FileReader();  
-                //将文件以Data URL形式读入页面  
-                reader.readAsDataURL(file);
-                reader.onload = function(e){  
-                    //显示文件
-                    var imageUrl = e.target.result;
-                    sendPrivateImg(imageUrl,counselorUno)
-                    var obj = $('#image')[0]; 
-                    obj.outerHTML = obj.outerHTML;
-                } 
-                console.log('已经获取到图片')
-            }*/
+            if(handleAvatarSuccess()){
+                 var file = $('#image')[0].files[0];//
+                 console.log(file)
+                 if(file){
+                    var reader = new FileReader();  
+                    //将文件以Data URL形式读入页面  
+                    reader.readAsDataURL(file);
+                    reader.onload = function(e){  
+                        //显示文件
+                        var imageUrl = e.target.result;
+                        sendPrivateImg(imageUrl,counselorUno)
+                        var obj = $('#image')[0]; 
+                        obj.outerHTML = obj.outerHTML;
+                    } 
+                    console.log('已经获取到图片')
+                }
+            }
         };
         /*发送消息*/
         $scope.sendPrivateInfo = function () {
@@ -526,7 +529,7 @@ angular.module('app.controllers',['app.servers'])
         }
     }])
     //方案详情
-    .controller('programInfoCtrl',['$scope','programInfoServer',function($scope,programInfoServer) {
+    .controller('programInfoCtrl',['$scope','programInfoServer',function ($scope,programInfoServer) {
         var url = '/api/beta/scheme/info.aspx';
         var loginUsers = JSON.parse(sessionStorage.getItem('users'));
         var schemeId = location.hash.split('/')[location.hash.split('/').length-1]
@@ -543,4 +546,4 @@ angular.module('app.controllers',['app.servers'])
         }
     }])
     //订单详情
-    .controller('orderInfoCtrl',['$scope',function($scope){}])
+    .controller('orderInfoCtrl',['$scope',function ($scope){}])

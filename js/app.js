@@ -72,6 +72,9 @@ angular.module('app',['ionic','app.controllers'])
         $urlRouterProvider.otherwise('/tabs');
     }])
     .run(function ($rootScope,loginServer,$location) {
+        $rootScope.backPgUp = function(){
+            window.history.go(-1);
+        };
         $rootScope.$on('$routeChangeStart', function(evt, next, current) {
             var status = sessionStorage.getItem('users')
             // var loginUsers = JSON.parse()
@@ -80,7 +83,7 @@ angular.module('app',['ionic','app.controllers'])
                 if (next.templateUrl === "login.html") {
                     // 已经转向登录路由因此无需重定向
                 } else {
-                    $location.path('/login');
+                    $location.path('/tabs/login');
                 }
             }
         });
@@ -142,5 +145,4 @@ angular.module('app',['ionic','app.controllers'])
             })
         .otherwise({redirectTo:'/tabs'});*/
 /*默认的路由*//*
-
 })*/
