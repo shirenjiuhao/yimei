@@ -36,8 +36,8 @@ angular.module('app.controllers',['app.servers'])
                 .done(function(res) {
                     console.log(res);
                     var counselorInfo = res.data;
-                    var hospitalId = counselorInfo.scheme.hospitalId;//医院ID
-                    var doctorId = counselorInfo.scheme.doctorId;//医生ID
+                    var hospitalId = counselorInfo.counselor.hospitalId;//医院ID
+                    var doctorId = counselorInfo.counselor.id;//医生ID
                     var counselorUno = counselorInfo.counselor.uno;//咨询师的环信ID
                     $location.path('/tabs/index/'+hospitalId+'/'+doctorId+'/'+counselorUno)
                 })
@@ -196,7 +196,7 @@ angular.module('app.controllers',['app.servers'])
     .controller('diyInfoCtrl',['$scope','diyInfoServer','$location', function ($scope,diyInfoServer,$location) {
         var hospitalId = location.hash.split('/')[location.hash.split('/').length-2];//医院ID
         var doctorId = location.hash.split('/')[location.hash.split('/').length-1];//医生ID
-        var url = '/api/beta/hospital/info.aspx?id='+ id +'&';
+        var url = '/api/beta/hospital/info.aspx?id='+ hospitalId +'&';
         var callback = function (res) {
             console.log(res)
             $scope.data = res.data;
@@ -449,7 +449,7 @@ angular.module('app.controllers',['app.servers'])
         $scope.show = function () {
             return true
         };
-        $scope.changeShow = function (e) {
+        $scope.changeShow = function ($event) {
             var add = $('#info_text');
             if(add.val() == ""){
                 $scope.show = function () {
@@ -459,10 +459,10 @@ angular.module('app.controllers',['app.servers'])
                 $scope.show = function () {
                     return false
                 };
-                if (e.keyCode === 13) {
-                    $('#info_text').val("");
+                if ($event.keyCode === 13) {
                     focus('info_text');
                     sendPrivateText(add.val(),counselorUno)
+                    $('#info_text').val("");
                 }
             }
         };
@@ -475,13 +475,9 @@ angular.module('app.controllers',['app.servers'])
             }else{
                 $('.counselor-foot').css('bottom',0)
             }
-        };
-        /*发送消息*/
-        $scope.sendPrivateInfo = function () {
-            var messages = $('#info_text').val();
-            console.log(messages);
-            var file = $('#image')[0].files[0];
-            if(file){
+            /*var file = $('#image')[0].files[0];//
+             console.log(file)
+             if(file){
                 var reader = new FileReader();  
                 //将文件以Data URL形式读入页面  
                 reader.readAsDataURL(file);
@@ -493,7 +489,11 @@ angular.module('app.controllers',['app.servers'])
                     obj.outerHTML = obj.outerHTML;
                 } 
                 console.log('已经获取到图片')
-            }
+            }*/
+        };
+        /*发送消息*/
+        $scope.sendPrivateInfo = function () {
+            var messages = $('#info_text').val();
             if(messages == ''){
                 return false
             }else{
@@ -502,6 +502,28 @@ angular.module('app.controllers',['app.servers'])
                 sendPrivateText(messages,counselorUno)
             }
         };
+        var infoMsg = sessionStorage.getItem(counselorUno);
+        if(infoMsg){
+            infoMsg = JSON.parse(infoMsg);
+            for(let i in infoMsg){
+                //console.log(i)
+                if(infoMsg[i].ext.msgType){
+                    if(infoMsg[i].to != loginUsersUno){
+                        if(infoMsg[i].ext.msgType != 2){
+                            msgShow('sender','text',infoMsg[i].msg,infoMsg[i].ext.time);
+                        }else{
+                            msgShow('sender','img',infoMsg[i].ext.imgSrc,infoMsg[i].ext.time);
+                        }
+                    }else{
+                        if(infoMsg[i].ext.msgType != 2){
+                            msgShow('receiver','text',infoMsg[i].data,infoMsg[i].ext.time);
+                        }else{
+                            msgShow('receiver','img',infoMsg[i].ext.imgSrc,infoMsg[i].ext.time);
+                        }
+                    }
+                }
+            }
+        }
     }])
     //方案详情
     .controller('programInfoCtrl',['$scope','programInfoServer',function($scope,programInfoServer) {

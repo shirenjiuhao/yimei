@@ -19,11 +19,13 @@ conn.listen({
         console.log('已退出登录')
     },         //连接关闭回调
     onTextMessage: function ( message ) {
+        infoMessages = JSON.parse(sessionStorage.getItem(message.from)) || [];
         console.log(message);
-        $('.counselor-content').append('<div class="counselor-chat" style="margin-top:2rem">'+
-            '<img src="img/touxiang1.png" alt="加载中"/>'+
-            '<div class="counselor-chat-text">'+ message.data+ '</div>'
-            +'</div>' );
+        message.ext.time = getShowDate();
+        infoMessages.push(message)
+        // msgShow('receiver','text',message.data,getShowDate());
+        // msgScrollTop();
+        sessionStorage.setItem(message.from,JSON.stringify(infoMessages))  
     },    //收到文本消息
     onEmojiMessage: function ( message ) {
         console.log('Emoji');
@@ -34,10 +36,16 @@ conn.listen({
     },   //收到表情消息
     onPictureMessage: function ( message ) {
         console.log('Picture');
-
+        infoMessages = JSON.parse(sessionStorage.getItem(message.from)) || [];
         var options = {url: message.url};
         options.onFileDownloadComplete = function () {
             // 图片下载成功
+            message.ext.time = getShowDate();
+            message.ext.imgSrc = message.url;
+            infoMessages.push(message);
+            /*msgShow('receiver','img',message.url,getShowDate());
+            msgScrollTop();*/
+            sessionStorage.setItem(message.from,JSON.stringify(infoMessages));
             console.log('Image download complete!');
         };
         options.onFileDownloadError = function () {
@@ -112,6 +120,7 @@ var sendPrivateText = function(messages,toUno){
             msgScrollTop();
         }
     });
+    infoMessages = JSON.parse(sessionStorage.getItem(toUno)) || [];
     msg.body.chatType = 'singleChat';
     conn.send(msg.body);
     infoMessages.push(msg.body);
@@ -152,6 +161,7 @@ var sendPrivateImg = function (imgSrc,toUno) {
                 },
                 // flashUpload: WebIM.flashUpload               // 意义待查
             };
+            infoMessages = JSON.parse(sessionStorage.getItem(toUno)) || [];
             infoMessages.push(option);
             sessionStorage.setItem(toUno,JSON.stringify(infoMessages));
             msg.set(option);
