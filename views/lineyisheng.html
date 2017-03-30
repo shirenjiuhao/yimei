@@ -1,16 +1,16 @@
 
 <div class='index-ion'>
-    <a ng-href="#/tabs/line" class="index-ion-return"></a>
+    <a href="" ng-click='backPgUp()' class="index-ion-return"></a>
     <h1 class='title'>医生详情</h1>
 </div>
 <ion-content class="has-header">
     <div ng-cloak>
         <div class="lineyisheng">
-            <img ng-src="{{data.bigImg}}" alt="正在加载图片..." class="responsive-img"/>
+            <img ng-src="{{data.img}}" alt="正在加载图片..." class="responsive-img"/>
         </div>
         <div class="yisheng-mid line-yisheng">
             <div class="line-name">{{data.name}}</div>
-            <div class="line-job">{{item.job}}</div>
+            <div class="line-job">{{data.level}}</div>
             <span ng-repeat="(key,val) in data.plasticProjects" ng-if='key > 2 ? false : true' data-id="{{val.id}}">{{val.name}}</span> 
         </div>
         <div class="line-yisheng-adr">
@@ -25,5 +25,5 @@
 
 </ion-content>
 <div class="program-btn">
-    <a>定制方案(首次免费)</a>
+    <a ng-click="speakChat()">定制方案(首次免费)</a>
 </div>

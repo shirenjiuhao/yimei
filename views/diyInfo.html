@@ -1,5 +1,5 @@
 <div class='index-ion'>
-    <a ng-href="#/tabs/diy" class="index-ion-return"></a>
+    <a ng-href="" ng-click='backPgUp()' class="index-ion-return"></a>
     <h1 class='title'>医院介绍</h1>
 </div>
 <ion-content class="has-header">
@@ -22,7 +22,7 @@
         <div class="diyInfo-for" ng-if="!show()">
             <div class="list">
                 <a class="item item-avatar line-yisheng" style="padding-left:7rem;"
-                   ng-repeat="list in lists" ng-href="#/tabs/line/{{list.id}}">
+                   ng-repeat="list in lists" ng-href="#/tabs/line/{{list.hospId}}/{{list.id}}">
                     <img ng-src="{{list.img}}" alt="加载中">
                     <h2>{{ list.name }}-{{ list.level }}<i class="line-ion-zhuan"></i></h2>
                     <p>{{list.hospName}}</p>
@@ -38,5 +38,5 @@
     </div>
 </ion-content>
 <div class="program-btn">
-    <a ng-href="#/tabs/login">定制方案(首次免费)</a>
+    <a ng-href="" ng-click='speakChat()'>定制方案(首次免费)</a>
 </div>

@@ -1,5 +1,5 @@
 <div class='index-ion'>
-    <a ng-href="#/tabs/line" class="index-ion-return"></a>
+    <a ng-href="" ng-click='backPgUp()' class="index-ion-return"></a>
     <h1 class='title'>优质医院</h1>
 </div>
 <ion-content class="has-header">
@@ -8,7 +8,7 @@
             on-refresh="">
     </ion-refresher>
     <div class="diylist" ng-repeat="item in data" ng-cloak>
-        <a ng-href="#/tabs/diy/{{item.id}}">
+        <a ng-href="#/tabs/diy/{{item.id}}/{{item.id}}">
             <img ng-src="{{item.img}}" alt="加载更多..." class="responsive-img"/>
             <div class="diylist-text">
                 <div>{{item.name}}</div>

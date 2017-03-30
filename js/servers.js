@@ -56,9 +56,16 @@ angular.module('app.servers',[])
         return this;
     }])
 .service('orderServer',['$http', function ($http) {
-        this.getData = function(callback,url){
-            $http.get(url,{cache:true}).success(function (data) {
-                callback(data);
+        this.getData = function(callback,url,Authorization){
+            $http({
+                url: url,
+                method:'get',
+                cache:true,
+                headers: {
+                    Authorization: Authorization
+                }
+            }).then(function (res) {
+                callback(res.data);
             })
         }
         return this;
@@ -76,6 +83,37 @@ angular.module('app.servers',[])
         this.getData = function(callback,url){
             $http.get(url,{cache:true}).success(function (data) {
                 callback(data);
+            })
+        }
+        return this;
+    }])
+    .service('programServer',['$http', function ($http) {
+        this.getData = function(callback,url,Authorization){
+            $http({
+                url: url,
+                method:'get',
+                cache:true,
+                headers: {
+                    Authorization: Authorization
+                }
+            }).then(function(res){
+                callback(res.data);
+            })
+        }
+        return this;
+    }])
+    .service('programInfoServer',['$http', function ($http) {
+        this.getData = function(callback,url,params,Authorization){
+            $http({
+                url: url,
+                method:'get',
+                cache:true,
+                params: params,
+                headers: {
+                    Authorization: Authorization
+                }
+            }).then(function(res){
+                callback(res.data);
             })
         }
         return this;

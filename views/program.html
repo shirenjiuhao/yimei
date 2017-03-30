@@ -1,35 +1,15 @@
 <div class='index-ion'>
-    <a ng-href="#/tabs/mine" class="index-ion-return"></a>
+    <a ng-href="" ng-click='backPgUp()' class="index-ion-return"></a>
     <h1 class='title'>方案</h1>
 </div>
 <ion-content class="has-header" style="padding:1rem;background:#F3F7F8">
-    <div  class="program-msg">
-        <a href="#/tabs/mine/program/:id">
-            <p>方案1</p>
-            <img ng-src="img/touxiang1.png" alt="加载中"/>
+    <div  class="program-msg" ng-repeat='(key,item) in data.list'>
+        <a href="#/tabs/mine/program/{{item.id}}">
+            <p>方案{{key+1}}</p>
+            <img ng-src="{{item.doctorImg}}" alt="加载中"/>
             <div class="program-msg-text">
-                <div>李敏 <i class="line-ion-zhuan"></i></div>
-                <span>主治医师</span>
-            </div>
-        </a>
-    </div>
-    <div  class="program-msg">
-        <a href="#/tabs/mine/program/:id">
-            <p>方案1</p>
-            <img ng-src="img/touxiang1.png" alt="加载中"/>
-            <div class="program-msg-text">
-                <div>李敏 <i class="line-ion-zhuan"></i></div>
-                <span>主治医师</span>
-            </div>
-        </a>
-    </div>
-    <div  class="program-msg">
-        <a href="#/tabs/mine/program/:id">
-            <p>方案1</p>
-            <img ng-src="img/touxiang1.png" alt="加载中"/>
-            <div class="program-msg-text">
-                <div>李敏 <i class="line-ion-zhuan"></i></div>
-                <span>主治医师</span>
+                <div>{{item.doctorName}}<i class="line-ion-zhuan"></i></div>
+                <span>{{item.doctorLevel}}</span>
             </div>
         </a>
     </div>

@@ -1,5 +1,5 @@
 <div class='index-ion'>
-    <a ng-href="#/tabs/messages" class="index-ion-return"></a>
+    <a ng-href="" ng-click='backPgUp()' class="index-ion-return"></a>
     <h1 class='title'>咨询师</h1>
 </div>
 <ion-content class="has-header" style="background:#F3F7F8">
@@ -7,7 +7,7 @@
             pulling-text="Pull to refresh..."
             on-refresh="">
     </ion-refresher>
-    <div class="counselor-content">
+    <div class="counselor-content" id='dialog_chat'>
         <div class="counselor-timer">2017-02-23</div>
         <div class="counselor-chat">
             <img ng-src="img/touxiang1.png" alt="加载中"/>
@@ -43,17 +43,19 @@
         </div>
     </div>
     <ion-infinite-scroll
+            icon="ios-load-a"
             on-infinite=""
             distance="1%">
     </ion-infinite-scroll>
 </ion-content>
 <div class="counselor-foot">
-    <input type="text" placeholder="请输入消息" id="info_text" ng-keyup="changeShow()" ng-blur="changeShow()"/>
+    <input type="text" placeholder="请输入消息" id="info_text" ng-keyup="changeShow(e)" ng-blur="changeShow()"/>
     <a class="icon ion-ios-plus-outline counselor-foot-add" ng-if="show()" ng-click="addPic()" style="cursor:pointer"></a>
-    <a class="counselor-send" id="info_send" ng-if="!show()" ng-click="sendPrivateText()">发送</a>
+    <a class="counselor-send" id="info_send" ng-if="!show()" ng-click="sendPrivateInfo()">发送</a>
 </div>
 <div class="bar bar-footer" style="height:66px;" ng-if="flag">
     <i class="button-icon button icon ion-ios-camera"></i>
+    <input type="file" id='image'>
     <div style="position: absolute;left: 14px;bottom:6px;">照片</div>
 </div>
 

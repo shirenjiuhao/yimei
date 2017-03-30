@@ -1,38 +1,29 @@
 <div class='index-ion'>
-    <a ng-href="#/tabs/mine/program" class="index-ion-return"></a>
-    <h1 class='title'>方案1</h1>
+    <a ng-href="" ng-click='backPgUp()' class="index-ion-return"></a>
+    <h1 class='title'>方案详情</h1>
 </div>
 <ion-content class="has-header" style="background:#F3F7F8">
     <div class="programInfo-fir">
-        <img ng-src="img/touxiang1.png" alt="加载中"/>
+        <img ng-src="{{data.doctorImg}}" alt="加载中"/>
         <div>
-            <span style="color:#666">李敏</span>
-            <span>主治医师</span>
-            <span style="float:right">2017-2-21</span>
+            <span style="color:#666">{{data.doctorName}}</span>
+            <span>{{data.doctorLevel}}</span>
+            <span style="float:right">{{data.reserveTime}}</span>
         </div>
     </div>
     <div class="programInfo-sec">
         <span>美容规划方案</span>
-        <span>定金：¥420.00</span>
+        <span>定金：{{data.payment | currency:'￥'}}</span>
     </div>
-    <div class="programInfo">方案1</div>
-    <ul class="programInfo-con">
-        <li>润百颜玻尿酸1ML</li>
-        <li>适用部位：面部</li>
-        <li>治疗时长：10分钟</li>
-        <li>技术理念：将玻尿酸注入真皮褶皱、凹陷的部位、以保持肌肤原本生态</li>
-        <li>治疗效果：抚平皱纹、补充肌肤水份、修饰面部轮廓、以延缓皮肤衰老。</li>
-        <li>项目优势：见效快、随做随走、微创无痕</li>
-        <li>参考价格：¥148.00</li>
-    </ul>
-    <ul class="programInfo-con">
-        <li>润百颜玻尿酸1ML</li>
-        <li>适用部位：面部</li>
-        <li>治疗时长：10分钟</li>
-        <li>技术理念：将玻尿酸注入真皮褶皱、凹陷的部位、以保持肌肤原本生态</li>
-        <li>治疗效果：抚平皱纹、补充肌肤水份、修饰面部轮廓、以延缓皮肤衰老。</li>
-        <li>项目优势：见效快、随做随走、微创无痕</li>
-        <li>参考价格：¥148.00</li>
+    <div class="programInfo">方案详情</div>
+    <ul class="programInfo-con" ng-repeat='item in data.items'>
+        <li>{{item.name}}</li>
+        <li>适用部位：{{item.body}}</li>
+        <li>治疗时长：{{item.curetime}}</li>
+        <li>技术理念：{{item.idea}}</li>
+        <li>治疗效果：{{item.effect}}</li>
+        <li>项目优势：{{item.advantage}}</li>
+        <li>参考价格：{{item.amount}}</li>
     </ul>
     <ion-infinite-scroll
             icon="ion-loading-c"

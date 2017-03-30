@@ -72,7 +72,7 @@ html,body{font-size: 12px;}
 .line-ion-zhuan{width: 1.3rem;height: 1rem;background: url("../img/zhuan.png") no-repeat;background-size: 100%;display: block;position: relative;top:0.2rem}
 /*医生详情页-------------------------------------------------------------*/
 .yisheng-mid{text-align:center;line-height: 2;padding:0.83rem 0 1.33rem;border-bottom: 0.08rem solid #E8E8E8}
-.lineyisheng{height:16.67rem}
+.lineyisheng{width:10rem;height:10rem;position: relative;left:50%;margin-left:-5rem;margin-top:3.33rem;border-radius:50%;}
 .yisheng-mid .line-name{font-size: 1.33rem;font-weight:500;color: #333}
 .yisheng-mid .line-job{font-size:1.25rem;color: #666 }
 .line-yisheng-adr{font-size: 1.33rem;padding: 1.33rem 0.83rem;}
@@ -135,6 +135,11 @@ html,body{font-size: 12px;}
 .counselor-foot{position:absolute;bottom:0;height:3.7rem;display:flex;width:100%;background:#fff;padding:0 3.3%;justify-content: center;align-items: center}
 .counselor-foot input{border:0.08rem solid #E8E8E8;flex:1;border-radius: 0.33rem;}
 .counselor-foot-add{margin-left:1rem;color:#34BBBE;font-size: 3rem;}
+#image{width: 30px;cursor: pointer;
+    position: relative;
+    left: -38px;
+    z-index: 10;
+    opacity: 0;}
 .counselor-send{background:#fff;color: #34BBBE;margin-left:1rem;font-size: 1.25rem;cursor: pointer}
 /*信息页面-------------------------------------------------------*/
 .message-border{margin: 0 1rem;background: #fff;}

@@ -1,6 +1,7 @@
 /**
  * Created by Administrator on 2017/2/27.
  */
+var infoMessages = [];
 var conn = new WebIM.connection({
     https: WebIM.config.https,
     url: WebIM.config.xmppURL,
@@ -75,7 +76,7 @@ conn.listen({
         console.log(message);
         console.log('连接失败，请重新登录');
         window.location.replace('#/tabs/login')
-
+        //window.location.href = '#/tabs/login'
     },          //失败回调
     onBlacklistUpdate: function (list) {       //黑名单变动
         // 查询黑名单，将好友拉黑，将好友从黑名单移除都会回调这个函数，list则是黑名单现有的所有好友信息
@@ -91,3 +92,82 @@ WebIM.utils.hasSetRequestHeader;
 //是否设置mimetype
 WebIM.utils.hasOverrideMimeType;
 
+var msgScrollTop = function(){
+    $(msgInit.el)[0].scrollTop = $(msgInit.el)[0].scrollHeight + $(msgInit.el)[0].offsetHeight;
+}
+//发送文本消息
+var sendPrivateText = function(messages,toUno){
+    let id = conn.getUniqueId();                 // 生成本地消息id
+    let msg = new WebIM.message('txt', id);      // 创建文本消息
+    msg.set({
+        msg: messages,                  // 消息内容
+        to: toUno,    // 接收消息对象（用户id）
+        ext: {"msgType":1,time:getShowDate()},
+        roomType: false,
+        success: function (id, serverMsgId) {
+            console.log('send private text Success');
+            console.log(msg)
+            let content = msg.value;
+            msgShow('sender','text',content,getShowDate());
+            msgScrollTop();
+        }
+    });
+    msg.body.chatType = 'singleChat';
+    conn.send(msg.body);
+    infoMessages.push(msg.body);
+    sessionStorage.setItem(toUno,JSON.stringify(infoMessages));
+ };
+// 发送图片消息
+var sendPrivateImg = function (imgSrc,toUno) {
+        var id = conn.getUniqueId();
+        var msg = new WebIM.message('img', id);
+        var input = document.getElementById('image');            // 选择图片的input
+        var file = WebIM.utils.getFileUrl(input);                   // 将图片转化为二进制文件
+        var allowType = {
+            'jpg': true,
+            'gif': true,
+            'png': true,
+            'bmp': true
+        };
+        if (file.filetype.toLowerCase() in allowType) {
+            console.log('send');
+            //console.log(file);
+            var option = {
+                apiUrl: WebIM.config.apiURL,
+                file: file,
+                to: toUno ,
+                ext: {"msgType":2,time:getShowDate(),imgSrc: imgSrc},
+                roomType: false,
+                chatType: 'singleChat',
+                onFileUploadError: function () {
+                    console.log('onFileUploadError');
+                },
+                onFileUploadComplete: function () {
+                    console.log('onFileUploadComplete'+' 发送成功');
+                },
+                success: function () {
+                    console.log('Success');
+                    msgShow('sender','img',imgSrc,getShowDate());
+                    msgScrollTop();
+                },
+                // flashUpload: WebIM.flashUpload               // 意义待查
+            };
+            infoMessages.push(option);
+            sessionStorage.setItem(toUno,JSON.stringify(infoMessages));
+            msg.set(option);
+            conn.send(msg.body);
+        }
+};
+$(function(){
+    userInfo = sessionStorage.getItem('users')
+    if(userInfo){
+        userInfo = JSON.parse(userInfo)
+        var signIn = {
+            apiUrl: WebIM.config.apiURL,
+            user: userInfo.consumer.uno,
+            pwd: userInfo.consumer.easemobPwd,
+            appKey: WebIM.config.appkey
+        };
+        conn.open(signIn);
+    }
+ });

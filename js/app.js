@@ -40,7 +40,7 @@ angular.module('app',['ionic','app.controllers'])
                 controller:'lineCtrl'
             })
             .state('lineid',{
-                url:'/tabs/line/:id',
+                url:'/tabs/line/:hospitalId/:doctorId',
                 templateUrl:'views/lineyisheng.html',
                 controller:'yishengCtrl'
             })
@@ -50,7 +50,7 @@ angular.module('app',['ionic','app.controllers'])
                 controller:'diylistCtrl'
             })
             .state('diyid',{
-                url:'/tabs/diy/:id',
+                url:'/tabs/diy/:hospitalId/:doctorId',
                 templateUrl:'views/diyInfo.html',
                 controller:'diyInfoCtrl'
             })
@@ -65,7 +65,7 @@ angular.module('app',['ionic','app.controllers'])
                 controller:'messagesCtrl'
             })
             .state('counselor',{
-                url:'/tabs/messages/:id',
+                url:'/tabs/:page/:hospitalId/:doctorId/:counselorUno',
                 templateUrl:'views/counselor.html',
                 controller:'counselorCtrl'
             })
@@ -73,9 +73,10 @@ angular.module('app',['ionic','app.controllers'])
     }])
     .run(function ($rootScope,loginServer,$location) {
         $rootScope.$on('$routeChangeStart', function(evt, next, current) {
-            var loginUsers = JSON.parse(localStorage.getItem('users'))
+            var status = sessionStorage.getItem('users')
+            // var loginUsers = JSON.parse()
             // 如果用户未登录
-            if (!loginUsers) {
+            if (!status) {
                 if (next.templateUrl === "login.html") {
                     // 已经转向登录路由因此无需重定向
                 } else {
