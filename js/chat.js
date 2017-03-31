@@ -69,19 +69,19 @@ function appendMsg(who,type,data) {
             break;
         case "info":
            var msgInfoNodeA = domCreat("a");//生成父元素a标签
-           msgInfoNodeA.setAttribute("href",'#/tabs/mine/program/2');
+           msgInfoNodeA.setAttribute("href",'#/tabs/mine/program/'+ data.msg.id);
 
            var msgInfoNodeP = domCreat("p");//生成方案名p标签
-           var textnodeP=document.createTextNode('方案2');
+           var textnodeP=document.createTextNode(data.msg.schemeName);
            msgInfoNodeP.appendChild(textnodeP);
 
            var msgInfoNodeImg = domCreat("img");//生成img头像
-           msgInfoNodeImg.src = './img/touxiang1.png';
+           msgInfoNodeImg.src = data.msg.doctorImg;
 
            var msgInfoNodeDiv = domCreat("div");//生成右边盒子
            msgInfoNodeDiv.className="counselor-chat-prog-tex";
            var msgInfoNodeChildDiv = domCreat("div");//生成自盒子
-           var textnodeChildDiv=document.createTextNode('李敏');
+           var textnodeChildDiv=document.createTextNode(data.msg.doctorName);
            var msgInfoNodeChildI = domCreat("i");//生成图标
            msgInfoNodeChildI.className="line-ion-zhuan";
            msgInfoNodeChildDiv.appendChild(textnodeChildDiv);
@@ -89,14 +89,15 @@ function appendMsg(who,type,data) {
            msgInfoNodeDiv.appendChild(msgInfoNodeChildDiv);//放到父盒子里
 
            var msgInfoNodeDivSpan = domCreat("span");//生成医生职位span标签
-           var textnodeChildDivSpan=document.createTextNode('主治医师');
-           msgInfoNodeDiv.appendChild(msgInfoNodeDivSpan);//放到父盒子里
+           var textnodeChildDivSpan=document.createTextNode(data.msg.doctorLevel);
+           msgInfoNodeDivSpan.appendChild(textnodeChildDivSpan);//放到父盒子里
+           msgInfoNodeDiv.appendChild(msgInfoNodeDivSpan);
             //分别添加到父盒子a标签中
             msgInfoNodeA.appendChild(msgInfoNodeP);
             msgInfoNodeA.appendChild(msgInfoNodeImg);
             msgInfoNodeA.appendChild(msgInfoNodeDiv);
             msgItem.className="counselor-chat-prog";
-            msgItem.appendChild(timeBox);
+            //msgItem.appendChild(timeBox);
             msgItem.appendChild(msgInfoNodeA);
             break;
         case "img":

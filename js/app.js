@@ -114,8 +114,13 @@ $rootScope.conn.listen({
         infoMessages = JSON.parse(sessionStorage.getItem(message.from)) || [];
         console.log(message);
         message.ext.time = getShowDate();
-        infoMessages.push(message)
-        msgShow('receiver','text',message.data,getShowDate());
+        infoMessages.push(message);
+        if(message.ext.msgType ==1){
+            msgShow('receiver','text',message.data,getShowDate());
+        }else{
+            var infoText = JSON.parse(message.data);
+            msgShow('receiver','info',infoText,getShowDate());
+        }
         // msgScrollTop();
         $timeout($rootScope.msgScrollTop,1000);
         sessionStorage.setItem(message.from,JSON.stringify(infoMessages))  ;

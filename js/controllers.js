@@ -520,8 +520,9 @@ angular.module('app.controllers',['app.servers'])
                             msgShow('receiver','img',infoMsg[i].ext.imgSrc,infoMsg[i].ext.time);
                         }
                         if(infoMsg[i].ext.msgType == 3){
-                            console.log(infoMsg[i].data)
-                           // msgShow('receiver','info',infoMsg[i].data,infoMsg[i].ext.time);
+                           // console.log(infoMsg[i].data)
+                            var infoText = JSON.parse(infoMsg[i].data);
+                            msgShow('receiver','info',infoText,infoMsg[i].ext.time);
                         }
                     }
                     $timeout($rootScope.msgScrollTop,1000)
