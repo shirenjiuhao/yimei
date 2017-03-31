@@ -372,7 +372,7 @@ angular.module('app.controllers',['app.servers'])
         }
     }])
     //退出登录
-    .controller('mineCtrl',['$scope','$location', function ($scope,$location) {
+    .controller('mineCtrl',['$scope','$rootScope','$location', function ($scope,$rootScope,$location) {
         $scope.signOut = function () {
             //var signOut = $("#signOut");
             var r = window.confirm('是否退出登录');
@@ -390,7 +390,7 @@ angular.module('app.controllers',['app.servers'])
                     .done(function(res) {
                         console.log(res);
                         sessionStorage.removeItem('users')
-                        conn.close();
+                        $rootScope.conn.close();
                     })
                 }else{
                     alert('您尚未登录')
@@ -533,6 +533,7 @@ angular.module('app.controllers',['app.servers'])
     //方案详情
     .controller('programInfoCtrl',['$scope','programInfoServer',function ($scope,programInfoServer) {
         var url = '/api/beta/scheme/info.aspx';
+        var Authorization = '';
         var loginUsers = JSON.parse(sessionStorage.getItem('users'));
         var schemeId = location.hash.split('/')[location.hash.split('/').length-1]
         var callback = function (res) {
@@ -540,11 +541,19 @@ angular.module('app.controllers',['app.servers'])
             $scope.data = res.data;
         };
         if(loginUsers){
-            var Authorization = 'MEDCOS#' + loginUsers.sessionKey ;
+            Authorization = 'MEDCOS#' + loginUsers.sessionKey ;
             programInfoServer.getData(callback,url,{schemeId: schemeId},Authorization)
-        }
+        };
+        var url2 = '/api/beta/scheme/affirm.aspx';
+        var callback2 = function (res) {
+            console.log(res)
+            //$scope.data = res.data;
+        };
         $scope.appay = function () {
-            alert(1);
+            if(loginUsers){
+                Authorization = 'MEDCOS#' + loginUsers.sessionKey ;
+                programInfoServer.payParams(callback2,url2,{schemeId: schemeId, appType: 2},Authorization)
+            }
         }
     }])
     //订单详情
