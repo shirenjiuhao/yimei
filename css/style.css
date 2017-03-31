@@ -103,34 +103,18 @@ html,body{font-size: 12px;}
 /*聊天页面-------------------------------------------------------------*/
 /*咨询师页面*/
 .counselor-content{padding:10px;font-size: 18px;}
-.counselor-content img{max-height: 40px;min-width: 40px;background:red;border-radius:50%}
+.counselor-content .counselor-chat-prog img{max-height: 40px;min-width: 40px;background:red;border-radius:50%}
 .counselor-timer{padding:2% 0;text-align: center;font-size:1rem;color: #999}
-.counselor-chat{position:relative;}
-.counselor-chat img{position:absolute;top:0;left:0;max-height:4.17rem;max-width:4.17rem}
-.counselor-chat .counselor-chat-text{margin-left:6rem;min-height: 4.17rem;font-size: 1.25rem;color:#333;max-width: 60%;padding:1%;
-    border-radius:0.83rem;position: relative;background: #fff;display: flex;
-    justify-content: center;word-break:break-all;
-    align-items: center;
-}
-.counselor-chat-text:before{content:'';position:absolute;border-color:transparent #FFF transparent transparent;top:0.37rem;left:-1.8rem;
-    border-width:1rem;border-style: dashed solid dashed dashed;
-}
-.counselor-chat-prog{min-width:23.75rem;height:10rem;margin: 0.83rem 3.75rem;background: #fff;padding:0 10px;border-radius: 5px;font-size: 1.25rem;position: relative}
+
+.counselor-chat-prog{min-width:23.75rem;height:10rem;margin: 0.83rem 3.75rem;background: #fff;padding:0 10px;border-radius: 5px;font-size: 1.25rem;position: relative;clear: both}
 .counselor-chat-prog p{border-bottom: 0.08px dashed #E8E8E8;font-size: 1.33rem;color: #34BBBE;padding:1rem 0;margin-bottom: 1rem;}
 .counselor-chat-prog-tex{position:absolute;top:4.7rem;left:5rem;}
 .counselor-chat-prog-tex div{color:#333;display: flex}
-.counselor-chat-prog-tex span{color: #999}
 .counselor-chat-h{height:11.17rem}
 .counselor-chat-h a{color:#999;}
+
 /*聊天头像样式*/
-.counselor-chat-mine{position: relative;margin-top: 2rem;}
-.counselor-chat-mine img{position:absolute;top:0;right:0;max-height:4.17rem;max-width:4.17rem}
-.counselor-chat-mine .counselor-chat-mine-text{
-    min-height: 3rem;min-width:1rem;font-size: 1.25rem;color:#333;max-width: 60%;padding:1%;margin-left:6rem;align-items: center;
-    border-radius:0.83rem;position: relative;background: #34BBBE;justify-content: center;display:flex;color:#fff;word-break:break-all;
-}
-.counselor-chat-mine-text:after{content:'';position:absolute;border-color:transparent transparent transparent #34BBBE;top:0.34rem;right:-1.7rem;
-    border-width:1rem;border-style: dashed dashed dashed solid;}
+
 /*输入框*/
 .counselor-foot{position:absolute;bottom:0;height:3.7rem;display:flex;width:100%;background:#fff;padding:0 3.3%;justify-content: center;align-items: center}
 .counselor-foot input{border:0.08rem solid #E8E8E8;flex:1;border-radius: 0.33rem;}

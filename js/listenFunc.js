@@ -23,7 +23,7 @@ conn.listen({
         console.log(message);
         message.ext.time = getShowDate();
         infoMessages.push(message)
-        // msgShow('receiver','text',message.data,getShowDate());
+        msgShow('receiver','text',message.data,getShowDate());
         // msgScrollTop();
         sessionStorage.setItem(message.from,JSON.stringify(infoMessages))  
     },    //收到文本消息
@@ -100,9 +100,6 @@ WebIM.utils.hasSetRequestHeader;
 //是否设置mimetype
 WebIM.utils.hasOverrideMimeType;
 
-var msgScrollTop = function(){
-    $(msgInit.el)[0].scrollTop = $(msgInit.el)[0].scrollHeight + $(msgInit.el)[0].offsetHeight;
-}
 //发送文本消息
 var sendPrivateText = function(messages,toUno){
     let id = conn.getUniqueId();                 // 生成本地消息id
@@ -117,7 +114,7 @@ var sendPrivateText = function(messages,toUno){
             console.log(msg)
             let content = msg.value;
             msgShow('sender','text',content,getShowDate());
-            msgScrollTop();
+            //msgScrollTop();
         }
     });
     infoMessages = JSON.parse(sessionStorage.getItem(toUno)) || [];
@@ -157,7 +154,7 @@ var sendPrivateImg = function (imgSrc,toUno) {
                 success: function () {
                     console.log('Success');
                     msgShow('sender','img',imgSrc,getShowDate());
-                    msgScrollTop();
+                    //msgScrollTop();
                 },
                 // flashUpload: WebIM.flashUpload               // 意义待查
             };

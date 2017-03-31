@@ -1,18 +1,12 @@
-<style>
-.chat-history-date{ 
-    padding: 2% 0;
-    text-align: center;
-    font-size: 1rem;
-    color: #999;
-}
+
 .chat-receiver,.chat-sender{
     margin: 5px;
     clear:both;  
     text-align: center;
 }
 .chat-avatar img{
-    min-width: 4.17rem;
-    min-height: 4.17rem;
+    width: 4.17rem;
+    height: 4.17rem;
     border-radius: 50%;
 }
 .chat-receiver .chat-avatar{
@@ -45,20 +39,20 @@
     background-color: #34BBBE; 
         word-break: break-word;
 }
-.chat-triangle{
+.chat-content:before{
+    content:'';
     position: absolute;
-    top:6px;
+    top:0.7rem;
     width:0px; 
     height:0px;        
     border-width:8px; 
     border-style:solid;   
 }
-.chat-receiver .chat-triangle{ 
-    left:-16px;
+.chat-receiver .chat-content:before{ 
+    left:-1.3rem;
     border-color:transparent #fff transparent transparent;      
 }
-.chat-sender .chat-triangle{ 
-    right:-16px;
+.chat-sender .chat-content:before{ 
+    right:-1.3rem;
     border-color:transparent transparent transparent #34BBBE;      
 }
-</style>

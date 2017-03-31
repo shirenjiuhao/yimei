@@ -2,20 +2,29 @@
     <a ng-href="" ng-click='backPgUp()' class="index-ion-return"></a>
     <h1 class='title'>咨询师</h1>
 </div>
-<ion-content class="has-header" style="background:#F3F7F8">
+<ion-content class="has-header" style="background:#F3F7F8" delegate-handle="mainScroll">
     <ion-refresher pulling-icon="ion-load-b"
             pulling-text="Pull to refresh..."
             on-refresh="">
     </ion-refresher>
     <div class="counselor-content" id='dialog_chat'>
-        <div class="counselor-timer">2017-02-23</div>
-        <div class="counselor-chat">
-            <img ng-src="img/touxiang1.png" alt="加载中"/>
-            <div class="counselor-chat-text">中国爱美整形外科医院是中国唯一
-                一家集整形美容整容为一体的专科医院。</div>
+        <div class="chat-receiver">
+            <div class="counselor-timer">
+                <span>2017-02-23</span>
+            </div>
+            <div class="chat-avatar">
+                <img src="./img/touxiang1.png">
+            </div>
+            <div class="chat-content">
+                <span>中国爱美整形外科医院是中国唯一
+                一家集整形美容整容为一体的专科医院。</span>
+            </div>
         </div>
         <div class="counselor-chat-prog">
-            <a href="#/tabs/mine/program/:id">
+            <div class="counselor-timer">
+                <span>02-23 17:30</span>
+            </div>
+            <a href="#/tabs/mine/program/1">
                 <p>方案1</p>
                 <img ng-src="img/touxiang1.png" alt="加载中"/>
                 <div class="counselor-chat-prog-tex">
@@ -24,7 +33,7 @@
                 </div>
             </a>
         </div>
-        <div class="counselor-chat-prog counselor-chat-h">
+        <!-- <div class="counselor-chat-prog counselor-chat-h">
             <a href="#/tabs/mine/order/:id">
                 <p>中国爱美整形外科医院</p>
                 <div style="display: flex">
@@ -36,16 +45,22 @@
                 <div><span>时间&nbsp;&nbsp;</span><span>02-10 16:16</span></div>
                 <div><span>方案&nbsp;&nbsp;</span><span style="color:#333">方案1</span></div>
             </a>
-        </div>
-        <div class="counselor-chat-mine">
-            <img ng-src="img/WechatIMG8.png" alt="加载中"/>
-            <div class="counselor-chat-mine-text">谢谢老师！</div>
+        </div> -->
+        <div class="chat-sender">
+            <div class="counselor-timer">
+                <span>02-23 17:30</span>
+            </div>
+            <div class="chat-avatar">
+                <img src="./img/WechatIMG8.png">
+            </div>
+            <div class="chat-content">
+                <span>谢谢老师！</span>
+            </div>
         </div>
     </div>
-    <ion-infinite-scroll
-            icon="ios-load-a"
-            on-infinite=""
-            distance="1%">
+    <ion-infinite-scroll style='height:50px;'
+        on-infinite=""
+        distance="2%">
     </ion-infinite-scroll>
 </ion-content>
 <div class="counselor-foot">
