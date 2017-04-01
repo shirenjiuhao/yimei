@@ -427,7 +427,7 @@ angular.module('app.controllers',['app.servers'])
     }])
     //消息列表
     .controller('messagesCtrl',['$scope','$rootScope','messagesServer',function ($scope,$rootScope,messagesServer){
-        var url = '/api/beta/easemob/chat/list.aspx';
+        var url = '/api/beta/consumer/counseling/list.aspx';
         //自己的环信ID
         var Authorization = '';
         var loginUsersUno = '';
@@ -439,7 +439,7 @@ angular.module('app.controllers',['app.servers'])
         if(loginUsers){
             loginUsersUno = loginUsers.consumer.uno;
             Authorization = 'MEDCOS#' + loginUsers.sessionKey ;
-            messagesServer.getData(callback,url,{fromUno: loginUsersUno,toUno: "****"},Authorization)
+            messagesServer.getData(callback,url,{fromUno: loginUsersUno},Authorization)
         };
         $rootScope.messageInfoNum_z = 0
     }])
@@ -450,10 +450,21 @@ angular.module('app.controllers',['app.servers'])
         var loginUsersUno = loginUsers.consumer.uno;
         //对方的环信ID
         var counselorUno = location.hash.split('/')[location.hash.split('/').length-1];
+        //默认显示 + 号
         $scope.show = function () {
             return true
         };
-        $scope.changeShow = function ($event) {
+        //回车发送消息
+        $scope.keySendTxt = function($event){
+            var add = $('#info_text');
+            if ($event.keyCode == 13) {
+                $rootScope.sendPrivateText(add.val(),counselorUno);
+                $timeout($rootScope.msgScrollTop,1000)
+                $('#info_text').val("");
+            }
+        };
+        //失去焦点时是否显示发送按钮
+        $scope.changeShow = function () {
             var add = $('#info_text');
             if(add.val() == ""){
                 $scope.show = function () {
@@ -463,26 +474,50 @@ angular.module('app.controllers',['app.servers'])
                 $scope.show = function () {
                     return false
                 };
-                if ($event.keyCode === 13) {
-                    focus('info_text');
-                    $rootScope.sendPrivateText(add.val(),counselorUno);
-                    $timeout($rootScope.msgScrollTop,0)
-                    $('#info_text').val("");
-                }
             }
         };
-        //focus('info_text');
-        $scope.flag = false;
-        $scope.addPic = function () {//是否发送图片
+        //是否发送图片
+        $scope.flag = false; //默认是否
+        $scope.addPic = function () {
             $scope.flag = ! $scope.flag;
             if($scope.flag){
                 $('.counselor-foot').css('bottom','5.42rem')
             }else{
                 $('.counselor-foot').css('bottom',0)
             }
-            /*if(handleAvatarSuccess()){
-                 var file = $('#image')[0].files[0];//
-                 console.log(file)
+            $scope.show = function () {//显示发送按钮
+                return false;
+            };
+        };
+        //input聚焦时不能发送图片
+        $scope.notPic = function(){
+            $scope.flag = false;
+            if($scope.flag){
+                $('.counselor-foot').css('bottom','5.42rem')
+            }else{
+                $('.counselor-foot').css('bottom',0)
+            }
+            $scope.show = function () {//显示发送按钮
+                return false;
+            };
+        };
+        /*发送消息*/
+        $scope.sendPrivateInfo = function () {
+            if(!$scope.flag){
+                var messages = $('#info_text').val();
+                if(messages == ''){
+                    return false
+                }else{
+                    $('#info_text').val("");
+                    $rootScope.sendPrivateText(messages,counselorUno)
+                    $timeout($rootScope.msgScrollTop,1000);
+                    $scope.show = function () {//显示+号
+                        return true;
+                    };
+                }
+            }else{
+                var file = $('#image')[0].files[0];
+                //console.log(file)
                  if(file){
                     var reader = new FileReader();  
                     //将文件以Data URL形式读入页面  
@@ -490,24 +525,14 @@ angular.module('app.controllers',['app.servers'])
                     reader.onload = function(e){  
                         //显示文件
                         var imageUrl = e.target.result;
-                        sendPrivateImg(imageUrl,counselorUno)
+                        $rootScope.sendPrivateImg(imageUrl,counselorUno);
+                        $timeout($rootScope.msgScrollTop,2000)
                         var obj = $('#image')[0]; 
                         obj.outerHTML = obj.outerHTML;
-                    } 
+                        $scope.addPic();
+                    }
                     console.log('已经获取到图片')
                 }
-            }*/
-        };
-        /*发送消息*/
-        $scope.sendPrivateInfo = function () {
-            var messages = $('#info_text').val();
-            if(messages == ''){
-                return false
-            }else{
-                $('#info_text').val("");
-                //focus('info_text');
-                $rootScope.sendPrivateText(messages,counselorUno)
-                $timeout($rootScope.msgScrollTop,1000)
             }
         };
         var infoMsg = sessionStorage.getItem(counselorUno);
@@ -558,11 +583,10 @@ angular.module('app.controllers',['app.servers'])
         //支付接口
         var url2 = '/api/beta/scheme/affirm.aspx';
         var callback2 = function (res) {
-            console.log(res)
-            //$scope.data = res.data;
+            //console.log(res)
+            window.location.href = res.data.payParams;
         };
         $scope.appay = function () {
-            alert(1);
             if(loginUsers){
                 Authorization = 'MEDCOS#' + loginUsers.sessionKey ;
                 programInfoServer.payParams(callback2,url2,{schemeId: schemeId, appType: 2},Authorization)

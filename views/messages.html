@@ -2,25 +2,13 @@
     <a ng-href="#/tabs" class="index-ion-return"></a>
     <h1 class='title'>消息</h1>
 </div>
-<ion-content class="has-header">
+<ion-content class="has-header" delegate-handle="mainScroll">
     <div style="" class="message-border">
-        <a class="item item-avatar"
-           ng-href="#/tabs/messages/1/1/6dfpfpqrzmr"    >
-            <img ng-src="img/touxiang1.png" alt="加载中">
-            <h2>咨询师 <span>12-09 16:00</span></h2>
-            <p>在线订单，全面开通医美美容服务...</p>
-        </a>
-        <a class="item item-avatar"
-           ng-href="#/tabs/messages/2/2/7tmf4cmxigs"    >
-            <img ng-src="img/touxiang1.png" alt="加载中">
-            <h2>咨询师 <span>12-09 16:00</span></h2>
-            <p>在线订单，全面开通医美美容服务...</p>
-        </a>
-        <a class="item item-avatar"
-           ng-href="#/tabs/messages/3/3/7tmhzlzjya6"    >
-            <img ng-src="img/touxiang1.png" alt="加载中">
-            <h2>咨询师 <span>12-09 16:00</span></h2>
-            <p>在线订单，全面开通医美美容服务...</p>
+        <a class="item item-avatar" ng-repeat='list in data.list'
+           ng-href="#/tabs/messages/{{list.hospitalid}}/{{list.counselorid}}/{{list.counseloruno}}" >
+            <img ng-src="{{list.counselorimg}}" alt="加载中">
+            <h2>咨询师 <span>{{list.lasttime}}</span></h2>
+            <p>{{list.lastmsg}}</p>
         </a>
     </div>
 

@@ -2,7 +2,7 @@
     <a ng-href="" ng-click='backPgUp()' class="index-ion-return"></a>
     <h1 class='title'>方案</h1>
 </div>
-<ion-content class="has-header" style="padding:1rem;background:#F3F7F8">
+<ion-content class="has-header" style="padding:1rem;background:#F3F7F8" delegate-handle="mainScroll">
     <div  class="program-msg" ng-repeat='(key,item) in data.list'>
         <a href="#/tabs/mine/program/{{item.id}}">
             <p>{{item.schemeName}}</p>

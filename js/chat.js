@@ -4,9 +4,8 @@
 var msgInit = {
     el: '#dialog_chat', //消息容器
     senderAvatar: './img/WechatIMG8.png',  //发送者头像
-    receiverAvatar: './img/touxiang1.png', //接收者头像
+    receiverAvatar: 'http://k1.jsqq.net/uploads/allimg/1612/140F5A32-6.jpg', //接收者头像
 }
-
 
 /**
  * @description 展示消息精简版

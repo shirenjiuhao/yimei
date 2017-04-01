@@ -13,7 +13,7 @@
                 <span>2017-02-23</span>
             </div>
             <div class="chat-avatar">
-                <img src="./img/touxiang1.png">
+                <img src="http://k1.jsqq.net/uploads/allimg/1612/140F5A32-6.jpg">
             </div>
             <div class="chat-content">
                 <span>中国爱美整形外科医院是中国唯一
@@ -23,7 +23,7 @@
         <div class="counselor-chat-prog">
             <a href="#/tabs/mine/program/20">
                 <p>方案1</p>
-                <img ng-src="./img/touxiang1.png" alt="加载中"/>
+                <img ng-src="http://k1.jsqq.net/uploads/allimg/1612/140F5A32-6.jpg" alt="加载中"/>
                 <div class="counselor-chat-prog-tex">
                     <div>李敏<i class="line-ion-zhuan"></i></div>
                     <span>主治医师</span>
@@ -61,7 +61,7 @@
     </ion-infinite-scroll>
 </ion-content>
 <div class="counselor-foot">
-    <input type="text" placeholder="请输入消息" id="info_text" ng-keyup="changeShow($event)" ng-blur="changeShow()"/>
+    <input type="text" placeholder="请输入消息" id="info_text" ng-keyup="keySendTxt($event)" ng-blur="changeShow()" ng-focus='notPic()'/>
     <a class="icon ion-ios-plus-outline counselor-foot-add" ng-if="show()" ng-click="addPic()" style="cursor:pointer"></a>
     <a class="counselor-send" id="info_send" ng-if="!show()" ng-click="sendPrivateInfo()">发送</a>
 </div>
