@@ -9,13 +9,13 @@
             <a href="#">
                 <img ng-src="img/WechatIMG8.png" alt=""/>
             </a>
-            <p>美询美哒哒</p>
+            <p>{{nicheng}}</p>
         </div>
     </div>
     <div class="mine-in">
         <a href="#/tabs/mine/program"><i class="fangan"></i><div>方案</div><span class="icon-next"></span></a>
         <a href="#/tabs/mine/order"><i class="dingdan"></i><div>订单</div><span class="icon-next"></span></a>
     </div>
-    <a href='' id="signOut" class="signOut" ng-click="signOut()">退出登录</a>
+    <a href='' id="signOut" class="signOut" ng-if='flag' ng-click="signOut()">退出登录</a>
 </div>
 

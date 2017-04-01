@@ -397,6 +397,13 @@ angular.module('app.controllers',['app.servers'])
                 }
                 $location.path('/tabs');
             }
+        };
+        var loginUsers = JSON.parse(sessionStorage.getItem('users'));
+        $scope.flag = false;
+        $scope.nicheng = '未登录'
+        if(loginUsers){
+            $scope.nicheng = loginUsers.consumer.nickname;
+            $scope.flag = true;
         }
     }])
     //方案列表
