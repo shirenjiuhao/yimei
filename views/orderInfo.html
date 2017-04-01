@@ -5,30 +5,20 @@
 <ion-content class="has-header" style="background:#F3F7F8">
     <div class="orderInfo">
         <p style="">预约服务</p>
-        <div class="orderInfo-text">
-            <span>玻尿酸1ML</span>
-            <span style="flex:1;text-align:center">×10</span>
-            <span>¥312.00</span>
+        <div class="orderInfo-text" ng-repeat='item in data.items'>
+            <span>{{item.name}}</span>
+            <span style="flex:1;text-align:center"></span>
+            <span>{{item.amount | currency:'￥'}}</span>
         </div>
-        <div class="orderInfo-text">
-            <span>玻尿酸1ML</span>
-            <span style="flex:1;text-align:center">×10</span>
-            <span>¥312.00</span>
-        </div>
-        <div class="orderInfo-text">
-            <span>玻尿酸1ML</span>
-            <span style="flex:1;text-align:center">×10</span>
-            <span>¥312.00</span>
-        </div>
-        <div class="addPrice">总价:￥936.00</div>
+        <div class="addPrice">总价:{{ price | currency:'￥'}}</div>
         <div style="clear: both;border-bottom:0.08rem dashed #ddd"></div>
     </div>
     <div class="orderInfo-mid">
-        <div><span>预约时间：</span>01-10 16:00</div>
-        <div><span>预约医生：</span>李敏</div>
+        <div><span>预约时间：</span>{{data.reserveTime}}</div>
+        <div><span>预约医生：</span>{{data.doctorName}}</div>
     </div>
     <div class="orderInfo-foot">
-        <a class="" ng-href="#/tabs/mine/program/:id">
+        <a class="" ng-href="#/tabs/mine/program/{{data.id}}">
             <span>方案详情</span>
             <i class="icon-next"></i>
         </a>

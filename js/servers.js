@@ -70,7 +70,7 @@ angular.module('app.servers',[])
         }
         return this;
     }])
-.service('focus', function ($timeout, $window) {
+/*.service('focus', function ($timeout, $window) {
     return function (id) {
         $timeout(function () {
             var element = $window.document.getElementById(id);
@@ -78,11 +78,19 @@ angular.module('app.servers',[])
                 element.focus();
         });
     };
-})
+})*/
 .service('messagesServer',['$http', function ($http) {
-    this.getData = function(callback,url){
-        $http.get(url,{cache:true}).success(function (data) {
-            callback(data);
+    this.getData = function(callback,url,params,Authorization){
+        $http({
+            url: url,
+            method:'get',
+            cache:true,
+            params: params,
+            headers: {
+                Authorization: Authorization
+            }
+        }).then(function(res){
+            callback(res.data);
         })
     }
     return this;
@@ -120,6 +128,22 @@ angular.module('app.servers',[])
         $http({
             url: url,
             method:'post',
+            params: params,
+            headers: {
+                Authorization: Authorization
+            }
+        }).then(function(res){
+            callback(res.data);
+        })
+    }
+    return this;
+}])
+.service('orderInfoServer',['$http',function ($http){
+    this.getData = function(callback,url,params,Authorization){
+        $http({
+            url: url,
+            method:'get',
+            cache:true,
             params: params,
             headers: {
                 Authorization: Authorization

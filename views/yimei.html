@@ -3,7 +3,7 @@
 <div class='index-ion'>
     <a ng-href="#/tabs/mine" class="index-ion-mine"></a>
     <h1 class='title'>医美定制</h1>
-    <a ng-href="#/tabs/messages" class="index-ion-tongzhi"><span class="index-info"></span></a>
+    <a ng-href="#/tabs/messages" class="index-ion-tongzhi"><span class="index-info" ng-if='messageInfoNum_z > 0 ? true : false'></span></a>
 </div>
 <div style="padding:1.9% 3.3% 0;">
     <ion-slide-box pager auto-play="true" does-continue="true" slide-interval="2000" style="height:16.25rem;">

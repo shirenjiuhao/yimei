@@ -5,7 +5,7 @@
 </div>
 <ion-content class="has-header" style="padding:0 1rem;background:#F3F7F8">
     <div class="counselor-chat-prog order-card" ng-repeat="item in data.list">
-        <a href="#/tabs/mine/order/{{item.orderid}}">
+        <a href="#/tabs/mine/order/{{item.schemeid}}">
             <p>{{item.hospitalname}}</p>
             <div style="display: flex">
                 <span>医生</span>
@@ -14,7 +14,7 @@
                 <span style="flex: 1;color:#FE88A5;font-size:1.5rem;text-align:right">{{item.payment|currency:"¥"}}</span>
             </div>
             <div><span>时间&nbsp;&nbsp;</span><span>{{item.ctime}}</span></div>
-            <div><span>方案&nbsp;&nbsp;</span><span style="color:#333">{{item.methods}}</span></div>
+            <div><span>方案&nbsp;&nbsp;</span><span style="color:#333">{{item.schemename}}</span></div>
         </a>
     </div>
     <div ng-if='data.list.length > 0 ? false :true' style='background:#fff;display:flex;justify-content:center;height:5rem;align-items:center;margin-top:1rem;'>您还没有预约服务，快去预约吧</div>

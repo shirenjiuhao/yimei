@@ -426,12 +426,22 @@ angular.module('app.controllers',['app.servers'])
         }
     }])
     //消息列表
-    .controller('messagesCtrl',['$scope','messagesServer',function ($scope,messagesServer){
+    .controller('messagesCtrl',['$scope','$rootScope','messagesServer',function ($scope,$rootScope,messagesServer){
         var url = '/api/beta/easemob/chat/list.aspx';
-        var callback = function (data) {
-            $scope.data = data;
+        //自己的环信ID
+        var Authorization = '';
+        var loginUsersUno = '';
+        var loginUsers = JSON.parse(sessionStorage.getItem('users'));
+        var callback = function (res) {
+            console.log(res)
+            $scope.data = res.data;
         };
-        messagesServer.getData(callback,url)
+        if(loginUsers){
+            loginUsersUno = loginUsers.consumer.uno;
+            Authorization = 'MEDCOS#' + loginUsers.sessionKey ;
+            messagesServer.getData(callback,url,{fromUno: loginUsersUno,toUno: "****"},Authorization)
+        };
+        $rootScope.messageInfoNum_z = 0
     }])
     //聊天窗口
     .controller('counselorCtrl',['$scope','$ionicScrollDelegate','$rootScope','$timeout', function ($scope,$ionicScrollDelegate,$rootScope,$timeout) {
@@ -461,7 +471,7 @@ angular.module('app.controllers',['app.servers'])
                 }
             }
         };
-        focus('info_text');
+        //focus('info_text');
         $scope.flag = false;
         $scope.addPic = function () {//是否发送图片
             $scope.flag = ! $scope.flag;
@@ -495,7 +505,7 @@ angular.module('app.controllers',['app.servers'])
                 return false
             }else{
                 $('#info_text').val("");
-                focus('info_text');
+                //focus('info_text');
                 $rootScope.sendPrivateText(messages,counselorUno)
                 $timeout($rootScope.msgScrollTop,1000)
             }
@@ -532,6 +542,7 @@ angular.module('app.controllers',['app.servers'])
     }])
     //方案详情
     .controller('programInfoCtrl',['$scope','programInfoServer',function ($scope,programInfoServer) {
+        //方案详情接口
         var url = '/api/beta/scheme/info.aspx';
         var Authorization = '';
         var loginUsers = JSON.parse(sessionStorage.getItem('users'));
@@ -544,12 +555,14 @@ angular.module('app.controllers',['app.servers'])
             Authorization = 'MEDCOS#' + loginUsers.sessionKey ;
             programInfoServer.getData(callback,url,{schemeId: schemeId},Authorization)
         };
+        //支付接口
         var url2 = '/api/beta/scheme/affirm.aspx';
         var callback2 = function (res) {
             console.log(res)
             //$scope.data = res.data;
         };
         $scope.appay = function () {
+            alert(1);
             if(loginUsers){
                 Authorization = 'MEDCOS#' + loginUsers.sessionKey ;
                 programInfoServer.payParams(callback2,url2,{schemeId: schemeId, appType: 2},Authorization)
@@ -557,4 +570,21 @@ angular.module('app.controllers',['app.servers'])
         }
     }])
     //订单详情
-    .controller('orderInfoCtrl',['$scope',function ($scope){}])
+    .controller('orderInfoCtrl',['$scope','orderInfoServer',function ($scope,orderInfoServer){
+        var url = '/api/beta/scheme/info.aspx';
+        var Authorization = '';
+        var loginUsers = JSON.parse(sessionStorage.getItem('users'));
+        var schemeId = location.hash.split('/')[location.hash.split('/').length-1]
+        var callback = function (res) {
+            console.log(res)
+            $scope.data = res.data;
+            $scope.price = 0;
+            for (var i in $scope.data.items) {
+                $scope.price += $scope.data.items[i].amount
+            };           
+        };
+        if(loginUsers){
+            Authorization = 'MEDCOS#' + loginUsers.sessionKey ;
+            orderInfoServer.getData(callback,url,{schemeId: schemeId},Authorization)
+        };
+    }])

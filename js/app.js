@@ -94,6 +94,10 @@ angular.module('app',['ionic','app.controllers'])
          * Created by Administrator on 2017/2/27.
          环信方法调用
          */
+        $rootScope.messageInfoNum_z = 0;
+        $rootScope.messageInfoNum_o = 0;
+        $rootScope.messageInfoNum_s = 0;
+        $rootScope.messageInfoNum_t = 0;
         var infoMessages = [];//存储历史聊天记录
         $rootScope.conn = new WebIM.connection({
             https: WebIM.config.https,
@@ -114,6 +118,7 @@ angular.module('app',['ionic','app.controllers'])
             onTextMessage: function ( message ) {
                 infoMessages = JSON.parse(sessionStorage.getItem(message.from)) || [];
                 console.log(message);
+                $rootScope.messageInfoNum_z ++;
                 message.ext.time = getShowDate();
                 infoMessages.push(message);
                 if(message.ext.msgType ==1){
@@ -135,6 +140,7 @@ angular.module('app',['ionic','app.controllers'])
             },   //收到表情消息
             onPictureMessage: function ( message ) {
                 console.log('Picture');
+                $rootScope.messageInfoNum_z ++;
                 infoMessages = JSON.parse(sessionStorage.getItem(message.from)) || [];
                 var options = {url: message.url};
                 options.onFileDownloadComplete = function () {

@@ -5,7 +5,7 @@
 <ion-content class="has-header" style="padding:1rem;background:#F3F7F8">
     <div  class="program-msg" ng-repeat='(key,item) in data.list'>
         <a href="#/tabs/mine/program/{{item.id}}">
-            <p>方案{{key+1}}</p>
+            <p>{{item.schemeName}}</p>
             <img ng-src="{{item.doctorImg}}" alt="加载中"/>
             <div class="program-msg-text">
                 <div>{{item.doctorName}}<i class="line-ion-zhuan"></i></div>
@@ -13,5 +13,5 @@
             </div>
         </a>
     </div>
-    <div ng-if='data.list.length > 0 ? false :true' style='background:#fff;display:flex;justify-content:center;height:5rem;align-items:center;margin-top:1rem;'>您还没有定制，快去定制吧</div>
+    <div ng-if='data.list.length > 0 ? false :true' style='background:#fff;display:flex;justify-content:center;height:5rem;align-items:center;margin-top:1rem;'>您还没有定制方案，快去定制吧</div>
 </ion-content>
