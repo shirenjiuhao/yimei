@@ -455,14 +455,14 @@ angular.module('app.controllers',['app.servers'])
             return true
         };
         //回车发送消息
-        $scope.keySendTxt = function($event){
+        /*$scope.keySendTxt = function($event){
             var add = $('#info_text');
             if ($event.keyCode == 13) {
                 $rootScope.sendPrivateText(add.val(),counselorUno);
                 $timeout($rootScope.msgScrollTop,1000)
                 $('#info_text').val("");
             }
-        };
+        };*/
         //失去焦点时是否显示发送按钮
         $scope.changeShow = function () {
             var add = $('#info_text');

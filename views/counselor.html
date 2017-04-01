@@ -61,7 +61,7 @@
     </ion-infinite-scroll>
 </ion-content>
 <div class="counselor-foot">
-    <input type="text" placeholder="请输入消息" id="info_text" ng-keyup="keySendTxt($event)" ng-blur="changeShow()" ng-focus='notPic()'/>
+    <input type="text" placeholder="请输入消息" id="info_text" ng-blur="changeShow()" ng-focus='notPic()'/>
     <a class="icon ion-ios-plus-outline counselor-foot-add" ng-if="show()" ng-click="addPic()" style="cursor:pointer"></a>
     <a class="counselor-send" id="info_send" ng-if="!show()" ng-click="sendPrivateInfo()">发送</a>
 </div>
