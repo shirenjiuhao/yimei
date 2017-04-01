@@ -78,7 +78,7 @@ angular.module('app',['ionic','app.controllers'])
         $rootScope.msgScrollTop = function(){
             $ionicScrollDelegate.$getByHandle('mainScroll').scrollBottom(true);;
         };
-        $rootScope.$on('$routeChangeStart', function(evt, next, current) {
+        /*$rootScope.$on('$routeChangeStart', function(evt, next, current) {
             var status = sessionStorage.getItem('users')
             // var loginUsers = JSON.parse()
             // 如果用户未登录
@@ -89,7 +89,7 @@ angular.module('app',['ionic','app.controllers'])
                     $location.path('/tabs/login');
                 }
             }
-        });
+        });*/
         /**
          * Created by Administrator on 2017/2/27.
          环信方法调用

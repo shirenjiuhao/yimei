@@ -13,6 +13,20 @@ angular.module('app.controllers',['app.servers'])
         tabsServer.getData(callback,url);
         var loginUsers = JSON.parse(sessionStorage.getItem('users'));
         //快速聊天
+        $scope.toMine = function(){
+            if(loginUsers){
+                $location.path('/tabs/mine')
+            }else{
+                $location.path('/tabs/login')
+            }
+        };
+        $scope.toMessages = function(){
+           if(loginUsers){
+                $location.path('/tabs/messages')
+            }else{
+                $location.path('/tabs/login')
+            } 
+        };
         $scope.speedChat = function(){
             if(loginUsers){
                 var params = {
@@ -360,7 +374,7 @@ angular.module('app.controllers',['app.servers'])
                     user: loginUsers.consumer.uno,
                     pwd: loginUsers.consumer.easemobPwd,
                     appKey: WebIM.config.appkey,
-                    success: function (token) {
+                    success: function () {
                         console.log('登陆环信成功');
                     },
                     error: function(){
@@ -392,18 +406,16 @@ angular.module('app.controllers',['app.servers'])
                         sessionStorage.removeItem('users')
                         $rootScope.conn.close();
                     })
-                }else{
-                    alert('您尚未登录')
                 }
                 $location.path('/tabs');
             }
         };
         var loginUsers = JSON.parse(sessionStorage.getItem('users'));
-        $scope.flag = false;
-        $scope.nicheng = '未登录'
+        //$scope.flag = false;
+        //$scope.nicheng = '未登录'
         if(loginUsers){
             $scope.nicheng = loginUsers.consumer.nickname;
-            $scope.flag = true;
+            //$scope.flag = true;
         }
     }])
     //方案列表
