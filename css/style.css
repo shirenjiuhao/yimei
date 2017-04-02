@@ -72,7 +72,7 @@ html,body{font-size: 12px;}
 .line-ion-zhuan{width: 1.3rem;height: 1rem;background: url("../img/zhuan.png") no-repeat;background-size: 100%;display: block;position: relative;top:0.2rem}
 /*医生详情页-------------------------------------------------------------*/
 .yisheng-mid{text-align:center;line-height: 2;padding:0.83rem 0 1.33rem;border-bottom: 0.08rem solid #E8E8E8}
-.lineyisheng{width:10rem;height:10rem;position: relative;left:50%;margin-left:-5rem;margin-top:3.33rem;border-radius:50%;}
+.lineyisheng{width:10rem;height:10rem;position: relative;left:50%;margin-left:-5rem;margin-top:1.33rem;border-radius:50%;}
 .yisheng-mid .line-name{font-size: 1.33rem;font-weight:500;color: #333}
 .yisheng-mid .line-job{font-size:1.25rem;color: #666 }
 .line-yisheng-adr{font-size: 1.33rem;padding: 1.33rem 0.83rem;}

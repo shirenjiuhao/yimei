@@ -76,7 +76,17 @@ angular.module('app',['ionic','app.controllers'])
             window.history.go(-1);
         };
         $rootScope.msgScrollTop = function(){
-            $ionicScrollDelegate.$getByHandle('mainScroll').scrollBottom(true);;
+            $ionicScrollDelegate.$getByHandle('mainScroll').scrollBottom(true);
+        };
+        $rootScope.title = function(value){
+            var $body = $('body');
+            document.title = value;
+            var $iframe = $('<iframe src="./favicon.ico"></iframe>');
+            $iframe.on('load',function() {
+              setTimeout(function() {
+                  $iframe.off('load').remove();
+              }, 100);
+            }).appendTo($body);
         };
         /*$rootScope.$on('$routeChangeStart', function(evt, next, current) {
             var status = sessionStorage.getItem('users')
@@ -188,8 +198,9 @@ angular.module('app',['ionic','app.controllers'])
             onOffline: function () {},                 //本机网络掉线
             onError: function ( message ) {
                 console.log(message);
-                console.log('连接失败，请重新登录');
-                window.location.replace('#/tabs/login')
+                //alert('会话超时，请重新登录');
+                //$location.path('/tabs/login')
+                //window.location.replace('#/tabs/login')
                 //window.location.href = '#/tabs/login'
             },          //失败回调
             onBlacklistUpdate: function (list) {       //黑名单变动
@@ -277,8 +288,9 @@ angular.module('app',['ionic','app.controllers'])
                 userInfo = JSON.parse(userInfo)
                 var signIn = {
                     apiUrl: WebIM.config.apiURL,
-                    user: userInfo.consumer.uno,
-                    pwd: userInfo.consumer.easemobPwd,
+                    accessToken: 'token',
+                   /* user: userInfo.consumer.uno,
+                    pwd: userInfo.consumer.easemobPwd,*/
                     appKey: WebIM.config.appkey
                 };
                 $rootScope.conn.open(signIn);

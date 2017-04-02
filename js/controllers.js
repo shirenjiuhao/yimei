@@ -3,7 +3,7 @@
  */
 angular.module('app.controllers',['app.servers'])
     //首页
-    .controller('tabsCtrl',['$scope','$location','$ionicSlideBoxDelegate','tabsServer',function($scope,$location,$ionicSlideBoxDelegate,tabsServer){
+    .controller('tabsCtrl',['$scope','$rootScope','$location','$ionicSlideBoxDelegate','tabsServer',function ($scope,$rootScope,$location,$ionicSlideBoxDelegate,tabsServer){
         var url = "/api/beta/banner/list.aspx?platform=APP&num=6";
         var callback = function (res) {
             console.log(res)
@@ -11,6 +11,7 @@ angular.module('app.controllers',['app.servers'])
             $ionicSlideBoxDelegate.update();
         };
         tabsServer.getData(callback,url);
+        $rootScope.title('医美定制');
         var loginUsers = JSON.parse(sessionStorage.getItem('users'));
         //快速聊天
         $scope.toMine = function(){
@@ -48,11 +49,16 @@ angular.module('app.controllers',['app.servers'])
                     }
                 }).done(function(res) {
                     console.log(res);
-                    var counselorInfo = res.data;
-                    var hospitalId = counselorInfo.counselor.hospitalId;//医院ID
-                    var doctorId = counselorInfo.counselor.id;//医生ID
-                    var counselorUno = counselorInfo.counselor.uno;//咨询师的环信ID
-                    $location.path('/tabs/index/'+hospitalId+'/'+doctorId+'/'+counselorUno)
+                    if(res.status ==200){
+                         var counselorInfo = res.data;
+                        var hospitalId = counselorInfo.counselor.hospitalId;//医院ID
+                        var doctorId = counselorInfo.counselor.id;//医生ID
+                        var counselorUno = counselorInfo.counselor.uno;//咨询师的环信ID
+                        $location.path('/tabs/index/'+hospitalId+'/'+doctorId+'/'+counselorUno)
+                    }else{
+                         alert('登录超时，请重新登录')
+                        $location.path('/tabs/login')
+                    }
                 })
             }else{
                 $location.path('/tabs/login')
@@ -60,7 +66,7 @@ angular.module('app.controllers',['app.servers'])
         };
     }])
     //医生列表
-    .controller('lineCtrl',['$scope','lineServer', function ($scope,lineServer) {
+    .controller('lineCtrl',['$scope','$rootScope','lineServer', function ($scope,$rootScope,lineServer) {
         $scope.pageNumber = 1;
         $scope.pageCount = 1;
         //获取整形部位
@@ -70,6 +76,7 @@ angular.module('app.controllers',['app.servers'])
             $scope.bodys = res.data ;
         }
         lineServer.getData(callback,url);
+        $rootScope.title('名医在线')
         //获取医生列表 ------------------------------start
         var url = "/api/beta/doctor/list.aspx";
         var callback = function (res) {
@@ -147,7 +154,7 @@ angular.module('app.controllers',['app.servers'])
         }
     }])
     //医生详情
-    .controller('yishengCtrl',['$scope','yishengServer','$location', function ($scope,yishengServer,$location) {
+    .controller('yishengCtrl',['$scope','$rootScope','yishengServer','$location', function ($scope,$rootScope,yishengServer,$location) {
         //console.log(location.hash)
         var hospitalId = location.hash.split('/')[location.hash.split('/').length-2];
         var doctorId = location.hash.split('/')[location.hash.split('/').length-1];
@@ -157,6 +164,7 @@ angular.module('app.controllers',['app.servers'])
             $scope.data = res.data;
         };
         yishengServer.getData(callback,url);
+        $rootScope.title('名医风采')
         var loginUsers = JSON.parse(sessionStorage.getItem('users'));
         $scope.speakChat = function(){
             if(loginUsers){
@@ -181,11 +189,16 @@ angular.module('app.controllers',['app.servers'])
                     }
                 }).done(function(res) {
                     console.log(res);
-                    var counselorInfo = res.data;
-                    // var hospitalId = counselorInfo.counselor.hospitalId;//医院ID
-                    // var doctorId = counselorInfo.counselor.doctorId;//医生ID
-                    var counselorUno = counselorInfo.counselor.uno;//咨询师的环信ID
-                    $location.path('/tabs/line/'+ hospitalId +'/'+doctorId +'/'+counselorUno)
+                    if(res.status ==200){
+                        var counselorInfo = res.data;
+                        // var hospitalId = counselorInfo.counselor.hospitalId;//医院ID
+                        // var doctorId = counselorInfo.counselor.doctorId;//医生ID
+                        var counselorUno = counselorInfo.counselor.uno;//咨询师的环信ID
+                        $location.path('/tabs/line/'+ hospitalId +'/'+doctorId +'/'+counselorUno)
+                    }else{
+                        alert('登录超时，请重新登录')
+                        $location.path('/tabs/login')
+                    }
                 })
             }else{
                 $location.path('/tabs/login')
@@ -193,7 +206,8 @@ angular.module('app.controllers',['app.servers'])
         }
     }])
     //医院列表
-    .controller('diylistCtrl',['$scope','diylistServer', function ($scope,diylistServer) {
+    .controller('diylistCtrl',['$scope','$rootScope','diylistServer', function ($scope,$rootScope,diylistServer) {
+        $rootScope.title('优质医院')
         var url = '/api/beta/hospital/list.aspx';
         var callback = function (res) {
             console.log(res)
@@ -202,7 +216,8 @@ angular.module('app.controllers',['app.servers'])
         diylistServer.getData(callback,url);
     }])
     //医院详情
-    .controller('diyInfoCtrl',['$scope','diyInfoServer','$location', function ($scope,diyInfoServer,$location) {
+    .controller('diyInfoCtrl',['$scope','$rootScope','diyInfoServer','$location', function ($scope,$rootScope,diyInfoServer,$location) {
+        $rootScope.title('医院详情')
         var hospitalId = location.hash.split('/')[location.hash.split('/').length-2];//医院ID
         var doctorId = location.hash.split('/')[location.hash.split('/').length-1];//医生ID
         var url = '/api/beta/hospital/info.aspx?id='+ hospitalId +'&';
@@ -286,11 +301,16 @@ angular.module('app.controllers',['app.servers'])
                 })
                 .done(function(res) {
                     console.log(res);
-                    var counselorInfo = res.data;
-                    // var hospitalId = counselorInfo.scheme.hospitalId;//医院ID
-                    var doctorId = counselorInfo.counselor.id;//医生ID
-                    var counselorUno = counselorInfo.counselor.uno;//咨询师的环信ID
-                    $location.path('/tabs/diy/'+ hospitalId +'/'+doctorId +'/'+counselorUno)
+                    if(res.status ==200){
+                        var counselorInfo = res.data;
+                        // var hospitalId = counselorInfo.scheme.hospitalId;//医院ID
+                        var doctorId = counselorInfo.counselor.id;//医生ID
+                        var counselorUno = counselorInfo.counselor.uno;//咨询师的环信ID
+                        $location.path('/tabs/diy/'+ hospitalId +'/'+doctorId +'/'+counselorUno)
+                    }else{
+                        alert('登录超时，请重新登录')
+                        $location.path('/tabs/login')
+                    }
                 })
             }else{
                 $location.path('/tabs/login')
@@ -299,6 +319,7 @@ angular.module('app.controllers',['app.servers'])
     }])
     //登录
     .controller('loginCtrl',['$scope','$interval','$rootScope',function ($scope,$interval,$rootScope) {
+        $rootScope.title('登录')
         var text = $('.login-get');
         var reg = /^1(3|4|5|7|8)\d{9}$/ig;
         var str1 = "";
@@ -374,8 +395,10 @@ angular.module('app.controllers',['app.servers'])
                     user: loginUsers.consumer.uno,
                     pwd: loginUsers.consumer.easemobPwd,
                     appKey: WebIM.config.appkey,
-                    success: function () {
+                    success: function (token) {
                         console.log('登陆环信成功');
+                        var token = token.access_token;
+                        WebIM.utils.setCookie('webim_' + encryptUsername, token, 1);
                     },
                     error: function(){
                     }
@@ -387,6 +410,7 @@ angular.module('app.controllers',['app.servers'])
     }])
     //退出登录
     .controller('mineCtrl',['$scope','$rootScope','$location', function ($scope,$rootScope,$location) {
+        $rootScope.title('个人中心')
         $scope.signOut = function () {
             //var signOut = $("#signOut");
             var r = window.confirm('是否退出登录');
@@ -403,8 +427,10 @@ angular.module('app.controllers',['app.servers'])
                     })
                     .done(function(res) {
                         console.log(res);
-                        sessionStorage.removeItem('users')
-                        $rootScope.conn.close();
+                        if(res.status == 200){
+                            sessionStorage.removeItem('users')
+                            $rootScope.conn.close();
+                        }
                     })
                 }
                 $location.path('/tabs');
@@ -419,12 +445,18 @@ angular.module('app.controllers',['app.servers'])
         }
     }])
     //方案列表
-    .controller('programCtrl',['$scope','programServer',function ($scope,programServer){
+    .controller('programCtrl',['$scope','$rootScope','$location','programServer',function ($scope,$rootScope,$location,programServer){
+        $rootScope.title('方案列表')
         var url = '/api/beta/scheme/list.aspx';
         var loginUsers = JSON.parse(sessionStorage.getItem('users'));
         var callback = function (res) {
             console.log(res)
-            $scope.data = res.data;
+            if(res.status ==200){
+                $scope.data = res.data;
+            }else{
+                 alert('登录超时，请重新登录')
+                $location.path('/tabs/login')
+            }
         };
         if(loginUsers){
             var Authorization = 'MEDCOS#' + loginUsers.sessionKey ;
@@ -432,12 +464,18 @@ angular.module('app.controllers',['app.servers'])
         }
     }])
     //订单列表
-    .controller('orderCtrl',['$scope','orderServer',function ($scope,orderServer){
+    .controller('orderCtrl',['$scope','$rootScope','$location','orderServer',function ($scope,$rootScope,$location,orderServer){
+        $rootScope.title('服务预约')
         var url = '/api/beta/order/list.aspx';
         var loginUsers = JSON.parse(sessionStorage.getItem('users'));
         var callback = function (res) {
             console.log(res)
-            $scope.data = res;
+            if(res.status ==200){
+               $scope.data = res.data; 
+            }else{
+                 alert('登录超时，请重新登录')
+                $location.path('/tabs/login')
+            }
         };
         if(loginUsers){
             var Authorization = 'MEDCOS#' + loginUsers.sessionKey ;
@@ -445,7 +483,8 @@ angular.module('app.controllers',['app.servers'])
         }
     }])
     //消息列表
-    .controller('messagesCtrl',['$scope','$rootScope','messagesServer',function ($scope,$rootScope,messagesServer){
+    .controller('messagesCtrl',['$scope','$rootScope','$location','messagesServer',function ($scope,$rootScope,$location,messagesServer){
+        $rootScope.title('消息')
         var url = '/api/beta/consumer/counseling/list.aspx';
         //自己的环信ID
         var Authorization = '';
@@ -453,7 +492,12 @@ angular.module('app.controllers',['app.servers'])
         var loginUsers = JSON.parse(sessionStorage.getItem('users'));
         var callback = function (res) {
             console.log(res)
-            $scope.data = res.data;
+            if(res.status ==200){
+                $scope.data = res.data;
+            }else{
+                alert('登录超时，请重新登录')
+                $location.path('/tabs/login')
+            }
         };
         if(loginUsers){
             loginUsersUno = loginUsers.consumer.uno;
@@ -464,6 +508,7 @@ angular.module('app.controllers',['app.servers'])
     }])
     //聊天窗口
     .controller('counselorCtrl',['$scope','$ionicScrollDelegate','$rootScope','$timeout', function ($scope,$ionicScrollDelegate,$rootScope,$timeout) {
+        $rootScope.title('咨询师')
         //自己的环信ID
         var loginUsers = JSON.parse(sessionStorage.getItem('users'));
         var loginUsersUno = loginUsers.consumer.uno;
@@ -585,7 +630,8 @@ angular.module('app.controllers',['app.servers'])
         };
     }])
     //方案详情
-    .controller('programInfoCtrl',['$scope','programInfoServer',function ($scope,programInfoServer) {
+    .controller('programInfoCtrl',['$scope','$rootScope','programInfoServer',function ($scope,$rootScope,programInfoServer) {
+        $rootScope.title('方案详情')
         //方案详情接口
         var url = '/api/beta/scheme/info.aspx';
         var Authorization = '';
@@ -613,7 +659,8 @@ angular.module('app.controllers',['app.servers'])
         }
     }])
     //订单详情
-    .controller('orderInfoCtrl',['$scope','orderInfoServer',function ($scope,orderInfoServer){
+    .controller('orderInfoCtrl',['$scope','$rootScope','orderInfoServer',function ($scope,$rootScope,orderInfoServer){
+        $rootScope.title('预约详情')
         var url = '/api/beta/scheme/info.aspx';
         var Authorization = '';
         var loginUsers = JSON.parse(sessionStorage.getItem('users'));
