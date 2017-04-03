@@ -5,10 +5,11 @@
 <ion-content style="background:#F3F7F8" delegate-handle="mainScroll">
     <ion-refresher pulling-icon="ion-load-b"
             pulling-text="Pull to refresh..."
-            on-refresh="">
+            on-refresh="pullMore()">
     </ion-refresher>
+    <div id='dialog_chatHis' style='text-align:center'><span ng-if='Ulist.length == 0 ? true : false'>没有更多消息了</span></div>
     <div class="counselor-content" id='dialog_chat'>
-        <div class="chat-receiver">
+        <!-- <div class="chat-receiver">
             <div class="counselor-timer">
                 <span>2017-02-23</span>
             </div>
@@ -29,7 +30,7 @@
                     <span>主治医师</span>
                 </div>
             </a>
-        </div>
+        </div> -->
         <!-- <div class="counselor-chat-prog counselor-chat-h">
             <a href="#/tabs/mine/order/:id">
                 <p>中国爱美整形外科医院</p>
@@ -43,7 +44,7 @@
                 <div><span>方案&nbsp;&nbsp;</span><span style="color:#333">方案1</span></div>
             </a>
         </div> -->
-        <div class="chat-sender">
+        <!-- <div class="chat-sender">
             <div class="counselor-timer">
                 <span>02-23 17:30</span>
             </div>
@@ -53,7 +54,7 @@
             <div class="chat-content">
                 <span>谢谢老师！</span>
             </div>
-        </div>
+        </div> -->
     </div>
     <ion-infinite-scroll style='height:50px;'
         on-infinite=""

@@ -154,3 +154,19 @@ angular.module('app.servers',[])
     }
     return this;
 }])
+.service('counselorServer',['$http',function ($http){
+    this.getData = function(callback,url,params,Authorization){
+        $http({
+            url: url,
+            method:'get',
+            cache:true,
+            params: params,
+            headers: {
+                Authorization: Authorization
+            }
+        }).then(function(res){
+            callback(res.data);
+        })
+    }
+    return this;
+}])

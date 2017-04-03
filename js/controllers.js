@@ -507,11 +507,12 @@ angular.module('app.controllers',['app.servers'])
         $rootScope.messageInfoNum_z = 0
     }])
     //聊天窗口
-    .controller('counselorCtrl',['$scope','$ionicScrollDelegate','$rootScope','$timeout', function ($scope,$ionicScrollDelegate,$rootScope,$timeout) {
+    .controller('counselorCtrl',['$scope','$ionicScrollDelegate','$rootScope','$timeout','counselorServer', function ($scope,$ionicScrollDelegate,$rootScope,$timeout,counselorServer) {
         $rootScope.title('咨询师')
         //自己的环信ID
         var loginUsers = JSON.parse(sessionStorage.getItem('users'));
         var loginUsersUno = loginUsers.consumer.uno;
+        var Authorization = 'MEDCOS#' + loginUsers.sessionKey ;
         //对方的环信ID
         var counselorUno = location.hash.split('/')[location.hash.split('/').length-1];
         //默认显示 + 号
@@ -628,6 +629,62 @@ angular.module('app.controllers',['app.servers'])
                 }
             }
         };
+        /*下拉刷新--------------------------------------*/
+        $scope.pageNumber = 1;
+        $scope.pageSize = 10;
+        $scope.pageCount = 2;
+        $scope.pullMore = function(){
+            if (!$scope.hasMore($scope.pageNumber)) {
+                $scope.$broadcast("scroll.refreshComplete");
+                return;
+            }
+            url = "/api/beta/easemob/chat/list.aspx";
+            var params = {
+                fromUno:loginUsersUno,
+                toUno:counselorUno,
+                pageNumber:$scope.pageNumber,
+                pageSize:$scope.pageSize
+            };
+            var callback2 = function (res) {
+                $scope.Ulist = res.list
+                console.log(res);
+                if($scope.Ulist.length){
+                    for(var i = $scope.Ulist.length-1;i>0;i--){
+                        if($scope.Ulist[i].msgtype){
+                            if($scope.Ulist[i].touno != loginUsersUno){
+                                if($scope.Ulist[i].msgtype != 2){
+                                    msgShowHistory('sender','text',$scope.Ulist[i].msg,$scope.Ulist[i].ctime);
+                                }else{
+                                    msgShowHistory('sender','img',$scope.Ulist[i].msg,$scope.Ulist[i].ctime);
+                                }
+                            }else{
+                                if($scope.Ulist[i].msgtype == 1){
+                                    msgShowHistory('receiver','text',$scope.Ulist[i].msg,$scope.Ulist[i].ctime);
+                                }
+                                if($scope.Ulist[i].msgtype == 2){
+                                    msgShowHistory('receiver','img',$scope.Ulist[i].msg,$scope.Ulist[i].ctime);
+                                }
+                                if($scope.Ulist[i].msgtype == 3){
+                                   // console.log(infoMsg[i].data)
+                                    var infoText = JSON.parse($scope.Ulist[i].msg);
+                                    msgShowHistory('receiver','info',infoText,$scope.Ulist[i].ctime);
+                                }
+                            }
+                            $timeout($rootScope.msgScrollTop,1000)
+                        }else{
+
+                        }
+                    }
+                }
+                $scope.pager = res.pager;
+                $scope.pageNumber ++;
+            };
+            counselorServer.getData(callback2,url,params,Authorization);
+            $scope.$broadcast("scroll.refreshComplete");
+        };
+        $scope.hasMore = function (num) {
+            return num >= $scope.pageCount ? false : true ;
+        }
     }])
     //方案详情
     .controller('programInfoCtrl',['$scope','$rootScope','programInfoServer',function ($scope,$rootScope,programInfoServer) {

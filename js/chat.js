@@ -6,7 +6,11 @@ var msgInit = {
     senderAvatar: './img/WechatIMG8.png',  //发送者头像
     receiverAvatar: 'http://k1.jsqq.net/uploads/allimg/1612/140F5A32-6.jpg', //接收者头像
 }
-
+var msgInitHis = {
+    el: '#dialog_chatHis', //消息容器
+    senderAvatar: './img/WechatIMG8.png',  //发送者头像
+    receiverAvatar: 'http://k1.jsqq.net/uploads/allimg/1612/140F5A32-6.jpg', //接收者头像
+}
 /**
  * @description 展示消息精简版
  * @param {String} who 消息来源,可选参数: {params} 'sender','receiver'
@@ -14,6 +18,15 @@ var msgInit = {
  * @param {Object} msg ('text'和'url'类型的msg是文字，img类型的msg是img地址)
  */
 var msgShow = function(who,type,msg,time){
+    appendMsg(who,type,{
+        el: msgInit.el,
+        senderAvatar: msgInit.senderAvatar,
+        receiverAvatar: msgInit.receiverAvatar,
+        msg: msg,
+        timer: time
+    });
+}
+var msgShowHistory = function(who,type,msg,time){
     appendMsg(who,type,{
         el: msgInit.el,
         senderAvatar: msgInit.senderAvatar,
