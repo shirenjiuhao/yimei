@@ -515,8 +515,9 @@ angular.module('app.controllers',['app.servers'])
     //聊天窗口
     .controller('counselorCtrl',['$scope','$ionicScrollDelegate','$rootScope','$timeout','$interval','$location','counselorServer', function ($scope,$ionicScrollDelegate,$rootScope,$timeout,$interval,$location,counselorServer) {
         $rootScope.title('咨询师');
-        msgShowTime('#dialog_chat',getShowDate());
-        msgShow('receiver','text','您好，欢迎咨询，请说出您的困惑。');
+        // msgShowTime('#dialog_chat',getShowDate());
+        //$interval(msgShowTime('#dialog_chat',getShowDate()),300000)
+        // msgShow('receiver','text','您好，欢迎咨询，请说出您的困惑。');
         //自己的环信ID
         var loginUsers = JSON.parse(localStorage.getItem('users'));
         var loginUsersUno = loginUsers.consumer.uno;
@@ -698,7 +699,6 @@ angular.module('app.controllers',['app.servers'])
         $scope.hasMore = function (num) {
             return num >= $scope.pageCount ? false : true ;
         };
-        //$interval(msgShowTime('#dialog_chat',getShowDate()),100000)
     }])
     //方案详情
     .controller('programInfoCtrl',['$scope','$rootScope','programInfoServer',function ($scope,$rootScope,programInfoServer) {
