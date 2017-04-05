@@ -198,6 +198,8 @@ angular.module('app',['ionic','app.controllers'])
             onOffline: function () {},                 //本机网络掉线
             onError: function ( message ) {
                 console.log(message);
+                console.log('环信回调失败，请刷新页面');
+                //localStorage.removeItem('users')
                 //alert('会话超时，请重新登录');
                 //$location.path('/tabs/login')
                 //window.location.replace('#/tabs/login')
@@ -283,7 +285,7 @@ angular.module('app',['ionic','app.controllers'])
             }
         };
         $(function(){
-            var userInfo = sessionStorage.getItem('users')
+            var userInfo = localStorage.getItem('users')
             if(userInfo){
                 userInfo = JSON.parse(userInfo)
                 var signIn = {
@@ -294,6 +296,9 @@ angular.module('app',['ionic','app.controllers'])
                     appKey: WebIM.config.appkey
                 };
                 $rootScope.conn.open(signIn);
+            }else{
+                $rootScope.conn.close();
+                //$location.path('/tabs/login')
             }
          });
     })

@@ -12,7 +12,7 @@ angular.module('app.controllers',['app.servers'])
         };
         tabsServer.getData(callback,url);
         $rootScope.title('医美定制');
-        var loginUsers = JSON.parse(sessionStorage.getItem('users'));
+        var loginUsers = JSON.parse(localStorage.getItem('users'));
         //快速聊天
         $scope.toMessages = function(){
            if(loginUsers){
@@ -158,7 +158,7 @@ angular.module('app.controllers',['app.servers'])
         };
         yishengServer.getData(callback,url);
         $rootScope.title('名医风采')
-        var loginUsers = JSON.parse(sessionStorage.getItem('users'));
+        var loginUsers = JSON.parse(localStorage.getItem('users'));
         $scope.speakChat = function(){
             if(loginUsers){
                 var params = {
@@ -269,7 +269,7 @@ angular.module('app.controllers',['app.servers'])
         $scope.hasMore = function (num) {
             return num > $scope.pageCount ? false : true ;
         }
-        var loginUsers = JSON.parse(sessionStorage.getItem('users'));
+        var loginUsers = JSON.parse(localStorage.getItem('users'));
         $scope.speakChat = function(){
             if(loginUsers){
                 var params = {
@@ -382,7 +382,7 @@ angular.module('app.controllers',['app.servers'])
             }).done(function(res) {
                 console.log(res);
                 loginUsers = res.data;
-                sessionStorage.setItem('users',JSON.stringify(loginUsers))
+                localStorage.setItem('users',JSON.stringify(loginUsers))
                 var signIn = {
                     apiUrl: WebIM.config.apiURL,
                     user: loginUsers.consumer.uno,
@@ -390,6 +390,8 @@ angular.module('app.controllers',['app.servers'])
                     appKey: WebIM.config.appkey,
                     success: function (token) {
                         console.log('登陆环信成功');
+                        var encryptUsername = WebIM.utils.encrypt(loginUsers.consumer.uno);
+                        var encryptAuth = WebIM.utils.encrypt(loginUsers.consumer.easemobPwd);
                         var token = token.access_token;
                         WebIM.utils.setCookie('webim_' + encryptUsername, token, 1);
                     },
@@ -408,7 +410,7 @@ angular.module('app.controllers',['app.servers'])
             //var signOut = $("#signOut");
             var r = window.confirm('是否退出登录');
             if(r == true){
-                var hahh = JSON.parse(sessionStorage.getItem('users'));
+                var hahh = JSON.parse(localStorage.getItem('users'));
                 if(hahh){
                    var Authorization = hahh.sessionKey 
                    $.ajax({
@@ -421,7 +423,7 @@ angular.module('app.controllers',['app.servers'])
                     .done(function(res) {
                         console.log(res);
                         if(res.status == 200){
-                            sessionStorage.removeItem('users')
+                            localStorage.removeItem('users')
                             $rootScope.conn.close();
                         }
                     })
@@ -429,7 +431,7 @@ angular.module('app.controllers',['app.servers'])
                 $location.path('/tabs');
             }
         };
-        var loginUsers = JSON.parse(sessionStorage.getItem('users'));
+        var loginUsers = JSON.parse(localStorage.getItem('users'));
         $scope.flag = true;//未登录状态
         //$scope.nicheng = '未登录'
         if(loginUsers){
@@ -457,7 +459,7 @@ angular.module('app.controllers',['app.servers'])
     .controller('programCtrl',['$scope','$rootScope','$location','programServer',function ($scope,$rootScope,$location,programServer){
         $rootScope.title('方案列表')
         var url = '/api/beta/scheme/list.aspx';
-        var loginUsers = JSON.parse(sessionStorage.getItem('users'));
+        var loginUsers = JSON.parse(localStorage.getItem('users'));
         var callback = function (res) {
             console.log(res)
             if(res.status ==200){
@@ -476,7 +478,7 @@ angular.module('app.controllers',['app.servers'])
     .controller('orderCtrl',['$scope','$rootScope','$location','orderServer',function ($scope,$rootScope,$location,orderServer){
         $rootScope.title('服务预约')
         var url = '/api/beta/order/list.aspx';
-        var loginUsers = JSON.parse(sessionStorage.getItem('users'));
+        var loginUsers = JSON.parse(localStorage.getItem('users'));
         var callback = function (res) {
             console.log(res)
            $scope.data = res.data; 
@@ -493,7 +495,7 @@ angular.module('app.controllers',['app.servers'])
         //自己的环信ID
         var Authorization = '';
         var loginUsersUno = '';
-        var loginUsers = JSON.parse(sessionStorage.getItem('users'));
+        var loginUsers = JSON.parse(localStorage.getItem('users'));
         var callback = function (res) {
             console.log(res)
             if(res.status ==200){
@@ -514,7 +516,7 @@ angular.module('app.controllers',['app.servers'])
     .controller('counselorCtrl',['$scope','$ionicScrollDelegate','$rootScope','$timeout','$location','counselorServer', function ($scope,$ionicScrollDelegate,$rootScope,$timeout,$location,counselorServer) {
         $rootScope.title('咨询师')
         //自己的环信ID
-        var loginUsers = JSON.parse(sessionStorage.getItem('users'));
+        var loginUsers = JSON.parse(localStorage.getItem('users'));
         var loginUsersUno = loginUsers.consumer.uno;
         var Authorization = 'MEDCOS#' + loginUsers.sessionKey ;
         //对方的环信ID
@@ -701,7 +703,7 @@ angular.module('app.controllers',['app.servers'])
         //方案详情接口
         var url = '/api/beta/scheme/info.aspx';
         var Authorization = '';
-        var loginUsers = JSON.parse(sessionStorage.getItem('users'));
+        var loginUsers = JSON.parse(localStorage.getItem('users'));
         var schemeId = location.hash.split('/')[location.hash.split('/').length-1]
         var callback = function (res) {
             console.log(res)
@@ -729,7 +731,7 @@ angular.module('app.controllers',['app.servers'])
         $rootScope.title('预约详情')
         var url = '/api/beta/scheme/info.aspx';
         var Authorization = '';
-        var loginUsers = JSON.parse(sessionStorage.getItem('users'));
+        var loginUsers = JSON.parse(localStorage.getItem('users'));
         var schemeId = location.hash.split('/')[location.hash.split('/').length-1]
         var callback = function (res) {
             console.log(res)
