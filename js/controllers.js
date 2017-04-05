@@ -14,13 +14,6 @@ angular.module('app.controllers',['app.servers'])
         $rootScope.title('医美定制');
         var loginUsers = JSON.parse(sessionStorage.getItem('users'));
         //快速聊天
-        $scope.toMine = function(){
-            if(loginUsers){
-                $location.path('/tabs/mine')
-            }else{
-                $location.path('/tabs/login')
-            }
-        };
         $scope.toMessages = function(){
            if(loginUsers){
                 $location.path('/tabs/messages')
@@ -437,11 +430,27 @@ angular.module('app.controllers',['app.servers'])
             }
         };
         var loginUsers = JSON.parse(sessionStorage.getItem('users'));
-        //$scope.flag = false;
+        $scope.flag = true;//未登录状态
         //$scope.nicheng = '未登录'
         if(loginUsers){
             $scope.nicheng = loginUsers.consumer.nickname;
-            //$scope.flag = true;
+            $scope.flag = false;
+        }else{
+            $scope.flag = true;
+        };
+        $scope.toProgram = function (){
+            if(loginUsers){
+                $location.path('/tabs/mine/program');
+            }else{
+                alert('您尚未登录')
+            }
+        };
+        $scope.toOrder = function (){
+            if(loginUsers){
+                $location.path('/tabs/mine/order');
+            }else{
+                alert('您尚未登录')
+            }
         }
     }])
     //方案列表
@@ -470,12 +479,7 @@ angular.module('app.controllers',['app.servers'])
         var loginUsers = JSON.parse(sessionStorage.getItem('users'));
         var callback = function (res) {
             console.log(res)
-            if(res.status ==200){
-               $scope.data = res.data; 
-            }else{
-                 alert('登录超时，请重新登录')
-                $location.path('/tabs/login')
-            }
+           $scope.data = res.data; 
         };
         if(loginUsers){
             var Authorization = 'MEDCOS#' + loginUsers.sessionKey ;
@@ -507,7 +511,7 @@ angular.module('app.controllers',['app.servers'])
         $rootScope.messageInfoNum_z = 0
     }])
     //聊天窗口
-    .controller('counselorCtrl',['$scope','$ionicScrollDelegate','$rootScope','$timeout','counselorServer', function ($scope,$ionicScrollDelegate,$rootScope,$timeout,counselorServer) {
+    .controller('counselorCtrl',['$scope','$ionicScrollDelegate','$rootScope','$timeout','$location','counselorServer', function ($scope,$ionicScrollDelegate,$rootScope,$timeout,$location,counselorServer) {
         $rootScope.title('咨询师')
         //自己的环信ID
         var loginUsers = JSON.parse(sessionStorage.getItem('users'));
@@ -603,26 +607,27 @@ angular.module('app.controllers',['app.servers'])
         var infoMsg = sessionStorage.getItem(counselorUno);
         if(infoMsg){
             infoMsg = JSON.parse(infoMsg);
+            msgShowTime('#dialog_chat',infoMsg[0].ext.time);
             for(let i in infoMsg){
                 //console.log(i)
                 if(infoMsg[i].ext.msgType){
                     if(infoMsg[i].to != loginUsersUno){
                         if(infoMsg[i].ext.msgType != 2){
-                            msgShow('sender','text',infoMsg[i].msg,infoMsg[i].ext.time);
+                            msgShow('sender','text',infoMsg[i].msg);
                         }else{
-                            msgShow('sender','img',infoMsg[i].ext.imgSrc,infoMsg[i].ext.time);
+                            msgShow('sender','img',infoMsg[i].ext.imgSrc);
                         }
                     }else{
                         if(infoMsg[i].ext.msgType == 1){
-                            msgShow('receiver','text',infoMsg[i].data,infoMsg[i].ext.time);
+                            msgShow('receiver','text',infoMsg[i].data);
                         }
                         if(infoMsg[i].ext.msgType == 2){
-                            msgShow('receiver','img',infoMsg[i].ext.imgSrc,infoMsg[i].ext.time);
+                            msgShow('receiver','img',infoMsg[i].ext.imgSrc);
                         }
                         if(infoMsg[i].ext.msgType == 3){
                            // console.log(infoMsg[i].data)
                             var infoText = JSON.parse(infoMsg[i].data);
-                            msgShow('receiver','info',infoText,infoMsg[i].ext.time);
+                            msgShow('receiver','info',infoText);
                         }
                     }
                     $timeout($rootScope.msgScrollTop,1000)
@@ -646,38 +651,42 @@ angular.module('app.controllers',['app.servers'])
                 pageSize:$scope.pageSize
             };
             var callback2 = function (res) {
-                $scope.Ulist = res.list
                 console.log(res);
-                if($scope.Ulist.length){
-                    for(var i = $scope.Ulist.length-1;i>0;i--){
-                        if($scope.Ulist[i].msgtype){
-                            if($scope.Ulist[i].touno != loginUsersUno){
-                                if($scope.Ulist[i].msgtype != 2){
-                                    msgShowHistory('sender','text',$scope.Ulist[i].msg,$scope.Ulist[i].ctime);
+                if(res.status && res.status != 200){
+                    alert(res.message);
+                    $location.path('/tabs/login')
+                }else{
+                    $scope.Ulist = res.list
+                    if($scope.Ulist.length){
+                        msgShowTime('#dialog_chatHis',$scope.Ulist[$scope.Ulist.length-1].ctime)
+                        for(var i = $scope.Ulist.length-1;i>=0;i--){
+                            if($scope.Ulist[i].msgtype){
+                                if($scope.Ulist[i].touno != loginUsersUno){
+                                    if($scope.Ulist[i].msgtype != 2){
+                                        msgShowHistory('sender','text',$scope.Ulist[i].msg);
+                                    }else{
+                                        msgShowHistory('sender','img',$scope.Ulist[i].msg);
+                                    }
                                 }else{
-                                    msgShowHistory('sender','img',$scope.Ulist[i].msg,$scope.Ulist[i].ctime);
+                                    if($scope.Ulist[i].msgtype == 1){
+                                        msgShowHistory('receiver','text',$scope.Ulist[i].msg);
+                                    }
+                                    if($scope.Ulist[i].msgtype == 2){
+                                        msgShowHistory('receiver','img',$scope.Ulist[i].msg);
+                                    }
+                                    if($scope.Ulist[i].msgtype == 3){
+                                       // console.log(infoMsg[i].data)
+                                        var infoText = JSON.parse($scope.Ulist[i].msg);
+                                        msgShowHistory('receiver','info',infoText);
+                                    }
                                 }
-                            }else{
-                                if($scope.Ulist[i].msgtype == 1){
-                                    msgShowHistory('receiver','text',$scope.Ulist[i].msg,$scope.Ulist[i].ctime);
-                                }
-                                if($scope.Ulist[i].msgtype == 2){
-                                    msgShowHistory('receiver','img',$scope.Ulist[i].msg,$scope.Ulist[i].ctime);
-                                }
-                                if($scope.Ulist[i].msgtype == 3){
-                                   // console.log(infoMsg[i].data)
-                                    var infoText = JSON.parse($scope.Ulist[i].msg);
-                                    msgShowHistory('receiver','info',infoText,$scope.Ulist[i].ctime);
-                                }
+                                $timeout($rootScope.msgScrollTop,1000)
                             }
-                            $timeout($rootScope.msgScrollTop,1000)
-                        }else{
-
                         }
                     }
+                    $scope.pager = res.pager;
+                    $scope.pageNumber ++;
                 }
-                $scope.pager = res.pager;
-                $scope.pageNumber ++;
             };
             counselorServer.getData(callback2,url,params,Authorization);
             $scope.$broadcast("scroll.refreshComplete");

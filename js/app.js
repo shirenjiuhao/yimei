@@ -132,10 +132,10 @@ angular.module('app',['ionic','app.controllers'])
                 message.ext.time = getShowDate();
                 infoMessages.push(message);
                 if(message.ext.msgType ==1){
-                    msgShow('receiver','text',message.data,getShowDate());
+                    msgShow('receiver','text',message.data);
                 }else{
                     var infoText = JSON.parse(message.data);
-                    msgShow('receiver','info',infoText,getShowDate());
+                    msgShow('receiver','info',infoText);
                 }
                 // msgScrollTop();
                 $timeout($rootScope.msgScrollTop,1000);
@@ -158,7 +158,7 @@ angular.module('app',['ionic','app.controllers'])
                     message.ext.time = getShowDate();
                     message.ext.imgSrc = message.url;
                     infoMessages.push(message);
-                    msgShow('receiver','img',message.url,getShowDate());
+                    msgShow('receiver','img',message.url);
                     /*msgScrollTop();*/
                     $timeout($rootScope.msgScrollTop,1000);
                     sessionStorage.setItem(message.from,JSON.stringify(infoMessages));
@@ -230,7 +230,7 @@ angular.module('app',['ionic','app.controllers'])
                     console.log('send private text Success');
                     console.log(msg)
                     let content = msg.value;
-                    msgShow('sender','text',content,getShowDate());
+                    msgShow('sender','text',content);
                     //msgScrollTop();
                 }
             });
@@ -270,7 +270,7 @@ angular.module('app',['ionic','app.controllers'])
                     },
                     success: function () {
                         console.log('Success');
-                        msgShow('sender','img',imgSrc,getShowDate());
+                        msgShow('sender','img',imgSrc);
                         //msgScrollTop();
                     },
                     // flashUpload: WebIM.flashUpload               // 意义待查
@@ -288,9 +288,9 @@ angular.module('app',['ionic','app.controllers'])
                 userInfo = JSON.parse(userInfo)
                 var signIn = {
                     apiUrl: WebIM.config.apiURL,
-                    accessToken: 'token',
-                   /* user: userInfo.consumer.uno,
-                    pwd: userInfo.consumer.easemobPwd,*/
+                    //accessToken: 'token',
+                    user: userInfo.consumer.uno,
+                    pwd: userInfo.consumer.easemobPwd,
                     appKey: WebIM.config.appkey
                 };
                 $rootScope.conn.open(signIn);

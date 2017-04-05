@@ -17,25 +17,41 @@ var msgInitHis = {
  * @param {Object} type 消息类型,可选参数: {params} 'text','url','img'
  * @param {Object} msg ('text'和'url'类型的msg是文字，img类型的msg是img地址)
  */
-var msgShow = function(who,type,msg,time){
+var msgShow = function(who,type,msg){
     appendMsg(who,type,{
         el: msgInit.el,
         senderAvatar: msgInit.senderAvatar,
         receiverAvatar: msgInit.receiverAvatar,
-        msg: msg,
-        timer: time
+        msg: msg
     });
 }
-var msgShowHistory = function(who,type,msg,time){
+var msgShowHistory = function(who,type,msg){
     appendMsg(who,type,{
-        el: msgInit.el,
-        senderAvatar: msgInit.senderAvatar,
-        receiverAvatar: msgInit.receiverAvatar,
-        msg: msg,
-        timer: time
+        el: msgInitHis.el,
+        senderAvatar: msgInitHis.senderAvatar,
+        receiverAvatar: msgInitHis.receiverAvatar,
+        msg: msg
     });
 }
-
+var msgShowTime = function (el,msg){
+    appendMsgTime({
+        el:el,
+        timer:msg
+    })
+}
+function appendMsgTime(data){
+    var domCreat = function(node){
+        return document.createElement(node)
+    };
+    var timeBox = domCreat('div');
+    //时间节点
+    var msgTextNode = domCreat("span");
+    var textnodeSpan=document.createTextNode(data.timer);
+    msgTextNode.appendChild(textnodeSpan);
+    timeBox.appendChild(msgTextNode);
+    timeBox.className='counselor-timer';
+    document.querySelector(data.el).appendChild(timeBox);
+}
 function appendMsg(who,type,data) {
     // 生成节点
     var domCreat = function(node){
@@ -44,17 +60,18 @@ function appendMsg(who,type,data) {
     
     // 基本节点
     var msgItem = domCreat("div"),
-        timeBox = domCreat('div') 
+        //timeBox = domCreat('div') 
         avatarBox = domCreat("div"),
         contentBox = domCreat("div"),
         avatar = domCreat("img");
 
     //时间节点
-    var msgTextNode = domCreat("span");
+    /*var msgTextNode = domCreat("span");
     var textnodeSpan=document.createTextNode(data.timer);
     msgTextNode.appendChild(textnodeSpan);
     timeBox.appendChild(msgTextNode);
-    timeBox.className='counselor-timer';
+    timeBox.className='counselor-timer';*/
+    
 
     // 头像节点
     avatarBox.className="chat-avatar";
@@ -75,7 +92,7 @@ function appendMsg(who,type,data) {
             contentBox.appendChild(msgTextNode);
 
             msgItem.className="chat-"+who;
-            msgItem.appendChild(timeBox);
+            //msgItem.appendChild(timeBox);
             msgItem.appendChild(avatarBox);
             msgItem.appendChild(contentBox);
             break;
@@ -118,7 +135,7 @@ function appendMsg(who,type,data) {
             contentBox.appendChild(msgImgNode);
 
             msgItem.className="chat-"+who;
-            msgItem.appendChild(timeBox);
+            //msgItem.appendChild(timeBox);
             msgItem.appendChild(avatarBox);
             msgItem.appendChild(contentBox);
             break;
@@ -127,18 +144,18 @@ function appendMsg(who,type,data) {
     }
     
     // 节点连接
-    
+    //document.querySelector(data.el).appendChild(timeBox);
     document.querySelector(data.el).appendChild(msgItem);
 }
 //生成日期
-var getShowDate = function(){
+function getShowDate(){
     let date =  new Date();
     let day = date.getDate() < 10 ? '0'+ date.getDate() : date.getDate();
     let month = date.getMonth()+1  < 10 ? '0' + (date.getMonth()+1) : date.getMonth()+1 ;
     let hour = date.getHours() <10 ? '0'+ date.getHours() : date.getHours();
     let minutes = date.getMinutes() < 10 ? '0'+ date.getMinutes() : date.getMinutes();
     let seconds = date.getSeconds() < 10 ? '0'+ date.getSeconds() : date.getSeconds()
-    return string = month +'-'+ day +' '+ hour + ':' + minutes;//date.getFullYear()+'-'+  + ':' + seconds 
+    return string = date.getFullYear() +'-'+ month +'-'+ day +' '+ hour + ':' + minutes;//  + ':' + seconds 
 }
 //只是单个属性值比较的对象去重
 var listUsers = function(item){

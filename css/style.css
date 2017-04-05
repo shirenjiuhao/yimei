@@ -57,21 +57,22 @@ html,body{font-size: 12px;}
 .signOut{display: flex;margin:18.92rem 1.67rem 0;height:3.67rem;border-radius:2rem;justify-content: center;align-items: center;background:#3CDAD3;font-size: 1.33rem;color:#fff}
 /*医生在线-------------------------------------------------------------*/
 /*选择按钮*/
-.line-selected{padding:1rem;width:100%;}
+.line-selected{padding:1rem;width:100%;border-bottom: 0.04rem solid #e8e8e8}
 .line-selected .line-item {width:100%;display: flex;justify-content:space-between;align-items:center;font-size: 1.17rem;flex-flow: row wrap;}
 .line-item a{text-align: center;line-height:2.5rem;background:#EDFAFA;color:#34BBBE;cursor: pointer;border-radius: 0.33rem;min-width: 6rem;margin-bottom: 0.83rem;width:auto}
 /*.line-item a:nth-child(-n+4){margin-bottom: 0.83rem}*/
 .line-item .line-active{background:#3CDAD3;color:#fff}
 /*医生列表*/
-.item{border-color:#E8E8E8}
+.item{border-width:0.04rem;border-color:#E8E8E8}
+.list .line-yisheng{border-top-color: transparent;}
 .list .line-yisheng img{max-width:4.17rem;max-height:4.17rem;}
 .line-yisheng h2{font-size:1.25rem;color:#333333;display: flex;}
 .line-yisheng p{font-size:1rem;margin-bottom: 0.83rem;}
 .line-yisheng span{font-size: 1rem;color:#FF8EA2;border:0.04rem solid #FF8EA2;border-radius:0.17rem;padding:0.17rem}
-.line-yisheng span:not(:last-child){margin-right:5px;}
+.line-yisheng span:not(:last-child){margin-right:0.83rem;}
 .line-ion-zhuan{width: 1.3rem;height: 1rem;background: url("../img/zhuan.png") no-repeat;background-size: 100%;display: block;position: relative;top:0.2rem}
 /*医生详情页-------------------------------------------------------------*/
-.yisheng-mid{text-align:center;line-height: 2;padding:0.83rem 0 1.33rem;border-bottom: 0.08rem solid #E8E8E8}
+.yisheng-mid{text-align:center;line-height: 2;padding:0.83rem 0 1.33rem;border-bottom: 0.04rem solid #E8E8E8}
 .lineyisheng{width:10rem;height:10rem;position: relative;left:50%;margin-left:-5rem;margin-top:1.33rem;border-radius:50%;}
 .yisheng-mid .line-name{font-size: 1.33rem;font-weight:500;color: #333}
 .yisheng-mid .line-job{font-size:1.25rem;color: #666 }
@@ -83,12 +84,12 @@ html,body{font-size: 12px;}
 /*医院介绍页-------------------------------------------------------------*/
 .diylist{}
 .diylist img{height:16.67rem;background-color:#ccc}
-.diylist-text{padding:0.3rem 0.83rem;line-height: 1.5}
+.diylist-text{padding:0.3rem 0.83rem;line-height: 1.7;letter-spacing: 1.7px;}
 .diylist-text div{font-size: 1.33rem;color:#34BBBE}
 .diylist-text span{font-size: 1.17rem;color:#999}
 /*医院详情介绍页-------------------------------------------------------------*/
 .diyInfo-fir img{height: 16.67rem}
-.diyInfo-sec{text-align:center;padding:1rem 0 1.67rem;border-bottom: 0.08rem solid #E8E8E8;background: #fff}
+.diyInfo-sec{text-align:center;padding:1rem 0 1.67rem;border-bottom: 0.08rem solid #E8E8E8;background: #fff;line-height: 1.7;letter-spacing: 1px}
 .diyInfo-sec div{font-size: 1.33rem;color: #333}
 .diyInfo-sec span{font-size: 1.25rem;color: #999}
 .diyInfo-thr{display: flex;padding-top:1rem;padding-bottom:0.75rem;background: #fff;font-size: 1.33rem}
@@ -104,7 +105,7 @@ html,body{font-size: 12px;}
 /*咨询师页面*/
 .counselor-content{padding:10px;font-size: 18px;}
 .counselor-content .counselor-chat-prog img{max-height: 40px;min-width: 40px;background:red;border-radius:50%}
-.counselor-timer{padding:2% 0;text-align: center;font-size:1rem;color: #999}
+.counselor-timer{padding:2% 0;text-align: center;font-size:1rem;color: #999;clear: both;}
 
 .counselor-chat-prog{min-width:23.75rem;height:10rem;margin: 0.83rem 3rem;background: #fff;padding:0 10px;border-radius: 5px;font-size: 1.25rem;position: relative;clear: both}
 .counselor-chat-prog p{border-bottom: 0.08px dashed #E8E8E8;font-size: 1.33rem;color: #34BBBE;padding:1rem 0;margin-bottom: 1rem;}
