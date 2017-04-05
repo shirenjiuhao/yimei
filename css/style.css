@@ -64,7 +64,7 @@ html,body{font-size: 12px;}
 .line-item .line-active{background:#3CDAD3;color:#fff}
 /*医生列表*/
 .item{border-width:0.04rem;border-color:#E8E8E8}
-.list .line-yisheng{border-top-color: transparent;}
+.list .line-yisheng:first-child{border-top-color: transparent;}
 .list .line-yisheng img{max-width:4.17rem;max-height:4.17rem;}
 .line-yisheng h2{font-size:1.25rem;color:#333333;display: flex;}
 .line-yisheng p{font-size:1rem;margin-bottom: 0.83rem;}

@@ -642,7 +642,7 @@ angular.module('app.controllers',['app.servers'])
         /*下拉刷新--------------------------------------*/
         $scope.pageNumber = 1;
         $scope.pageSize = 10;
-        $scope.pageCount = 2;
+        $scope.pageCount = 9;
         $scope.pullMore = function(){
             if (!$scope.hasMore($scope.pageNumber)) {
                 $scope.$broadcast("scroll.refreshComplete");
@@ -661,6 +661,7 @@ angular.module('app.controllers',['app.servers'])
                     alert(res.message);
                     $location.path('/tabs/login')
                 }else{
+                    $('#dialog_chatHis').empty();
                     $scope.Ulist = res.list
                     if($scope.Ulist.length){
                         msgShowTime('#dialog_chatHis',$scope.Ulist[$scope.Ulist.length-1].ctime)
