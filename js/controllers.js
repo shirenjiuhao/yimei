@@ -640,8 +640,9 @@ angular.module('app.controllers',['app.servers'])
             }
         };
         /*下拉刷新--------------------------------------*/
+        $scope.Ulist = [];
         $scope.pageNumber = 1;
-        $scope.pageSize = 10;
+        $scope.pageSize = 20;
         $scope.pageCount = 9;
         $scope.pullMore = function(){
             if (!$scope.hasMore($scope.pageNumber)) {
@@ -662,7 +663,13 @@ angular.module('app.controllers',['app.servers'])
                     $location.path('/tabs/login')
                 }else{
                     $('#dialog_chatHis').empty();
-                    $scope.Ulist = res.list
+                    if(res.list.length !=0){
+                        for(var i= res.list.length-1;i>=0;i--){
+                            $scope.Ulist.push(res.list[i])
+                        }
+                    }else{
+                        alert('没有更多消息了')
+                    }
                     if($scope.Ulist.length){
                         msgShowTime('#dialog_chatHis',$scope.Ulist[$scope.Ulist.length-1].ctime)
                         for(var i = $scope.Ulist.length-1;i>=0;i--){
