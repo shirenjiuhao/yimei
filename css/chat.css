@@ -2,7 +2,6 @@
 .chat-receiver,.chat-sender{
     margin: 5px;
     clear:both;  
-    text-align: center;
 }
 .chat-avatar img{
     width: 4.17rem;
