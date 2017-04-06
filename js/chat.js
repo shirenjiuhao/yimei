@@ -139,6 +139,20 @@ function appendMsg(who,type,data) {
             msgItem.appendChild(avatarBox);
             msgItem.appendChild(contentBox);
             break;
+        case "program":
+            var msgInfoNodeA = domCreat("a");//生成父元素a标签
+            msgInfoNodeA.setAttribute("href",'#/tabs/mine/program/'+ data.msg.id);
+            
+            var msgInfoNodeP = domCreat("p");//生成医院名p标签
+            var textnodeP=document.createTextNode(data.msg.hospitalName);
+            msgInfoNodeP.appendChild(textnodeP);
+
+            var msgInfoNodeDiv = domCreat("div");//生成盒子
+            msgInfoNodeDiv.style = 'display:flex';
+            var msgInfoNodeSpan1 = domCreat("span");
+
+            msgItem.appendChild();
+            break;
         default:
             break;
     }

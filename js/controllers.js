@@ -707,7 +707,7 @@ angular.module('app.controllers',['app.servers'])
         };
     }])
     //方案详情
-    .controller('programInfoCtrl',['$scope','$rootScope','programInfoServer',function ($scope,$rootScope,programInfoServer) {
+    .controller('programInfoCtrl',['$scope','$rootScope','$location','programInfoServer',function ($scope,$rootScope,$location,programInfoServer) {
         $rootScope.title('方案详情')
         //方案详情接口
         var url = '/api/beta/scheme/info.aspx';
@@ -729,6 +729,9 @@ angular.module('app.controllers',['app.servers'])
             window.location.href = res.data.payParams;
         };
         $scope.appay = function () {
+            alert(1);
+            // $location.path('/tabs/messages/'+$scope.data.hospitalId +'/'+$scope.data.doctorId)
+            //window.history.go(-1)
             if(loginUsers){
                 Authorization = 'MEDCOS#' + loginUsers.sessionKey ;
                 programInfoServer.payParams(callback2,url2,{schemeId: schemeId, appType: 2},Authorization)
