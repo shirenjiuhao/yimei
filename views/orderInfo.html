@@ -2,7 +2,7 @@
     <a ng-href="" ng-click='backPgUp()' class="index-ion-return"></a>
     <h1 class='title'>预约详情</h1>
 </div> -->
-<ion-content style="background:#F3F7F8" delegate-handle="mainScroll">
+<ion-content style="background:#F3F7F8" delegate-handle="mainScroll" has-bouncing="false">
     <div class="orderInfo">
         <p style="">预约服务</p>
         <div class="orderInfo-text" ng-repeat='item in data.items'>
@@ -23,4 +23,9 @@
             <i class="icon-next"></i>
         </a>
     </div>
+    <ion-infinite-scroll 
+            icon="ion-loading-c"
+            on-infinite=""
+            distance="1%">
+    </ion-infinite-scroll>
 </ion-content>

@@ -3,7 +3,7 @@
     <a ng-href="" ng-click='backPgUp()' class="index-ion-return"></a>
     <h1 class='title'>服务预约</h1>
 </div> -->
-<ion-content style="padding:0 1rem;background:#F3F7F8" delegate-handle="mainScroll">
+<ion-content style="padding:0 1rem;background:#F3F7F8" delegate-handle="mainScroll" has-bouncing="false">
     <div class="counselor-chat-prog order-card" ng-repeat="item in data.list">
         <a href="#/tabs/mine/order/{{item.schemeid}}">
             <p>{{item.hospitalname}}</p>
@@ -18,4 +18,9 @@
         </a>
     </div>
     <div ng-if='data.list.length > 0 ? false :true' style='background:#fff;display:flex;justify-content:center;height:5rem;align-items:center;margin-top:1rem;'>您还没有预约服务，快去预约吧</div>
+    <ion-infinite-scroll 
+            icon="ion-loading-c"
+            on-infinite=""
+            distance="1%">
+    </ion-infinite-scroll>
 </ion-content>

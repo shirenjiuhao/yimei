@@ -243,7 +243,7 @@ angular.module('app.controllers',['app.servers'])
             }
         };
         /*加载更多----------------------------------------------------*/
-        $scope.loadMore = function(){
+       /* $scope.loadMore = function(){
             if (!$scope.hasMore($scope.pageNumber)) {
                 $scope.$broadcast("scroll.infiniteScrollComplete");
                 return;
@@ -262,13 +262,13 @@ angular.module('app.controllers',['app.servers'])
                         $scope.pageCount = res.data.pager.pageCount;//总页数
                     }
                 };
-                lineServer.getDataList(callback1,url);
+                diyInfoServer.getData(callback1,url);
                 $scope.$broadcast("scroll.infiniteScrollComplete");
             }
         };
         $scope.hasMore = function (num) {
             return num > $scope.pageCount ? false : true ;
-        }
+        }*/
         var loginUsers = JSON.parse(localStorage.getItem('users'));
         $scope.speakChat = function(){
             if(loginUsers){
@@ -358,7 +358,7 @@ angular.module('app.controllers',['app.servers'])
         $scope.yanzhengma = function () {
             var pwd = $('.login-input').find("input[type='text']").val();
             if(pwd == ''){
-                alert('验证码输入错误,请重新输入')
+                alert('验证码不能为空,请重新输入')
             }
         }
         //登录
@@ -387,16 +387,14 @@ angular.module('app.controllers',['app.servers'])
                     apiUrl: WebIM.config.apiURL,
                     user: loginUsers.consumer.uno,
                     pwd: loginUsers.consumer.easemobPwd,
-                    appKey: WebIM.config.appkey,
+                    appKey: WebIM.config.appkeys/*,
                     success: function (token) {
                         console.log('登陆环信成功');
-                        var encryptUsername = WebIM.utils.encrypt(loginUsers.consumer.uno);
-                        var encryptAuth = WebIM.utils.encrypt(loginUsers.consumer.easemobPwd);
                         var token = token.access_token;
                         WebIM.utils.setCookie('webim_' + encryptUsername, token, 1);
                     },
                     error: function(){
-                    }
+                    }*/
                 };
                 $rootScope.conn.open(signIn);
                 window.history.go(-1)
@@ -481,7 +479,7 @@ angular.module('app.controllers',['app.servers'])
         var loginUsers = JSON.parse(localStorage.getItem('users'));
         var callback = function (res) {
             console.log(res)
-           $scope.data = res.data; 
+           $scope.data = res; 
         };
         if(loginUsers){
             var Authorization = 'MEDCOS#' + loginUsers.sessionKey ;

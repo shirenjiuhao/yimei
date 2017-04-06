@@ -3,7 +3,7 @@
     <a href="" ng-click='backPgUp()' class="index-ion-return"></a>
     <h1 class='title'>医生详情</h1>
 </div> -->
-<ion-content delegate-handle="mainScroll">
+<ion-content delegate-handle="mainScroll" has-bouncing="false">
     <div ng-cloak>
         <div class="lineyisheng">
             <img ng-src="{{data.img}}" alt="正在加载图片..." class="responsive-img"/>
@@ -22,7 +22,11 @@
         <div style="height:0.83rem;background: #F3F7F8"></div>
         <div class="line-yisheng-bimg"><img ng-src="{{data.description}}" alt="正在加载..."class="responsive-img"/></div>
     </div>
-
+    <ion-infinite-scroll
+            icon="ion-load-a"
+            on-infinite=""
+            distance="1%">
+    </ion-infinite-scroll>
 </ion-content>
 <div class="program-btn">
     <a ng-click="speakChat()">定制方案(首次免费)</a>

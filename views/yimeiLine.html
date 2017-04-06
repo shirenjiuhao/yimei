@@ -3,7 +3,7 @@
     <a ng-href="" ng-click='backPgUp()' class="index-ion-return"></a>
     <h1 class='title'>名医在线</h1>
 </div> -->
-<ion-content delegate-handle="mainScroll">
+<ion-content delegate-handle="mainScroll" has-bouncing="false">
     <!-- <ion-refresher icon="ion-load-c"
             pulling-text="Pull to refresh..."
             on-refresh="pullMore()">
@@ -22,10 +22,10 @@
             <p>{{ list.hospName }}</p>
             <span ng-repeat="(key,val) in list.plasticProjects" ng-if='key > 2 ? false : true' data-id="{{val.id}}">{{val.name}}</span> 
         </a>
-        <ion-infinite-scroll
-           icon="ion-load-c"
-           on-infinite="loadMore()"
-           distance="1%">
-        </ion-infinite-scroll>
     </div>
+    <ion-infinite-scroll
+       icon="ion-load-a"
+       on-infinite="loadMore()"
+       distance="1%">
+    </ion-infinite-scroll>
 </ion-content>

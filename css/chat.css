@@ -35,7 +35,7 @@
 .chat-sender .chat-content{
     float:right;   
     color: #ffffff; 
-    background-color: #34BBBE; 
+    background-color: #3CDAD3; 
         word-break: break-word;
 }
 .chat-content:before{
@@ -53,5 +53,5 @@
 }
 .chat-sender .chat-content:before{ 
     right:-1.3rem;
-    border-color:transparent transparent transparent #34BBBE;      
+    border-color:transparent transparent transparent #3CDAD3;      
 }

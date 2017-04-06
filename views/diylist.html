@@ -2,7 +2,7 @@
     <a ng-href="" ng-click='backPgUp()' class="index-ion-return"></a>
     <h1 class='title'>优质医院</h1>
 </div> -->
-<ion-content delegate-handle="mainScroll">
+<ion-content delegate-handle="mainScroll" has-bouncing="false">
     <ion-refresher
             pulling-text="Pull to refresh..."
             on-refresh="">
@@ -17,7 +17,7 @@
         </a>
     </div>
     <ion-infinite-scroll
-            icon="ion-loading-c"
+            icon="ion-load-a"
             on-infinite=""
             distance="1%">
     </ion-infinite-scroll>

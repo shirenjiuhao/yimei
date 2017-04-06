@@ -2,7 +2,7 @@
     <a ng-href="#/tabs" class="index-ion-return"></a>
     <h1 class='title'>消息</h1>
 </div> -->
-<ion-content delegate-handle="mainScroll">
+<ion-content delegate-handle="mainScroll" has-bouncing="false">
     <div style="" class="message-border">
         <a class="item item-avatar" ng-repeat='list in data.list'
            ng-href="#/tabs/messages/{{list.hospitalid}}/{{list.counselorid}}/{{list.counseloruno}}" >
@@ -11,4 +11,9 @@
             <p>{{list.lastmsg}}</p>
         </a>
     </div>
+    <ion-infinite-scroll 
+            icon="ion-loading-c"
+            on-infinite=""
+            distance="1%">
+    </ion-infinite-scroll>
 </ion-content>

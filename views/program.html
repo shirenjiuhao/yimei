@@ -2,7 +2,7 @@
     <a ng-href="" ng-click='backPgUp()' class="index-ion-return"></a>
     <h1 class='title'>方案</h1>
 </div> -->
-<ion-content style="padding:1rem;background:#F3F7F8" delegate-handle="mainScroll">
+<ion-content style="padding:1rem;background:#F3F7F8" delegate-handle="mainScroll" has-bouncing="false">
     <div  class="program-msg" ng-repeat='(key,item) in data.list'>
         <a href="#/tabs/mine/program/{{item.id}}">
             <p>{{item.schemeName}}</p>
@@ -14,4 +14,9 @@
         </a>
     </div>
     <div ng-if='data.list.length > 0 ? false :true' style='background:#fff;display:flex;justify-content:center;height:5rem;align-items:center;margin-top:1rem;'>您还没有定制方案，快去定制吧</div>
+    <ion-infinite-scroll 
+            icon="ion-loading-c"
+            on-infinite=""
+            distance="1%">
+    </ion-infinite-scroll>
 </ion-content>

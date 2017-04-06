@@ -84,12 +84,12 @@ html,body{font-size: 12px;}
 /*医院介绍页-------------------------------------------------------------*/
 .diylist{}
 .diylist img{height:16.67rem;background-color:#ccc}
-.diylist-text{padding:0.3rem 0.83rem;line-height: 1.7;letter-spacing: 1.7px;}
+.diylist-text{padding:0.3rem 0.83rem;line-height: 1.7;height:5.85rem;}/*letter-spacing: 1.7px;*/
 .diylist-text div{font-size: 1.33rem;color:#34BBBE}
 .diylist-text span{font-size: 1.17rem;color:#999}
 /*医院详情介绍页-------------------------------------------------------------*/
 .diyInfo-fir img{height: 16.67rem}
-.diyInfo-sec{text-align:center;padding:1rem 0 1.67rem;border-bottom: 0.08rem solid #E8E8E8;background: #fff;line-height: 1.7;letter-spacing: 1px}
+.diyInfo-sec{text-align:center;padding:1rem 0 1.67rem;border-bottom: 0.08rem solid #E8E8E8;background: #fff;line-height: 1.7;}/*letter-spacing: 1px*/
 .diyInfo-sec div{font-size: 1.33rem;color: #333}
 .diyInfo-sec span{font-size: 1.25rem;color: #999}
 .diyInfo-thr{display: flex;padding-top:1rem;padding-bottom:0.75rem;background: #fff;font-size: 1.33rem}
