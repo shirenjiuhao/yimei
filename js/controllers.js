@@ -12,7 +12,8 @@ angular.module('app.controllers',['app.servers'])
         };
         tabsServer.getData(callback,url);
         $rootScope.title('医美定制');
-        var loginUsers = JSON.parse(localStorage.getItem('users'));
+        var loginUsers = localStorage.getItem('users');
+        if(loginUsers) loginUsers = JSON.parse(loginUsers);
         //快速聊天
         $scope.toMessages = function(){
            if(loginUsers){
@@ -43,11 +44,14 @@ angular.module('app.controllers',['app.servers'])
                 }).done(function(res) {
                     console.log(res);
                     if(res.status ==200){
-                         var counselorInfo = res.data;
-                        var hospitalId = counselorInfo.counselor.hospitalId;//医院ID
-                        var doctorId = counselorInfo.counselor.id;//医生ID
-                        var counselorUno = counselorInfo.counselor.uno;//咨询师的环信ID
-                        $location.path('/tabs/index/'+hospitalId+'/'+doctorId+'/'+counselorUno)
+                        var counselorInfo = res.data;
+                        if(counselorInfo.prepaid){
+                            var hospitalId = counselorInfo.counselor.hospitalId;//医院ID
+                            var doctorId = counselorInfo.counselor.id;//医生ID
+                            var counselorUno = counselorInfo.counselor.uno;//咨询师的环信ID
+                            $location.path('/tabs/index/'+hospitalId+'/'+doctorId+'/'+counselorUno)
+                        }
+                        else window.location.href = counselorInfo.payParams;
                     }else{
                          alert('登录超时，请重新登录')
                         $location.path('/tabs/login')
@@ -167,7 +171,7 @@ angular.module('app.controllers',['app.servers'])
                     page:'医生详情',
                     //url:'http://yifengbeauty.com/banner-info.html',
                     deviceType:2,
-                    appType:1,
+                    appType:2,
                     sourceType: 2
                 }
                 var Authorization = "MEDCOS#"+ loginUsers.sessionKey
@@ -186,10 +190,15 @@ angular.module('app.controllers',['app.servers'])
                         var counselorInfo = res.data;
                         // var hospitalId = counselorInfo.counselor.hospitalId;//医院ID
                         // var doctorId = counselorInfo.counselor.doctorId;//医生ID
-                        var counselorUno = counselorInfo.counselor.uno;//咨询师的环信ID
-                        $location.path('/tabs/line/'+ hospitalId +'/'+doctorId +'/'+counselorUno)
+                        if(counselorInfo.prepaid){
+                            var counselorUno = counselorInfo.counselor.uno;//咨询师的环信ID
+                            $location.path('/tabs/line/'+ hospitalId +'/'+doctorId +'/'+counselorUno)
+                        }else{
+                            window.location.href = counselorInfo.payParams;
+                        }
                     }else{
                         alert('登录超时，请重新登录')
+                        localStorage.removeItem('users')
                         $location.path('/tabs/login')
                     }
                 })
@@ -278,7 +287,7 @@ angular.module('app.controllers',['app.servers'])
                     page:'医院详情',
                    // url:'http://yifengbeauty.com/banner-info.html',
                     deviceType:2,
-                    appType:1,
+                    appType:2,
                     sourceType: 1
                 }
                 var Authorization = "MEDCOS#"+ loginUsers.sessionKey
@@ -296,12 +305,18 @@ angular.module('app.controllers',['app.servers'])
                     console.log(res);
                     if(res.status ==200){
                         var counselorInfo = res.data;
-                        // var hospitalId = counselorInfo.scheme.hospitalId;//医院ID
-                        var doctorId = counselorInfo.counselor.id;//医生ID
-                        var counselorUno = counselorInfo.counselor.uno;//咨询师的环信ID
-                        $location.path('/tabs/diy/'+ hospitalId +'/'+doctorId +'/'+counselorUno)
+                        //$location.path('/tabs/diy/'+ hospitalId +'/'+doctorId +'/'+counselorUno)
+                        if(counselorInfo.prepaid){
+                            // var hospitalId = counselorInfo.scheme.hospitalId;//医院ID
+                            var doctorId = counselorInfo.counselor.id;//医生ID
+                            var counselorUno = counselorInfo.counselor.uno;//咨询师的环信ID
+                            $location.path('/tabs/diy/'+ hospitalId +'/'+doctorId +'/'+counselorUno)
+                        }else{
+                            window.location.href = counselorInfo.payParams;
+                        }
                     }else{
                         alert('登录超时，请重新登录')
+                        localStorage.removeItem('users')
                         $location.path('/tabs/login')
                     }
                 })
@@ -382,7 +397,6 @@ angular.module('app.controllers',['app.servers'])
             }).done(function(res) {
                 console.log(res);
                 loginUsers = res.data;
-                localStorage.setItem('users',JSON.stringify(loginUsers))
                 var signIn = {
                     apiUrl: WebIM.config.apiURL,
                     user: loginUsers.consumer.uno,
@@ -397,6 +411,7 @@ angular.module('app.controllers',['app.servers'])
                     }*/
                 };
                 $rootScope.conn.open(signIn);
+                localStorage.setItem('users',JSON.stringify(loginUsers))
                 window.history.go(-1)
             })
         }
@@ -423,6 +438,8 @@ angular.module('app.controllers',['app.servers'])
                         if(res.status == 200){
                             localStorage.removeItem('users')
                             $rootScope.conn.close();
+                        }else{
+                            localStorage.removeItem('users')
                         }
                     })
                 }
@@ -464,6 +481,7 @@ angular.module('app.controllers',['app.servers'])
                 $scope.data = res.data;
             }else{
                  alert('登录超时，请重新登录')
+                 localStorage.removeItem('users')
                 $location.path('/tabs/login')
             }
         };
@@ -500,6 +518,7 @@ angular.module('app.controllers',['app.servers'])
                 $scope.data = res.data;
             }else{
                 alert('登录超时，请重新登录')
+                localStorage.removeItem('users')
                 $location.path('/tabs/login')
             }
         };
@@ -607,6 +626,8 @@ angular.module('app.controllers',['app.servers'])
                 }
             }
         };
+        var ppppp = {"sn":1,"payment":2,"status":0,"statusName":"待确认","hospitalId":1,"schemeName":"方案1","consumerId":4,"discount":0,"doctorImg":"http://image.yifengbeauty.com/group1/M00/00/00/Co2LRVjIntiAMLnPAAIAzIfnzn8905.jpg","reserveTime":"2017-03-06 15:20:03","amount":2,"id":9,"doctorLevel":"主任医师","doctorId":6,"hospitalName":"宋秋丽","doctorName":"宋秋丽","counselorId":1}
+        msgShow('sender','program',ppppp)
         var infoMsg = sessionStorage.getItem(counselorUno);
         if(infoMsg){
             infoMsg = JSON.parse(infoMsg);
@@ -632,11 +653,17 @@ angular.module('app.controllers',['app.servers'])
                             var infoText = JSON.parse(infoMsg[i].data);
                             msgShow('receiver','info',infoText);
                         }
+                        if(infoMsg[i].ext.msgType == 4){
+                           // console.log(infoMsg[i].data)
+                            var programText = JSON.parse(infoMsg[i].data);
+                            msgShow('receiver','program',programText);
+                        }
                     }
                     $timeout($rootScope.msgScrollTop,1000)
                 }
             }
         };
+        
         /*下拉刷新--------------------------------------*/
         $scope.Ulist = [];
         $scope.pageNumber = 1;
@@ -725,11 +752,14 @@ angular.module('app.controllers',['app.servers'])
         //支付接口
         var url2 = '/api/beta/scheme/affirm.aspx';
         var callback2 = function (res) {
-            //console.log(res)
-            window.location.href = res.data.payParams;
+            console.log(res)
+            if(res.status == 200){
+                window.location.href = res.data.payParams;
+            }else{
+                alert('您已支付成功！')
+            }
         };
         $scope.appay = function () {
-            alert(1);
             // $location.path('/tabs/messages/'+$scope.data.hospitalId +'/'+$scope.data.doctorId)
             //window.history.go(-1)
             if(loginUsers){

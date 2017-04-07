@@ -131,12 +131,18 @@ angular.module('app',['ionic','app.controllers'])
                 $rootScope.messageInfoNum_z ++;
                 message.ext.time = getShowDate();
                 infoMessages.push(message);
-                if(message.ext.msgType ==1){
-                    msgShow('receiver','text',message.data);
+                if(JSON.parse(message.data) === Object){
+                    if(message.ext.msgType !=4){
+                        var infoText = JSON.parse(message.data);
+                        msgShow('receiver','info',infoText);
+                    }else{
+                        var programText = JSON.parse(message.data);
+                        msgShow('receiver','program',programText);
+                    }
                 }else{
-                    var infoText = JSON.parse(message.data);
-                    msgShow('receiver','info',infoText);
+                    msgShow('receiver','text',message.data);
                 }
+                
                 // msgScrollTop();
                 $timeout($rootScope.msgScrollTop,1000);
                 sessionStorage.setItem(message.from,JSON.stringify(infoMessages))  ;

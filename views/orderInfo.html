@@ -8,9 +8,9 @@
         <div class="orderInfo-text" ng-repeat='item in data.items'>
             <span>{{item.name}}</span>
             <span style="flex:1;text-align:center"></span>
-            <span>{{item.amount | currency:'￥'}}</span>
+            <span>{{item.amount | currency:'¥'}}</span>
         </div>
-        <div class="addPrice">总价:{{ price | currency:'￥'}}</div>
+        <div class="addPrice">总价:{{ price | currency:'¥'}}</div>
         <div style="clear: both;border-bottom:0.08rem dashed #ddd"></div>
     </div>
     <div class="orderInfo-mid">

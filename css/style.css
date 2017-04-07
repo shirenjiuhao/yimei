@@ -113,7 +113,7 @@ html,body{font-size: 12px;}
 .counselor-chat-prog-tex div{color:#333;display: flex}
 .counselor-chat-h{height:11.17rem}
 .counselor-chat-h a{color:#999;}
-
+.counselor-chat-h a div span:first-child{margin-right: 10px;}
 /*聊天头像样式*/
 
 /*输入框*/

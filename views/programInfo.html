@@ -13,7 +13,7 @@
     </div>
     <div class="programInfo-sec">
         <span>美容规划方案</span>
-        <span>定金：{{data.payment | currency:'￥'}}</span>
+        <span>定金：{{data.payment * 0.1 | currency:'¥'}}</span>
     </div>
     <div class="programInfo">{{data.schemeName}}</div>
     <ul class="programInfo-con" ng-repeat='item in data.items'>

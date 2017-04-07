@@ -141,17 +141,68 @@ function appendMsg(who,type,data) {
             break;
         case "program":
             var msgInfoNodeA = domCreat("a");//生成父元素a标签
-            msgInfoNodeA.setAttribute("href",'#/tabs/mine/program/'+ data.msg.id);
+            msgInfoNodeA.setAttribute("href",'#/tabs/mine/order/'+data.msg.id );
             
             var msgInfoNodeP = domCreat("p");//生成医院名p标签
             var textnodeP=document.createTextNode(data.msg.hospitalName);
             msgInfoNodeP.appendChild(textnodeP);
 
-            var msgInfoNodeDiv = domCreat("div");//生成盒子
+            var msgInfoNodeDiv = domCreat("div");//生成第一行盒子
             msgInfoNodeDiv.style = 'display:flex';
-            var msgInfoNodeSpan1 = domCreat("span");
 
-            msgItem.appendChild();
+            var msgInfoNodeSpan1 = domCreat("span");
+            var textnodeInfoSpan1 = document.createTextNode('医生 ');
+            msgInfoNodeSpan1.appendChild(textnodeInfoSpan1);
+
+            var msgInfoNodeSpan2 = domCreat("span");
+            var textnodeInfoSpan2 = document.createTextNode(data.msg.doctorName);
+            msgInfoNodeSpan2.style = 'color:#333;'
+             msgInfoNodeSpan2.appendChild(textnodeInfoSpan2);
+
+            var msgInfoNodeI = domCreat("i");
+            msgInfoNodeI.className = 'line-ion-zhuan';
+
+            var msgInfoNodeSpan3 = domCreat("span");
+            var textnodeInfoSpan3 = document.createTextNode('¥' + data.msg.payment);
+            msgInfoNodeSpan3.appendChild(textnodeInfoSpan3);
+            msgInfoNodeSpan3.style = 'flex: 1;color: #FF8EA2;font-size:1.42rem;text-align:right';
+
+            msgInfoNodeDiv.appendChild(msgInfoNodeSpan1);
+            msgInfoNodeDiv.appendChild(msgInfoNodeSpan2);
+            msgInfoNodeDiv.appendChild(msgInfoNodeI);
+            msgInfoNodeDiv.appendChild(msgInfoNodeSpan3);
+
+            var msgInfoNodeDiv1 = domCreat("div");//生成第二行盒子
+            var msgInfoNodeSpan4 = domCreat("span");
+            var textnodeInfoSpan4 = document.createTextNode('时间');
+            msgInfoNodeSpan4.appendChild(textnodeInfoSpan4);
+
+            var msgInfoNodeSpan5 = domCreat("span");
+            var textnodeInfoSpan5 = document.createTextNode(data.msg.reserveTime);
+            msgInfoNodeSpan5.appendChild(textnodeInfoSpan5);
+
+            msgInfoNodeDiv1.appendChild(msgInfoNodeSpan4);
+            msgInfoNodeDiv1.appendChild(msgInfoNodeSpan5);
+
+            var msgInfoNodeDiv2 = domCreat("div");//生成第三行盒子
+            var msgInfoNodeSpan6 = domCreat("span");
+            var textnodeInfoSpan6 = document.createTextNode("方案");
+            msgInfoNodeSpan6.appendChild(textnodeInfoSpan6);
+
+            var msgInfoNodeSpan7 = domCreat("span");
+            var textnodeInfoSpan7 = document.createTextNode(data.msg.schemeName);
+            msgInfoNodeSpan7.style = 'color:#333';
+            msgInfoNodeSpan7.appendChild(textnodeInfoSpan7);
+
+            msgInfoNodeDiv2.appendChild(msgInfoNodeSpan6);
+            msgInfoNodeDiv2.appendChild(msgInfoNodeSpan7);
+
+            msgInfoNodeA.appendChild(msgInfoNodeP);
+            msgInfoNodeA.appendChild(msgInfoNodeDiv);
+            msgInfoNodeA.appendChild(msgInfoNodeDiv1);
+            msgInfoNodeA.appendChild(msgInfoNodeDiv2);
+            msgItem.className = 'counselor-chat-prog counselor-chat-h';
+            msgItem.appendChild(msgInfoNodeA);
             break;
         default:
             break;
