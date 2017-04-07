@@ -142,7 +142,6 @@ angular.module('app',['ionic','app.controllers'])
                 }else{
                     msgShow('receiver','text',message.data);
                 }
-                
                 // msgScrollTop();
                 $timeout($rootScope.msgScrollTop,1000);
                 sessionStorage.setItem(message.from,JSON.stringify(infoMessages))  ;
@@ -227,8 +226,8 @@ angular.module('app',['ionic','app.controllers'])
 
         //发送文本消息
         $rootScope.sendPrivateText = function(messages,toUno){
-            let id = $rootScope.conn.getUniqueId();                 // 生成本地消息id
-            let msg = new WebIM.message('txt', id);      // 创建文本消息
+            var id = $rootScope.conn.getUniqueId();                 // 生成本地消息id
+            var msg = new WebIM.message('txt', id);      // 创建文本消息
             msg.set({
                 msg: messages,                  // 消息内容
                 to: toUno,    // 接收消息对象（用户id）
@@ -237,7 +236,7 @@ angular.module('app',['ionic','app.controllers'])
                 success: function (id, serverMsgId) {
                     console.log('send private text Success');
                     console.log(msg)
-                    let content = msg.value;
+                    var content = msg.value;
                     msgShow('sender','text',content);
                     //msgScrollTop();
                 }
@@ -280,7 +279,7 @@ angular.module('app',['ionic','app.controllers'])
                         console.log('Success');
                         msgShow('sender','img',imgSrc);
                         //msgScrollTop();
-                    },
+                    }
                     // flashUpload: WebIM.flashUpload               // 意义待查
                 };
                 infoMessages = JSON.parse(sessionStorage.getItem(toUno)) || [];
@@ -302,9 +301,6 @@ angular.module('app',['ionic','app.controllers'])
                     appKey: WebIM.config.appkey
                 };
                 $rootScope.conn.open(signIn);
-            }else{
-                $rootScope.conn.close();
-                //$location.path('/tabs/login')
             }
          });
     })

@@ -401,14 +401,14 @@ angular.module('app.controllers',['app.servers'])
                     apiUrl: WebIM.config.apiURL,
                     user: loginUsers.consumer.uno,
                     pwd: loginUsers.consumer.easemobPwd,
-                    appKey: WebIM.config.appkeys/*,
+                    appKey: WebIM.config.appkeys,
                     success: function (token) {
                         console.log('登陆环信成功');
-                        var token = token.access_token;
-                        WebIM.utils.setCookie('webim_' + encryptUsername, token, 1);
+                        /*var token = token.access_token;
+                        WebIM.utils.setCookie('webim_' + encryptUsername, token, 1);*/
                     },
                     error: function(){
-                    }*/
+                    }
                 };
                 $rootScope.conn.open(signIn);
                 localStorage.setItem('users',JSON.stringify(loginUsers))
